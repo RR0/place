@@ -1,12 +1,14 @@
 import {BornEvent, BornEventRenderer} from "../BornEvent";
 import {HTMLPlaceRenderer} from "../../place/render/HTMLPlaceRenderer";
 import {Translator} from "../../lang/Translator";
+import {HTMLPeopleRenderer} from "../../people/render/HTMLPeopleRenderer";
 
 export type HTML = string
 
 
 export class HTMLEventRenderer implements BornEventRenderer<HTML> {
-  constructor(private placeRenderer: HTMLPlaceRenderer, private translator: Translator) {
+  constructor(private peopleRenderer: HTMLPeopleRenderer, private placeRenderer: HTMLPlaceRenderer,
+              private translator: Translator) {
   }
 
   dateStr(when: Date) {
@@ -20,7 +22,7 @@ export class HTMLEventRenderer implements BornEventRenderer<HTML> {
 
   renderBorn(event: BornEvent): HTML {
     return this.translator.translate('event.born', {
-      who: event.who.lastName,
+      who: this.peopleRenderer.render(event.who),
       when: this.dateStr(event.when),
       where: event.where.render(this.placeRenderer)
     })
