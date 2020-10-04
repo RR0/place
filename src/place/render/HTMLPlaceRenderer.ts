@@ -24,7 +24,11 @@ export class HTMLPlaceRenderer extends Renderer implements PlaceRenderer<HTML>, 
   }
 
   renderCountry(country: Country): HTML {
-    return this.translator.translate(`place.country.${country.name}`);
+    return this.translator.translate(`place.country.${country.name}.name`);
+  }
+
+  renderNationality(country: Country): HTML {
+    return this.translator.translate(`place.country.${country.name}.nationality`);
   }
 
   renderState(state: State): HTML {

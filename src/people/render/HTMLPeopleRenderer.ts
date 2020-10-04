@@ -78,7 +78,7 @@ export class HTMLPeopleRenderer extends Renderer implements PeopleRenderer<HTML>
       const bornPlace = born.where
       if (bornPlace) {
         const country = bornPlace.country
-        nationality = country?.render(this.placeRenderer)
+        nationality = country?.renderNationality(this.placeRenderer)
       }
     }
     return nationality

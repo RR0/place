@@ -8,7 +8,9 @@ import {HTMLTimeRenderer} from "./HTMLTimeRenderer";
 
 export type HTML = string
 
-
+/**
+ * Renders events as HTML.
+ */
 export class HTMLEventRenderer extends Renderer implements EventRenderer<HTML> {
 
   constructor(private peopleRenderer: HTMLPeopleRenderer,

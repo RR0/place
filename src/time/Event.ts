@@ -12,6 +12,9 @@ export interface EventRenderer<R> extends BornEventRenderer<R> {
 }
 
 
+/**
+ * Something that occurred.
+ */
 export abstract class RR0Event {
 
   protected constructor(readonly type: RR0EventType, readonly when?: RR0Time, readonly where?: Place) {

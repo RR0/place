@@ -1,10 +1,11 @@
 import {Timeline} from "./Timeline";
 import {BornEvent} from "./BornEvent";
-import {Country, CountryCode} from "../place/Country";
+import {Country} from "../place/Country";
 import {State} from "../place/State";
 import {City} from "../place/City";
 import {Gender, People} from "../people/People";
 import {DateTime} from "./DateTime";
+import {CountryCode} from "../place/CountryCode";
 
 test('find event type', () => {
   const timeline = new Timeline()

@@ -1,8 +1,9 @@
 import {HTMLPlaceRenderer} from "./HTMLPlaceRenderer";
 import {City} from "../City";
 import {State} from "../State";
-import {Country, CountryCode} from "../Country";
+import {Country} from "../Country";
 import {Translator} from "../../lang/Translator";
+import {CountryCode} from "../CountryCode";
 // jest.mock('../../lang/Translator');
 
 test('render city', () => {

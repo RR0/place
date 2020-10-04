@@ -1,38 +1,19 @@
 import {Place} from "./Place";
+import {CountryCode} from "./CountryCode";
 
 
 export interface CountryRenderer<R> {
+  /**
+   * Render a country.
+   */
   renderCountry(country: Country): R
+
+  /**
+   * Render the nationality of a country.
+   */
+  renderNationality(country: Country): R;
 }
 
-export enum CountryCode {
-  /**
-   * France
-   */
-  fr = 'fr',
-
-  /**
-   * United States of america
-   */
-  us = 'us',
-
-  /**
-   * Czechoslovakia.
-   *
-   * @deprecated Was divided into Czechia (#cz) and Slovakia (#sk)
-   */
-  cs = 'cs',
-
-  /**
-   * Czechia
-   */
-  cz = 'cz',
-
-  /**
-   * Slovakia
-   */
-  sk = 'sk',
-}
 
 export class Country extends Place {
 
@@ -46,5 +27,9 @@ export class Country extends Place {
 
   render<R>(renderer: CountryRenderer<R>): R {
     return renderer.renderCountry(this)
+  }
+
+  renderNationality<R>(renderer: CountryRenderer<R>): R {
+    return renderer.renderNationality(this)
   }
 }

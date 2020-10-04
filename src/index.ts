@@ -6,10 +6,11 @@ import {HTMLEventRenderer} from "./time/render/HTMLEventRenderer";
 import {User} from "./user/User";
 import {Translator} from "./lang/Translator";
 import {State} from "./place/State";
-import {Country, CountryCode} from "./place/Country";
+import {Country} from "./place/Country";
 import {HTMLPeopleRenderer} from "./people/render/HTMLPeopleRenderer";
 import {HTMLTimeRenderer} from "./time/render/HTMLTimeRenderer";
 import {DateTime} from "./time/DateTime";
+import {CountryCode} from "./place/CountryCode";
 
 const user = new User('fr');
 
