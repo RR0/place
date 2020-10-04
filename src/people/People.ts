@@ -1,4 +1,6 @@
 import {Timeline} from "../time/Timeline";
+import {Country} from "../place/Country";
+import {BirthEvent} from "../time/BirthEvent";
 
 
 export interface PeopleRenderer<R> {
@@ -18,5 +20,17 @@ export class People {
 
   render<R>(renderer: PeopleRenderer<R>): R {
     return renderer.render(this)
+  }
+
+  get birthCountry(): Country | undefined {
+    let country
+    const born = this.events.findOfType(BirthEvent)
+    if (born) {
+      const bornPlace = born.where
+      if (bornPlace) {
+        country = bornPlace.country
+      }
+    }
+    return country
   }
 }

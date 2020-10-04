@@ -1,5 +1,5 @@
 import {Place} from '../place/Place'
-import {BornEventRenderer} from "./BornEvent";
+import {BirthEventRenderer} from "./BirthEvent";
 import {RR0Time} from "./Time";
 
 export enum RR0EventType {
@@ -7,7 +7,7 @@ export enum RR0EventType {
 }
 
 
-export interface EventRenderer<R> extends BornEventRenderer<R> {
+export interface EventRenderer<R> extends BirthEventRenderer<R> {
   render(event: RR0Event): R
 }
 

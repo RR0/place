@@ -8,16 +8,16 @@ import {RR0Time} from "./Time";
 /**
  * A birth event rendering algorithm.
  */
-export interface BornEventRenderer<R> {
+export interface BirthEventRenderer<R> {
 
-  renderBorn(event: BornEvent): R
+  renderBorn(event: BirthEvent): R
 }
 
 
 /**
  * A birth event.
  */
-export class BornEvent extends PeopleEvent {
+export class BirthEvent extends PeopleEvent {
 
   /**
    * Creates a birth event.
@@ -37,7 +37,7 @@ export class BornEvent extends PeopleEvent {
    *
    * @param renderer The rendering algorithm.
    */
-  render<R>(renderer: BornEventRenderer<R>): R {
+  render<R>(renderer: BirthEventRenderer<R>): R {
     return renderer.renderBorn(this)
   }
 }

@@ -1,6 +1,5 @@
 import {People, PeopleRenderer} from "../People";
 import {Renderer} from "../../Renderer";
-import {BornEvent} from "../../time/BornEvent";
 import {HTMLPlaceRenderer} from "../../place/render/HTMLPlaceRenderer";
 import {Translator} from "../../lang/Translator";
 
@@ -42,7 +41,6 @@ export interface PeopleRenderOptions {
     middle?: NameCase
     last?: NameCase
   },
-  nationality?: boolean
 }
 
 
@@ -65,22 +63,6 @@ export class HTMLPeopleRenderer extends Renderer implements PeopleRenderer<HTML>
     const middle = people.middleName ? NameCaseUtil.apply(people.middleName, nameOptions.middle) : ''
     const last = people.lastName ? NameCaseUtil.apply(people.lastName, nameOptions.last) : ''
     const first = `${firstName}${firstName && middle ? ' ' : ''}${middle}`
-    const name = `${first}${first && last ? ' ' : ''}${last}`
-    const nationality = options.nationality ? this.nationality(people) : ''
-    const rendered = `${name}${name && nationality ? ' ' : ''}${nationality}`
-    return rendered
-  }
-
-  private nationality(people: People) {
-    let nationality
-    const born = people.events.findOfType(BornEvent)
-    if (born) {
-      const bornPlace = born.where
-      if (bornPlace) {
-        const country = bornPlace.country
-        nationality = country?.renderNationality(this.placeRenderer)
-      }
-    }
-    return nationality
+    return `${first}${first && last ? ' ' : ''}${last}`
   }
 }

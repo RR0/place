@@ -1,5 +1,5 @@
 import {Timeline} from "./Timeline";
-import {BornEvent} from "./BornEvent";
+import {BirthEvent} from "./BirthEvent";
 import {Country} from "../place/Country";
 import {State} from "../place/State";
 import {City} from "../place/City";
@@ -13,10 +13,10 @@ test('find event type', () => {
   const usa = new Country(CountryCode.us)
   const illinois = new State('Illinois', usa)
   const chicago = new City('Chicago', illinois)
-  const bornEvent: BornEvent = new BornEvent(hynek, new DateTime(new Date(1910, 4, 1)), chicago)
+  const bornEvent: BirthEvent = new BirthEvent(hynek, new DateTime(new Date(1910, 4, 1)), chicago)
   timeline.add(bornEvent)
 
-  const found = timeline.findOfType(BornEvent)
+  const found = timeline.findOfType(BirthEvent)
   expect(found).toBe(bornEvent)
 })
 
