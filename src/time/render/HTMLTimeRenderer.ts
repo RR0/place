@@ -1,13 +1,10 @@
 import {RR0Time, TimeRenderer} from "../Time";
 import {DateTime} from "../DateTime";
 import {Translator} from "../../lang/Translator";
-import {Renderer} from "../../Renderer";
+import {HTML, HTMLRenderer} from "../../HTMLRenderer";
 
 
-export type HTML = string
-
-
-export class HTMLTimeRenderer extends Renderer implements TimeRenderer<HTML> {
+export class HTMLTimeRenderer extends HTMLRenderer implements TimeRenderer<HTML> {
 
   constructor(translator: Translator) {
     super(translator)

@@ -2,14 +2,11 @@ import {City, CityRenderer} from "../City";
 import {Place, PlaceRenderer} from "../Place";
 import {Country} from "../Country";
 import {State} from "../State";
-import {Renderer} from "../../Renderer";
 import {Translator} from "../../lang/Translator";
+import {HTML, HTMLRenderer} from "../../HTMLRenderer";
 
 
-export type HTML = string
-
-
-export class HTMLPlaceRenderer extends Renderer implements PlaceRenderer<HTML>, CityRenderer<HTML> {
+export class HTMLPlaceRenderer extends HTMLRenderer implements PlaceRenderer<HTML>, CityRenderer<HTML> {
 
   constructor(translator: Translator) {
     super(translator);

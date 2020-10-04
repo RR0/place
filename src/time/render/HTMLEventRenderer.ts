@@ -2,23 +2,21 @@ import {BirthEvent} from "../BirthEvent";
 import {HTMLPlaceRenderer} from "../../place/render/HTMLPlaceRenderer";
 import {Translator} from "../../lang/Translator";
 import {HTMLPeopleRenderer} from "../../people/render/HTMLPeopleRenderer";
-import {Renderer} from "../../Renderer";
 import {EventRenderer, RR0Event} from "../Event";
 import {HTMLTimeRenderer} from "./HTMLTimeRenderer";
 import {People} from "../../people/People";
 import {Country} from "../../place/Country";
-
-export type HTML = string
+import {HTML, HTMLRenderer} from "../../HTMLRenderer";
 
 /**
  * Renders events as HTML.
  */
-export class HTMLEventRenderer extends Renderer implements EventRenderer<HTML> {
+export class HTMLEventRenderer extends HTMLRenderer implements EventRenderer<HTML> {
 
-  constructor(private peopleRenderer: HTMLPeopleRenderer,
+  constructor(translator: Translator,
+              private peopleRenderer: HTMLPeopleRenderer,
               private placeRenderer: HTMLPlaceRenderer,
-              private timeRenderer: HTMLTimeRenderer,
-              translator: Translator) {
+              private timeRenderer: HTMLTimeRenderer) {
     super(translator)
   }
 

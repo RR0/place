@@ -1,10 +1,7 @@
 import {People, PeopleRenderer} from "../People";
-import {Renderer} from "../../Renderer";
-import {HTMLPlaceRenderer} from "../../place/render/HTMLPlaceRenderer";
 import {Translator} from "../../lang/Translator";
+import {HTML, HTMLRenderer} from "../../HTMLRenderer";
 
-
-export type HTML = string
 
 export enum NameCase {
   none = "none",
@@ -44,13 +41,13 @@ export interface PeopleRenderOptions {
 }
 
 
-export class HTMLPeopleRenderer extends Renderer implements PeopleRenderer<HTML> {
+export class HTMLPeopleRenderer extends HTMLRenderer implements PeopleRenderer<HTML> {
 
   private readonly defaultFirstName = NameCase.camelCase
   private readonly defaultLastName = NameCase.camelCase
   private readonly defaultMiddleName = NameCase.initials
 
-  constructor(translator: Translator, private placeRenderer: HTMLPlaceRenderer) {
+  constructor(translator: Translator) {
     super(translator);
   }
 

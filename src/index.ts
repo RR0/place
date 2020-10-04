@@ -1,16 +1,13 @@
 import {Gender, People} from "./people/People";
 import {BirthEvent} from "./time/BirthEvent";
 import {City} from "./place/City";
-import {HTMLPlaceRenderer} from "./place/render/HTMLPlaceRenderer";
-import {HTMLEventRenderer} from "./time/render/HTMLEventRenderer";
 import {User} from "./user/User";
 import {Translator} from "./lang/Translator";
 import {State} from "./place/State";
 import {Country} from "./place/Country";
-import {HTMLPeopleRenderer} from "./people/render/HTMLPeopleRenderer";
-import {HTMLTimeRenderer} from "./time/render/HTMLTimeRenderer";
 import {DateTime} from "./time/DateTime";
 import {CountryCode} from "./place/CountryCode";
+import {HTMLDocRenderer} from "./HTMLDocRenderer";
 
 const user = new User('fr');
 
@@ -30,18 +27,11 @@ const bornEvent: BirthEvent = new BirthEvent(
 hynek.events.add(bornEvent);
 
 const translator = new Translator(user.locale);
-const placeRenderer = new HTMLPlaceRenderer(translator);
-const peopleRenderer = new HTMLPeopleRenderer(translator, placeRenderer);
-const timeRenderer = new HTMLTimeRenderer(translator);
-const eventRenderer = new HTMLEventRenderer(peopleRenderer, placeRenderer, timeRenderer, translator);
 
-let eventStr = ''
-for (const event of hynek.events) {
-  eventStr += event.render(eventRenderer)
-}
+const docRenderer = new HTMLDocRenderer(translator)
+const eventHTML = hynek.render(docRenderer)
 const docHtml = `
-<h1>${peopleRenderer.render(hynek)}</h1>
-<p>${eventStr}. 
+${eventHTML}. 
 Il fait ses études dans les écoles publiques de la ville, et sort du lycée technique Crane en 1927. 
 Il entre alors à l'Université de Chicago, dont il obtient un B.S. en 1931, puis un doctorat en astrophysique en 1935</p>.
 `;
