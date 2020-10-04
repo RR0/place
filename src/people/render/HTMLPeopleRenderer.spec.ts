@@ -1,8 +1,12 @@
 import {HTMLPeopleRenderer, NameCase} from "./HTMLPeopleRenderer";
 import {Gender, People} from "../People";
+import {Translator} from "../../lang/Translator";
+import {HTMLPlaceRenderer} from "../../place/render/HTMLPlaceRenderer";
 
 test('render people', () => {
-  const renderer = new HTMLPeopleRenderer();
+
+  const translator = new Translator('fr');
+  const renderer = new HTMLPeopleRenderer(translator, new HTMLPlaceRenderer(translator));
   {
     const peopleWithMiddleName = new People(Gender.male, `Josef`, 'Hynek', `Allen`);
     {
@@ -10,7 +14,7 @@ test('render people', () => {
       expect(html).toBe('Josef A. Hynek')
     }
     {
-      const html = renderer.render(peopleWithMiddleName, {middleName: NameCase.camelCase});
+      const html = renderer.render(peopleWithMiddleName, {name: {middle: NameCase.camelCase}});
       expect(html).toBe('Josef Allen Hynek')
     }
   }
@@ -21,7 +25,7 @@ test('render people', () => {
       expect(html).toBe('Jérôme Beau')
     }
     {
-      const html = renderer.render(peopleWithoutMiddleName, {lastName: NameCase.upperCase});
+      const html = renderer.render(peopleWithoutMiddleName, {name: {last: NameCase.upperCase}});
       expect(html).toBe('Jérôme BEAU')
     }
   }

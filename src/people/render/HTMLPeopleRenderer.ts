@@ -1,9 +1,14 @@
 import {People, PeopleRenderer} from "../People";
+import {Renderer} from "../../Renderer";
+import {BornEvent} from "../../time/BornEvent";
+import {HTMLPlaceRenderer} from "../../place/render/HTMLPlaceRenderer";
+import {Translator} from "../../lang/Translator";
 
 
 export type HTML = string
 
 export enum NameCase {
+  none = "none",
   unchanged = "unchanged",
   camelCase = "camelCase",
   upperCase = "upperCase",
@@ -14,6 +19,9 @@ class NameCaseUtil {
 
   static apply(name: string, cas: NameCase): string {
     switch (cas) {
+      case NameCase.none:
+        name = ''
+        break;
       case NameCase.camelCase:
         name = name.charAt(0).toLocaleUpperCase() + name.substring(1)
         break;
@@ -29,29 +37,50 @@ class NameCaseUtil {
 }
 
 export interface PeopleRenderOptions {
-  firstName?: NameCase
-  middleName?: NameCase
-  lastName?: NameCase
+  name?: {
+    first?: NameCase
+    middle?: NameCase
+    last?: NameCase
+  },
+  nationality?: boolean
 }
 
 
-export class HTMLPeopleRenderer implements PeopleRenderer<HTML> {
+export class HTMLPeopleRenderer extends Renderer implements PeopleRenderer<HTML> {
 
-  defaultFirstName = NameCase.camelCase;
-  private defaultLastName = NameCase.camelCase;
-  private defaultMiddleName = NameCase.initials;
+  private readonly defaultFirstName = NameCase.camelCase
+  private readonly defaultLastName = NameCase.camelCase
+  private readonly defaultMiddleName = NameCase.initials
 
-  readonly defaultOptions: PeopleRenderOptions = {
-    firstName: this.defaultFirstName, lastName: this.defaultLastName, middleName: this.defaultMiddleName
+  constructor(translator: Translator, private placeRenderer: HTMLPlaceRenderer) {
+    super(translator);
   }
 
   render(people: People, options: PeopleRenderOptions = {}): HTML {
-    options.firstName = options.firstName || this.defaultFirstName
-    options.middleName = options.middleName || this.defaultMiddleName
-    options.lastName = options.lastName || this.defaultLastName
-    const firstName = NameCaseUtil.apply(people.firstName, options.firstName);
-    const middle = `${people.middleName ? `${NameCaseUtil.apply(people.middleName, options.middleName)} ` : ''}`;
-    const lastName = NameCaseUtil.apply(people.lastName, options.lastName);
-    return `${firstName} ${middle}${lastName}`
+    const nameOptions = options.name || {}
+    nameOptions.first = nameOptions.first || this.defaultFirstName
+    nameOptions.middle = nameOptions.middle || this.defaultMiddleName
+    nameOptions.last = nameOptions.last || this.defaultLastName
+    const firstName = people.firstName ? NameCaseUtil.apply(people.firstName, nameOptions.first) : ''
+    const middle = people.middleName ? NameCaseUtil.apply(people.middleName, nameOptions.middle) : ''
+    const last = people.lastName ? NameCaseUtil.apply(people.lastName, nameOptions.last) : ''
+    const first = `${firstName}${firstName && middle ? ' ' : ''}${middle}`
+    const name = `${first}${first && last ? ' ' : ''}${last}`
+    const nationality = options.nationality ? this.nationality(people) : ''
+    const rendered = `${name}${name && nationality ? ' ' : ''}${nationality}`
+    return rendered
+  }
+
+  private nationality(people: People) {
+    let nationality
+    const born = people.events.findOfType(BornEvent)
+    if (born) {
+      const bornPlace = born.where
+      if (bornPlace) {
+        const country = bornPlace.country
+        nationality = country?.render(this.placeRenderer)
+      }
+    }
+    return nationality
   }
 }

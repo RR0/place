@@ -2,12 +2,18 @@ import {City, CityRenderer} from "../City";
 import {Place, PlaceRenderer} from "../Place";
 import {Country} from "../Country";
 import {State} from "../State";
+import {Renderer} from "../../Renderer";
+import {Translator} from "../../lang/Translator";
 
 
 export type HTML = string
 
 
-export class HTMLPlaceRenderer implements PlaceRenderer<HTML>, CityRenderer<HTML> {
+export class HTMLPlaceRenderer extends Renderer implements PlaceRenderer<HTML>, CityRenderer<HTML> {
+
+  constructor(translator: Translator) {
+    super(translator);
+  }
 
   render(place: Place): HTML {
     return place.name;
@@ -18,7 +24,7 @@ export class HTMLPlaceRenderer implements PlaceRenderer<HTML>, CityRenderer<HTML
   }
 
   renderCountry(country: Country): HTML {
-    return country.name;
+    return this.translator.translate(`place.country.${country.name}`);
   }
 
   renderState(state: State): HTML {

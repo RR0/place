@@ -9,8 +9,12 @@ export interface StateRenderer<R> {
 
 export class State extends Place {
 
-  constructor(name: string, readonly country: Country) {
+  constructor(name: string, readonly _country: Country) {
     super(name)
+  }
+
+  get country() {
+    return this._country
   }
 
   render<R>(renderer: StateRenderer<R>): R {

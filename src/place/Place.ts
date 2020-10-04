@@ -1,5 +1,5 @@
 import {CityRenderer} from "./City";
-import {CountryRenderer} from "./Country";
+import {Country, CountryRenderer} from "./Country";
 import {StateRenderer} from "./State";
 
 
@@ -15,6 +15,10 @@ export class Place {
 
   render<R>(renderer: PlaceRenderer<R>): R {
     return renderer.render(this)
+  }
+
+  get country(): Country | undefined {
+    return undefined
   }
 }
 

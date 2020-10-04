@@ -1,6 +1,6 @@
 import {RR0Event} from "./Event";
 
-export class Timeline {
+export class Timeline implements Iterable<RR0Event> {
 
   private readonly events: RR0Event[] = []
 
@@ -14,5 +14,9 @@ export class Timeline {
 
   findOfType(type: any) {
     return this.events.find(event => event instanceof type)
+  }
+
+  [Symbol.iterator](): Iterator<RR0Event> {
+    return this.events[Symbol.iterator]();
   }
 }
