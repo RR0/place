@@ -1,5 +1,6 @@
 import {Place} from "./Place";
 import {CountryCode} from "./CountryCode";
+import {Gender} from "../people/People";
 
 
 export interface CountryRenderer<R> {
@@ -11,7 +12,7 @@ export interface CountryRenderer<R> {
   /**
    * Render the nationality of a country.
    */
-  renderNationality(country: Country): R;
+  renderNationality(country: Country, gender: Gender): R;
 }
 
 
@@ -29,7 +30,7 @@ export class Country extends Place {
     return renderer.renderCountry(this)
   }
 
-  renderNationality<R>(renderer: CountryRenderer<R>): R {
-    return renderer.renderNationality(this)
+  renderNationality<R>(renderer: CountryRenderer<R>, gender: Gender): R {
+    return renderer.renderNationality(this, gender)
   }
 }

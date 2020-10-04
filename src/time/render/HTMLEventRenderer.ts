@@ -22,9 +22,11 @@ export class HTMLEventRenderer extends HTMLRenderer implements EventRenderer<HTM
 
   renderBorn(event: BirthEvent): HTML {
     const where = event.where;
-    const born = this.translator.translate('event.born', {
-      who: this.peopleRenderer.render(event.who),
-      when: event.when ? event.when.render(this.timeRenderer) : '',
+    const when = event.when;
+    const who = event.who;
+    const born = this.translator.translate(this.translator.message.event.born.label, {
+      who: this.peopleRenderer.render(who),
+      when: when ? when.render(this.timeRenderer) : '',
       where: where ? where.render(this.placeRenderer) : '',
     });
     const birthCountry = where?.country;
@@ -44,22 +46,34 @@ export class HTMLEventRenderer extends HTMLRenderer implements EventRenderer<HTM
     }
     let parents = ''
     if (fatherName || motherName) {
+      parents += this.translator.translate(this.translator.message.event.born.child[who.gender])
       if (fatherName) {
         parents += fatherName
+        if (fatherNationality) {
+          parents += ` (${fatherNationality})`
+        }
       } else if (fatherNationality) {
-        parents += "d'un père " + fatherNationality
+        parents += this.translator.translate(this.translator.message.event.born.father.anonymous.nationality, {nationality: fatherNationality})
+      }
+      if (fatherName && motherName) {
+        parents += this.translator.translate(this.translator.message.event.born.parents.and)
       }
       if (motherName) {
         parents += motherName
+        if (motherNationality) {
+          parents += ` (${motherNationality})`
+        }
       } else if (motherNationality) {
-        parents += "d'une mère " + motherNationality
+        parents += this.translator.translate(this.translator.message.event.born.mother.anonymous.nationality, {nationality: fatherNationality})
       }
     } else {
-      parents += ' de parents '
       if (fatherNationality === motherNationality) {
-        parents += fatherNationality + 's'
+        parents += this.translator.translate(this.translator.message.event.born.parents.anonymous.nationality, {nationality: fatherNationality})
       } else {
-        parents += fatherNationality + ' et ' + motherNationality
+        parents += this.translator.translate(this.translator.message.event.born.parents.anonymous.nationalities, {
+          fatherNationality,
+          motherNationality
+        })
       }
     }
     return born + parents
@@ -70,7 +84,7 @@ export class HTMLEventRenderer extends HTMLRenderer implements EventRenderer<HTM
     const fatherBirthCountry = parent.birthCountry;
     let nationality = ''
     if (birthCountry !== fatherBirthCountry) {
-      nationality += fatherBirthCountry?.renderNationality(this.placeRenderer)
+      nationality += fatherBirthCountry?.renderNationality(this.placeRenderer, parent.gender)
     }
     return [name, nationality];
   }

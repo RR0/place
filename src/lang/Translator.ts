@@ -9,13 +9,11 @@ export class Translator {
   constructor(readonly locale: string) {
   }
 
-  translate(messageKey: string, values: { [valueKey: string]: any } = {}): string {
-    let obj = this.messages[this.locale]
-    const levels = messageKey.split('.');
-    for (const level of levels) {
-      obj = (obj as any)[level] as any
-    }
-    const template = obj as any as string
+  get message(): Message {
+    return this.messages[this.locale];
+  }
+
+  translate(template: string, values: { [valueKey: string]: any } = {}): string {
     let translated = template
     for (const value in values) {
       if (values.hasOwnProperty(value)) {

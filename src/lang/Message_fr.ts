@@ -6,28 +6,66 @@ export const message_fr: Message = {
     country: {
       [CountryCode.cz]: {
         name: 'Tchéquie',
-        nationality: 'tchèque',
+        nationality: {
+          male: 'tchèque',
+          female: 'tchèque',
+        },
       },
       [CountryCode.cs]: {
         name: 'Tchécoslovaquie',
-        nationality: 'tchécoslovaque',
+        nationality: {
+          male: 'tchécoslovaque',
+          female: 'tchécoslovaque',
+        },
       },
       [CountryCode.fr]: {
         name: 'France',
-        nationality: 'française',
+        nationality: {
+          male: 'français',
+          female: 'française'
+        },
       },
       [CountryCode.sk]: {
         name: 'Slovaquie',
-        nationality: 'slovaque',
+        nationality: {
+          male: 'slovaque',
+          female: 'slovaque'
+        },
       },
       [CountryCode.us]: {
         name: 'États-Unis',
-        nationality: 'américaine',
+        nationality: {
+          male: 'américain',
+          female: 'américaine',
+        },
       },
     }
   },
   event: {
     default: '${when} à ${where} ${type}',
-    born: '${who} naît le ${when} à ${where}'
+    born: {
+      label: '${who} naît le ${when} à ${where}',
+      child: {
+        male: ", fils de ",
+        female: ", fille de "
+      },
+      father: {
+        anonymous: {
+          nationality: " d'un père ${nationality}"
+        }
+      },
+      mother: {
+        anonymous: {
+          nationality: " d'une mère ${nationality}"
+        }
+      },
+      parents: {
+        and: " et ",
+        anonymous: {
+          nationality: " de parents ${nationality}s",
+          nationalities: " d'un père ${fatherNationality} et d'une mère ${motherNationality}"
+        }
+      }
+    }
   }
 }

@@ -9,7 +9,7 @@ import {DateTime} from "./time/DateTime";
 import {CountryCode} from "./place/CountryCode";
 import {HTMLDocRenderer} from "./HTMLDocRenderer";
 
-const user = new User('fr');
+const user = new User('en');
 
 const hynek = new People(Gender.male, `Josef`, 'Hynek', `Allen`)
 const usa = new Country(CountryCode.us);
