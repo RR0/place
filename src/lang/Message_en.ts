@@ -6,28 +6,66 @@ export const message_en: Message = {
     country: {
       [CountryCode.cz]: {
         name: 'Czechia',
-        nationality: 'czech'
+        nationality: {
+          male: 'czech',
+          female: 'czech',
+        }
       },
       [CountryCode.cs]: {
         name: 'Czechoslovakia',
-        nationality: 'czechoslovak'
+        nationality: {
+          male: 'czechoslovak',
+          female: 'czechoslovak',
+        }
       },
       [CountryCode.fr]: {
         name: 'France',
-        nationality: 'french',
+        nationality: {
+          male: 'french',
+          female: 'french',
+        },
       },
       [CountryCode.sk]: {
         name: 'Slovakia',
-        nationality: 'slovak'
+        nationality: {
+          male: 'slovak',
+          female: 'slovak',
+        }
       },
       [CountryCode.us]: {
         name: 'USA',
-        nationality: 'american'
+        nationality: {
+          male: 'american',
+          female: 'american',
+        }
       },
     }
   },
   event: {
     default: '${when} at ${where} ${type}',
-    born: '${who} was born on ${when} at ${where}'
+    born: {
+      label: '${who} was born on ${when} at ${where}',
+      child: {
+        male: ", son of ",
+        female: ", daughter of "
+      },
+      father: {
+        anonymous: {
+          nationality: ' from a ${nationality} father'
+        }
+      },
+      mother: {
+        anonymous: {
+          nationality: ' from a ${nationality} mother'
+        }
+      },
+      parents: {
+        and: " and ",
+        anonymous: {
+          nationality: " from ${nationality} parents",
+          nationalities: " from a ${fatherNationality} father and a ${motherNationality} mother"
+        }
+      }
+    }
   }
 }
