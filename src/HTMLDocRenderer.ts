@@ -6,13 +6,15 @@ import {HTMLEventRenderer} from "./time/render/HTMLEventRenderer";
 import {Translator} from "./lang/Translator";
 import {HTML, HTMLRenderer} from "./HTMLRenderer";
 import {People, PeopleRenderer} from "./people/People";
+import {HTMLOccupationRenderer} from "./time/render/HTMLOccupationRenderer";
 
 export class HTMLDocRenderer extends HTMLRenderer implements PeopleRenderer<HTML> {
 
   readonly placeRenderer = new HTMLPlaceRenderer(this.translator);
   readonly peopleRenderer = new HTMLPeopleRenderer(this.translator);
   readonly timeRenderer = new HTMLTimeRenderer(this.translator);
-  readonly eventRenderer = new HTMLEventRenderer(this.translator, this.peopleRenderer, this.placeRenderer, this.timeRenderer);
+  readonly occupationRenderer = new HTMLOccupationRenderer(this.translator);
+  readonly eventRenderer = new HTMLEventRenderer(this.translator, this.peopleRenderer, this.placeRenderer, this.timeRenderer, this.occupationRenderer);
   protected events: Timeline = new Timeline()
 
   constructor(translator: Translator) {

@@ -18,8 +18,8 @@ export class Timeline implements Iterable<RR0Event> {
     return this.events[index]
   }
 
-  findOfType(type: any) {
-    return this.events.find(event => event instanceof type)
+  findOfType(type: any): RR0Event[] {
+    return this.events.filter(event => event instanceof type)
   }
 
   [Symbol.iterator](): Iterator<RR0Event> {

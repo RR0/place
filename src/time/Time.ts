@@ -1,10 +1,13 @@
 import {DateTime} from "./DateTime";
+import {BeforeTime} from "./BeforeTime";
 
 export interface TimeRenderer<R> {
 
   render(time: RR0Time): R
 
   renderDate(time: DateTime): R;
+
+  renderBefore(time: BeforeTime): R;
 }
 
 

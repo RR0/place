@@ -8,21 +8,29 @@ import {Country} from "./place/Country";
 import {DateTime} from "./time/DateTime";
 import {CountryCode} from "./place/CountryCode";
 import {HTMLDocRenderer} from "./HTMLDocRenderer";
+import {OccupationEvent} from "./time/OccupationEvent";
+import {Organization, OrganizationType} from "./org/Organization";
+import {BeforeTime} from "./time/BeforeTime";
 
-const user = new User('en');
+const user = new User('fr');
 
 const hynek = new People(Gender.male, `Josef`, 'Hynek', `Allen`)
 const usa = new Country(CountryCode.us);
 const illinois = new State('Illinois', usa);
 const chicago = new City('Chicago', illinois);
-const father = new People(Gender.male);
+const birthdate = new Date(1910, 4, 1);
+const father = new People(Gender.male, 'Joseph');
 const czechoslovakia = new Country(CountryCode.cs);
-father.events.add(new BirthEvent(father, undefined, czechoslovakia))
-const mother = new People(Gender.female);
-mother.events.add(new BirthEvent(mother, undefined, czechoslovakia))
+const fatherEvents = father.events;
+fatherEvents.add(new BirthEvent(father, undefined, czechoslovakia))
+const cigarFactory = new Organization(OrganizationType.factory);
+fatherEvents.add(new OccupationEvent(father, cigarFactory, new BeforeTime(birthdate), czechoslovakia))
+const mother = new People(Gender.female, 'Bertha');
+const motherEvents = mother.events;
+motherEvents.add(new BirthEvent(mother, undefined, czechoslovakia))
 const bornEvent: BirthEvent = new BirthEvent(
   hynek,
-  new DateTime(new Date(1910, 4, 1)),
+  new DateTime(birthdate),
   chicago, father, mother)
 hynek.events.add(bornEvent);
 

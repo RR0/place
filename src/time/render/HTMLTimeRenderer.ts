@@ -2,6 +2,7 @@ import {RR0Time, TimeRenderer} from "../Time";
 import {DateTime} from "../DateTime";
 import {Translator} from "../../lang/Translator";
 import {HTML, HTMLRenderer} from "../../HTMLRenderer";
+import {BeforeTime} from "../BeforeTime";
 
 
 export class HTMLTimeRenderer extends HTMLRenderer implements TimeRenderer<HTML> {
@@ -21,5 +22,9 @@ export class HTMLTimeRenderer extends HTMLRenderer implements TimeRenderer<HTML>
       day: "numeric",
       year: "numeric"
     });
+  }
+
+  renderBefore(time: BeforeTime): HTML {
+    return this.translator.translate(this.translator.message.time.before, {date: time.date});
   }
 }

@@ -24,7 +24,7 @@ export class People {
 
   get birthCountry(): Country | undefined {
     let country
-    const born = this.events.findOfType(BirthEvent)
+    const born = this.events.findOfType(BirthEvent)[0]
     if (born) {
       const bornPlace = born.where
       if (bornPlace) {

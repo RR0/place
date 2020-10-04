@@ -1,3 +1,5 @@
+import {OrganizationType} from "../org/Organization";
+
 export interface CountryMessage {
   name: string
   nationality: {
@@ -24,11 +26,11 @@ interface BornFromParentMessage {
 
 interface BornFromAnonymousParentsMessage {
   nationality: string
-  nationalities: string;
+  nationalities: string
 }
 
 interface BornFromParentsMessage {
-  and: string;
+  and: string
   anonymous: BornFromAnonymousParentsMessage
 }
 
@@ -39,18 +41,31 @@ interface ChildMessage {
 
 interface BornMessage {
   label: string
-  child: ChildMessage;
-  father: BornFromParentMessage;
-  mother: BornFromParentMessage;
-  parents: BornFromParentsMessage;
+  child: ChildMessage
+  father: BornFromParentMessage
+  mother: BornFromParentMessage
+  parents: BornFromParentsMessage
 }
 
 export interface EventMessage {
   default: string,
   born: BornMessage
+  occupation: string;
+}
+
+interface TimeMessage {
+  before: string
+}
+
+interface OrgMessage {
+  type: {
+    [OrganizationType.factory]: string
+  }
 }
 
 export interface Message {
-  place: PlaceMessage,
+  org: OrgMessage
+  time: TimeMessage
+  place: PlaceMessage
   event: EventMessage
 }

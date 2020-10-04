@@ -10,7 +10,7 @@ import {RR0Time} from "./Time";
  */
 export interface BirthEventRenderer<R> {
 
-  renderBorn(event: BirthEvent): R
+  renderBirth(event: BirthEvent): R
 }
 
 
@@ -38,6 +38,6 @@ export class BirthEvent extends PeopleEvent {
    * @param renderer The rendering algorithm.
    */
   render<R>(renderer: BirthEventRenderer<R>): R {
-    return renderer.renderBorn(this)
+    return renderer.renderBirth(this)
   }
 }

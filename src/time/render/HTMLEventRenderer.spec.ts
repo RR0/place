@@ -10,6 +10,7 @@ import {Translator} from "../../lang/Translator";
 import {HTMLPeopleRenderer} from "../../people/render/HTMLPeopleRenderer";
 import {HTMLTimeRenderer} from "./HTMLTimeRenderer";
 import {HTMLPlaceRenderer} from "../../place/render/HTMLPlaceRenderer";
+import {HTMLOccupationRenderer} from "./HTMLOccupationRenderer";
 
 const hynek = new People(Gender.male, `Josef`, 'Hynek', `Allen`)
 const usa = new Country(CountryCode.us)
@@ -21,7 +22,8 @@ const renderer = new HTMLEventRenderer(
   translator,
   new HTMLPeopleRenderer(translator),
   new HTMLPlaceRenderer(translator),
-  new HTMLTimeRenderer(translator)
+  new HTMLTimeRenderer(translator),
+  new HTMLOccupationRenderer(translator)
 );
 
 test('renders anonymous parents of same nationality', () => {

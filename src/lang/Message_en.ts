@@ -2,6 +2,11 @@ import {CountryCode} from "../place/CountryCode";
 import {Message} from "./Message";
 
 export const message_en: Message = {
+  org: {
+    type: {
+      factory: 'factory'
+    }
+  },
   place: {
     country: {
       [CountryCode.cz]: {
@@ -66,6 +71,10 @@ export const message_en: Message = {
           nationalities: " from a ${fatherNationality} father and a ${motherNationality} mother"
         }
       }
-    }
+    },
+    occupation: "work for ${organization}"
+  },
+  time: {
+    before: ' before ${date}'
   }
 }

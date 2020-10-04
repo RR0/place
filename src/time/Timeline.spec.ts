@@ -16,7 +16,7 @@ test('find event type', () => {
   const bornEvent: BirthEvent = new BirthEvent(hynek, new DateTime(new Date(1910, 4, 1)), chicago)
   timeline.add(bornEvent)
 
-  const found = timeline.findOfType(BirthEvent)
+  const found = timeline.findOfType(BirthEvent)[0]
   expect(found).toBe(bornEvent)
 })
 
