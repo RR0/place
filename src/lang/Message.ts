@@ -1,4 +1,5 @@
 import {OrganizationType} from "../org/Organization";
+import {OccupationRole} from "../time/OccupationEvent";
 
 export interface CountryMessage {
   name: string
@@ -47,20 +48,35 @@ interface BornMessage {
   parents: BornFromParentsMessage
 }
 
-export interface EventMessage {
-  default: string,
-  born: BornMessage
-  occupation: string;
+interface OccupationMessage {
+  label: string
+  role: string
+  for: string
 }
 
-interface TimeMessage {
+export interface EventMessage {
+  default: string
+  born: BornMessage
+  occupation: OccupationMessage
+}
+
+export interface TimeMessage {
   before: string
 }
 
-interface OrgMessage {
+export interface OrgMessage {
   type: {
-    [OrganizationType.factory]: string
+    [OrganizationType.company]: string
+    [OrganizationType.army]: string
+  },
+  role: {
+    [OccupationRole.worker]: string
+    [OccupationRole.general]: string
   }
+}
+
+export interface DictionaryMessage {
+  cigar: string
 }
 
 export interface Message {
@@ -68,4 +84,5 @@ export interface Message {
   time: TimeMessage
   place: PlaceMessage
   event: EventMessage
+  dict: DictionaryMessage
 }

@@ -33,26 +33,26 @@ export class HTMLEventRenderer extends HTMLRenderer implements EventRenderer<HTM
     })
   }
 
-  renderBirth(event: BirthEvent): HTML {
-    const where = event.where
-    const when = event.when
-    const who = event.who
+  renderBirth(birth: BirthEvent): HTML {
+    const birthPlace = birth.where
+    const birthTime = birth.when
+    const baby = birth.who
     const bornMsg = this.translator.message.event.born
     const born = this.translator.translate(bornMsg.label, {
-      who: this.peopleRenderer.render(who),
-      when: when ? when.render(this.timeRenderer) : '',
-      where: where ? where.render(this.placeRenderer) : '',
+      who: this.peopleRenderer.render(baby),
+      when: birthTime ? birthTime.render(this.timeRenderer) : '',
+      where: birthPlace ? birthPlace.render(this.placeRenderer) : '',
     })
-    const birthCountry = where?.country
+    const birthCountry = birthPlace?.country
     let fatherName = '', fatherNationality
-    const father = event.father
+    const father = birth.father
     {
       if (father) {
         [fatherName, fatherNationality] = this.parentInfo(father, birthCountry)
       }
     }
     let motherName = '', motherNationality
-    const mother = event.mother
+    const mother = birth.mother
     {
       if (mother) {
         [motherName, motherNationality] = this.parentInfo(mother, birthCountry)
@@ -60,12 +60,20 @@ export class HTMLEventRenderer extends HTMLRenderer implements EventRenderer<HTM
     }
     let parents = ''
     if (fatherName || motherName) {
-      parents += this.translator.translate(bornMsg.child[who.gender])
+      parents += this.translator.translate(bornMsg.child[baby.gender])
       parents += this.parentNationality(fatherName, fatherNationality, father?.gender)
       const occupations = father!.events.findOfType(OccupationEvent);
       if (occupations.length > 0) {
-        const occupationAtBirth = occupations[0]
-        parents += occupationAtBirth.render(this)
+        let occupationAtBirth: OccupationEvent | undefined = undefined
+        for (const occupation of occupations) {
+          occupationAtBirth = occupation as OccupationEvent
+          if (occupation.isAfter(birth)) {
+            break;
+          }
+        }
+        if (occupationAtBirth) {
+          parents += occupationAtBirth.render(this)
+        }
       }
       if (fatherName && motherName) {
         parents += this.translator.translate(bornMsg.parents.and)

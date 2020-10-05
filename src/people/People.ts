@@ -24,11 +24,15 @@ export class People {
 
   get birthCountry(): Country | undefined {
     let country
-    const born = this.events.findOfType(BirthEvent)[0]
-    if (born) {
-      const bornPlace = born.where
-      if (bornPlace) {
-        country = bornPlace.country
+    const birthEvents = this.events.findOfType(BirthEvent)
+    if (birthEvents.length > 0) {
+      if (birthEvents.length === 1) {
+        const bornPlace = birthEvents.get(0).where
+        if (bornPlace) {
+          country = bornPlace.country
+        }
+      } else {
+        throw new Error("More than 1 birth event")
       }
     }
     return country

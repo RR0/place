@@ -1,13 +1,20 @@
 import {CountryCode} from "../place/CountryCode";
 import {Message} from "./Message";
+import {OccupationRole} from "../time/OccupationEvent";
+import {OrganizationType} from "../org/Organization";
 
-export const message_fr: Message = {
-  org: {
+class FrenchMessage implements Message {
+  org = {
     type: {
-      factory: 'usine'
+      [OrganizationType.company]: 'société',
+      [OrganizationType.army]: 'armée',
+    },
+    role: {
+      [OccupationRole.worker]: 'ouvrier',
+      [OccupationRole.general]: "général"
     }
-  },
-  place: {
+  }
+  place = {
     country: {
       [CountryCode.cz]: {
         name: 'Tchéquie',
@@ -45,8 +52,8 @@ export const message_fr: Message = {
         },
       },
     }
-  },
-  event: {
+  }
+  event = {
     default: '${when} à ${where} ${type}',
     born: {
       label: '${who} naît le ${when} à ${where}',
@@ -72,9 +79,18 @@ export const message_fr: Message = {
         }
       }
     },
-    occupation: "travaille pour ${organization}"
-  },
-  time: {
+    occupation: {
+      label: "travaille",
+      role: " comme ${role}",
+      for: " pour"
+    }
+  }
+  time = {
     before: ' avant le ${date}'
   }
+  dict = {
+    cigar: 'cigare'
+  }
 }
+
+export const message_fr = new FrenchMessage();

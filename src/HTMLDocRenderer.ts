@@ -7,13 +7,15 @@ import {Translator} from "./lang/Translator";
 import {HTML, HTMLRenderer} from "./HTMLRenderer";
 import {People, PeopleRenderer} from "./people/People";
 import {HTMLOccupationRenderer} from "./time/render/HTMLOccupationRenderer";
+import {HTMLOrganizationRenderer} from "./org/render/HTMLOrganizationRenderer";
 
 export class HTMLDocRenderer extends HTMLRenderer implements PeopleRenderer<HTML> {
 
   readonly placeRenderer = new HTMLPlaceRenderer(this.translator);
   readonly peopleRenderer = new HTMLPeopleRenderer(this.translator);
   readonly timeRenderer = new HTMLTimeRenderer(this.translator);
-  readonly occupationRenderer = new HTMLOccupationRenderer(this.translator);
+  readonly orgRenderer = new HTMLOrganizationRenderer(this.translator);
+  readonly occupationRenderer = new HTMLOccupationRenderer(this.translator, this.orgRenderer);
   readonly eventRenderer = new HTMLEventRenderer(this.translator, this.peopleRenderer, this.placeRenderer, this.timeRenderer, this.occupationRenderer);
   protected events: Timeline = new Timeline()
 

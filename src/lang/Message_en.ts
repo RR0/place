@@ -1,13 +1,20 @@
 import {CountryCode} from "../place/CountryCode";
-import {Message} from "./Message";
+import {DictionaryMessage, EventMessage, Message, OrgMessage, PlaceMessage, TimeMessage} from "./Message";
+import {OccupationRole} from "../time/OccupationEvent";
+import {OrganizationType} from "../org/Organization";
 
-export const message_en: Message = {
-  org: {
+class EnglishMessage implements Message {
+  org: OrgMessage = {
     type: {
-      factory: 'factory'
+      [OrganizationType.company]: 'company',
+      [OrganizationType.army]: 'army',
+    },
+    role: {
+      [OccupationRole.worker]: 'worker',
+      [OccupationRole.general]: "general"
     }
-  },
-  place: {
+  }
+  place: PlaceMessage = {
     country: {
       [CountryCode.cz]: {
         name: 'Czechia',
@@ -45,8 +52,8 @@ export const message_en: Message = {
         }
       },
     }
-  },
-  event: {
+  }
+  event: EventMessage = {
     default: '${when} at ${where} ${type}',
     born: {
       label: '${who} was born on ${when} at ${where}',
@@ -72,9 +79,18 @@ export const message_en: Message = {
         }
       }
     },
-    occupation: "work for ${organization}"
-  },
-  time: {
+    occupation: {
+      label: "work ",
+      role: "as ${role}",
+      for: " for"
+    }
+  }
+  time: TimeMessage = {
     before: ' before ${date}'
   }
+  dict: DictionaryMessage = {
+    cigar: 'cigar'
+  }
 }
+
+export const message_en = new EnglishMessage()

@@ -23,4 +23,17 @@ export abstract class RR0Event {
   }
 
   abstract render<R>(renderer: EventRenderer<R>): R
+
+  /**
+   * If an event is chronologically before another.
+   *
+   * @return null if not known.
+   */
+  isBefore(otherEvent: RR0Event): Boolean | null {
+    return this.when ? this.when.isBefore(otherEvent.when) : null;
+  }
+
+  isAfter(otherEvent: RR0Event) {
+    return this.when ? this.when.isAfter(otherEvent.when) : null;
+  }
 }

@@ -15,6 +15,14 @@ export interface OccupationEventRenderer<R> {
 }
 
 
+export enum MilitaryOccupation {
+}
+
+export enum OccupationRole {
+  worker = 'worker',
+  general = 'general',
+}
+
 /**
  * A occupation event.
  */
@@ -24,11 +32,12 @@ export class OccupationEvent extends PeopleEvent {
    * Creates a occupation event.
    *
    * @param who Who was occupation.
-   * @param when When (s)he was occupation.
-   * @param where Where (s)he was occupation.
+   * @param role
    * @param organization The organisation to work for.
+   * @param when? When (s)he was occupation.
+   * @param where? Where (s)he was occupation.
    */
-  constructor(who: People, readonly organization: Organization, when?: RR0Time, where?: Place) {
+  constructor(who: People, readonly role: OccupationRole, readonly organization: Organization, when?: RR0Time, where?: Place) {
     super(RR0EventType.occupation, who, when, where);
   }
 
