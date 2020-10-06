@@ -1,10 +1,11 @@
 import {Timeline} from "../time/Timeline";
 import {Country} from "../place/Country";
 import {BirthEvent} from "../time/BirthEvent";
+import {PeopleRenderOptions} from "./render/HTMLPeopleRenderer";
 
 
 export interface PeopleRenderer<R> {
-  render(people: People): R
+  render(people: People, options: PeopleRenderOptions): R
 }
 
 export enum Gender {
@@ -12,14 +13,15 @@ export enum Gender {
   female = 'female'
 }
 
+
 export class People {
   readonly events = new Timeline()
 
   constructor(readonly gender: Gender, readonly firstName?: string, readonly lastName?: string, readonly middleName?: string) {
   }
 
-  render<R>(renderer: PeopleRenderer<R>): R {
-    return renderer.render(this)
+  render<R>(renderer: PeopleRenderer<R>, options: PeopleRenderOptions): R {
+    return renderer.render(this, options)
   }
 
   get birthCountry(): Country | undefined {

@@ -2,7 +2,7 @@ import {BirthEvent} from "../BirthEvent"
 import {HTMLPlaceRenderer} from "../../place/render/HTMLPlaceRenderer"
 import {Translator} from "../../lang/Translator"
 import {HTMLPeopleRenderer} from "../../people/render/HTMLPeopleRenderer"
-import {EventRenderer, RR0Event} from "../Event"
+import {EventRenderer, EventRenderOptions, RR0Event} from "../Event"
 import {HTMLTimeRenderer} from "./HTMLTimeRenderer"
 import {Gender, People} from "../../people/People"
 import {Country} from "../../place/Country"
@@ -33,13 +33,13 @@ export class HTMLEventRenderer extends HTMLRenderer implements EventRenderer<HTM
     })
   }
 
-  renderBirth(birth: BirthEvent): HTML {
+  renderBirth(birth: BirthEvent, options: EventRenderOptions): HTML {
     const birthPlace = birth.where
     const birthTime = birth.when
     const baby = birth.who
     const bornMsg = this.translator.message.event.born
     const born = this.translator.translate(bornMsg.label, {
-      who: this.peopleRenderer.render(baby),
+      who: this.peopleRenderer.render(baby, options.birth.people),
       when: birthTime ? birthTime.render(this.timeRenderer) : '',
       where: birthPlace ? birthPlace.render(this.placeRenderer) : '',
     })
@@ -48,14 +48,14 @@ export class HTMLEventRenderer extends HTMLRenderer implements EventRenderer<HTM
     const father = birth.father
     {
       if (father) {
-        [fatherName, fatherNationality] = this.parentInfo(father, birthCountry)
+        [fatherName, fatherNationality] = this.parentInfo(father, birthCountry, options)
       }
     }
     let motherName = '', motherNationality
     const mother = birth.mother
     {
       if (mother) {
-        [motherName, motherNationality] = this.parentInfo(mother, birthCountry)
+        [motherName, motherNationality] = this.parentInfo(mother, birthCountry, options)
       }
     }
     let parents = ''
@@ -72,7 +72,7 @@ export class HTMLEventRenderer extends HTMLRenderer implements EventRenderer<HTM
           }
         }
         if (occupationAtBirth) {
-          parents += occupationAtBirth.render(this)
+          parents += occupationAtBirth.render(this, options)
         }
       }
       if (fatherName && motherName) {
@@ -107,8 +107,8 @@ export class HTMLEventRenderer extends HTMLRenderer implements EventRenderer<HTM
     return parentNationality
   }
 
-  private parentInfo<R>(parent: People, birthCountry?: Country) {
-    const name = this.peopleRenderer.render(parent)
+  private parentInfo<R>(parent: People, birthCountry: Country | undefined, options: EventRenderOptions) {
+    const name = this.peopleRenderer.render(parent, options.birth.people)
     const fatherBirthCountry = parent.birthCountry
     let nationality = ''
     if (birthCountry !== fatherBirthCountry) {

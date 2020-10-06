@@ -1,4 +1,4 @@
-import {RR0EventType} from "./Event";
+import {EventRenderer, EventRenderOptions, RR0EventType} from "./Event";
 import {Place} from "../place/Place";
 import {People} from "../people/People";
 import {PeopleEvent} from './PeopleEvent'
@@ -10,7 +10,7 @@ import {RR0Time} from "./Time";
  */
 export interface BirthEventRenderer<R> {
 
-  renderBirth(event: BirthEvent): R
+  renderBirth(event: BirthEvent, options: EventRenderOptions): R
 }
 
 
@@ -29,15 +29,16 @@ export class BirthEvent extends PeopleEvent {
    * @param mother The mother of that born child.
    */
   constructor(who: People, when?: RR0Time, where?: Place, readonly father?: People, readonly mother?: People) {
-    super(RR0EventType.born, who, when, where);
+    super(RR0EventType.birth, who, when, where);
   }
 
   /**
    * Render that birth event.
    *
    * @param renderer The rendering algorithm.
+   * @param options
    */
-  render<R>(renderer: BirthEventRenderer<R>): R {
-    return renderer.renderBirth(this)
+  render<R>(renderer: EventRenderer<R>, options: EventRenderOptions): R {
+    return renderer.renderBirth(this, options)
   }
 }

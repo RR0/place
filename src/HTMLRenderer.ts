@@ -8,6 +8,14 @@ export class HTMLRenderer extends Renderer {
     return this.tag('p', content);
   }
 
+  protected heading(content: HTML, level: number): HTML {
+    return this.tag(`h${level}`, content);
+  }
+
+  protected h1(content: HTML): HTML {
+    return this.heading(content, 1);
+  }
+
   private tag(tag: string, content: HTML): HTML {
     return `<${tag}>${content}</${tag}>`
   }

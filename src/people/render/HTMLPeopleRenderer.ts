@@ -32,30 +32,44 @@ class NameCaseUtil {
   }
 }
 
-export interface PeopleRenderOptions {
-  name?: {
-    first?: NameCase
-    middle?: NameCase
-    last?: NameCase
-  },
+export class PeopleNameFormat {
+
+  static readonly full: PeopleRenderOptions = {
+    name: {
+      first: NameCase.camelCase,
+      middle: NameCase.camelCase,
+      last: NameCase.camelCase,
+    }
+  }
+
+  static readonly middleAbbreviated: PeopleRenderOptions = {
+    name: {
+      first: NameCase.camelCase,
+      middle: NameCase.initials,
+      last: NameCase.camelCase,
+    }
+  }
+
+  lastName = "lastName"
+  firstName = "firstName"
 }
 
+export interface PeopleRenderOptions {
+  name: {
+    first: NameCase
+    middle: NameCase
+    last: NameCase
+  }
+}
 
 export class HTMLPeopleRenderer extends HTMLRenderer implements PeopleRenderer<HTML> {
-
-  private readonly defaultFirstName = NameCase.camelCase
-  private readonly defaultLastName = NameCase.camelCase
-  private readonly defaultMiddleName = NameCase.initials
 
   constructor(translator: Translator) {
     super(translator);
   }
 
-  render(people: People, options: PeopleRenderOptions = {}): HTML {
+  render(people: People, options: PeopleRenderOptions): HTML {
     const nameOptions = options.name || {}
-    nameOptions.first = nameOptions.first || this.defaultFirstName
-    nameOptions.middle = nameOptions.middle || this.defaultMiddleName
-    nameOptions.last = nameOptions.last || this.defaultLastName
     const firstName = people.firstName ? NameCaseUtil.apply(people.firstName, nameOptions.first) : ''
     const middle = people.middleName ? NameCaseUtil.apply(people.middleName, nameOptions.middle) : ''
     const last = people.lastName ? NameCaseUtil.apply(people.lastName, nameOptions.last) : ''

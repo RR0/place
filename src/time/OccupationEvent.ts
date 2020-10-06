@@ -1,4 +1,4 @@
-import {RR0EventType} from "./Event";
+import {EventRenderer, EventRenderOptions, RR0EventType} from "./Event";
 import {Place} from "../place/Place";
 import {People} from "../people/People";
 import {PeopleEvent} from './PeopleEvent'
@@ -46,7 +46,7 @@ export class OccupationEvent extends PeopleEvent {
    *
    * @param renderer The rendering algorithm.
    */
-  render<R>(renderer: OccupationEventRenderer<R>): R {
+  render<R>(renderer: EventRenderer<R>, options: EventRenderOptions): R {
     return renderer.renderOccupation(this)
   }
 }

@@ -1,6 +1,6 @@
 import {Timeline} from "./time/Timeline";
 import {HTMLPlaceRenderer} from "./place/render/HTMLPlaceRenderer";
-import {HTMLPeopleRenderer, NameCase} from "./people/render/HTMLPeopleRenderer";
+import {HTMLPeopleRenderer, PeopleNameFormat} from "./people/render/HTMLPeopleRenderer";
 import {HTMLTimeRenderer} from "./time/render/HTMLTimeRenderer";
 import {HTMLEventRenderer} from "./time/render/HTMLEventRenderer";
 import {Translator} from "./lang/Translator";
@@ -8,6 +8,7 @@ import {HTML, HTMLRenderer} from "./HTMLRenderer";
 import {People, PeopleRenderer} from "./people/People";
 import {HTMLOccupationRenderer} from "./time/render/HTMLOccupationRenderer";
 import {HTMLOrganizationRenderer} from "./org/render/HTMLOrganizationRenderer";
+import {EventRenderOptions} from "./time/Event";
 
 export class HTMLDocRenderer extends HTMLRenderer implements PeopleRenderer<HTML> {
 
@@ -24,15 +25,17 @@ export class HTMLDocRenderer extends HTMLRenderer implements PeopleRenderer<HTML
   }
 
   render(people: People): HTML {
-    const titleHTML = `<h1>${this.peopleRenderer.render(people, {name: {middle: NameCase.camelCase}})}</h1>`;
-    const bioHTML = this.renderBio(people);
+    const titleHTML = this.h1(this.peopleRenderer.render(people, PeopleNameFormat.full));
+    const eventOptions = {birth: {people: PeopleNameFormat.middleAbbreviated}}
+    const bioHTML = this.renderBio(people, eventOptions);
     return titleHTML + bioHTML;
   }
 
-  private renderBio(people: People): HTML {
+  private renderBio(people: People, options: EventRenderOptions): HTML {
     let bioHTML = ''
     for (const event of people.events) {
-      bioHTML += this.paragraph(event.render(this.eventRenderer) + '.')
+      const renderedEvent = event.render(this.eventRenderer, options);
+      bioHTML += this.paragraph(renderedEvent + '.')
     }
     return bioHTML
   }

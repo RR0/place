@@ -35,7 +35,11 @@ const bornEvent: BirthEvent = new BirthEvent(
   chicago, father, mother)
 hynek.events.add(bornEvent);
 
-
+const format = {
+  people: {
+    name: 'full'
+  }
+}
 const docRenderer = new HTMLDocRenderer(translator)
 const eventHTML = hynek.render(docRenderer)
 const docHtml = `
