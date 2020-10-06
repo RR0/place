@@ -1,16 +1,16 @@
 import {Translator} from "../../lang/Translator";
 import {HTML, HTMLRenderer} from "../../HTMLRenderer";
-import {OccupationEvent, OccupationEventRenderer} from "../OccupationEvent";
-import {HTMLOrganizationRenderer} from "../../org/render/HTMLOrganizationRenderer";
+import {OccupationEvent, OccupationEventRenderer, OccupationRenderOptions} from "../OccupationEvent";
+import {OrganizationRenderer} from "../../org/Organization";
 
 
 export class HTMLOccupationRenderer extends HTMLRenderer implements OccupationEventRenderer<HTML> {
 
-  constructor(translator: Translator, private orgRenderer: HTMLOrganizationRenderer) {
+  constructor(translator: Translator, private orgRenderer: OrganizationRenderer<HTML>) {
     super(translator)
   }
 
-  renderOccupation(occupation: OccupationEvent): HTML {
+  renderOccupation(occupation: OccupationEvent, options: OccupationRenderOptions): HTML {
     const orgMsg = this.translator.message.org;
     const organization = occupation.organization;
     const orgType = this.translator.translate(orgMsg.type[organization.type])

@@ -50,17 +50,27 @@ export class PeopleNameFormat {
     }
   }
 
-  lastName = "lastName"
-  firstName = "firstName"
-}
-
-export interface PeopleRenderOptions {
-  name: {
-    first: NameCase
-    middle: NameCase
-    last: NameCase
+  static readonly lastName: PeopleRenderOptions = {
+    name: {
+      first: NameCase.none,
+      middle: NameCase.none,
+      last: NameCase.camelCase,
+    }
   }
 }
+
+
+export interface PeopleNameRenderOptions {
+  first: NameCase
+  middle: NameCase
+  last: NameCase
+}
+
+
+export interface PeopleRenderOptions {
+  name: PeopleNameRenderOptions
+}
+
 
 export class HTMLPeopleRenderer extends HTMLRenderer implements PeopleRenderer<HTML> {
 

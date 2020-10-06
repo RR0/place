@@ -3,6 +3,19 @@ import {Place} from "../place/Place";
 import {People} from "../people/People";
 import {PeopleEvent} from './PeopleEvent'
 import {RR0Time} from "./Time";
+import {PeopleRenderOptions} from "../people/render/HTMLPeopleRenderer";
+
+
+export interface BirthParentRenderOptions {
+  occupation: EventRenderOptions;
+  people: PeopleRenderOptions
+}
+
+
+export interface BirthEventRenderOptions extends EventRenderOptions {
+  people: PeopleRenderOptions
+  parent: BirthParentRenderOptions
+}
 
 
 /**
@@ -10,7 +23,7 @@ import {RR0Time} from "./Time";
  */
 export interface BirthEventRenderer<R> {
 
-  renderBirth(event: BirthEvent, options: EventRenderOptions): R
+  renderBirth(event: BirthEvent, options: BirthEventRenderOptions): R
 }
 
 
@@ -38,7 +51,7 @@ export class BirthEvent extends PeopleEvent {
    * @param renderer The rendering algorithm.
    * @param options
    */
-  render<R>(renderer: EventRenderer<R>, options: EventRenderOptions): R {
+  render<R>(renderer: EventRenderer<R>, options: BirthEventRenderOptions): R {
     return renderer.renderBirth(this, options)
   }
 }

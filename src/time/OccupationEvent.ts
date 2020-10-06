@@ -1,4 +1,4 @@
-import {EventRenderer, EventRenderOptions, RR0EventType} from "./Event";
+import {EventRenderOptions, RR0EventType} from "./Event";
 import {Place} from "../place/Place";
 import {People} from "../people/People";
 import {PeopleEvent} from './PeopleEvent'
@@ -6,12 +6,15 @@ import {RR0Time} from "./Time";
 import {Organization} from "../org/Organization";
 
 
+export interface OccupationRenderOptions extends EventRenderOptions {
+}
+
 /**
  * An Occupation event rendering algorithm.
  */
 export interface OccupationEventRenderer<R> {
 
-  renderOccupation(event: OccupationEvent): R
+  renderOccupation(event: OccupationEvent, options: OccupationRenderOptions): R
 }
 
 
@@ -45,8 +48,9 @@ export class OccupationEvent extends PeopleEvent {
    * Render that occupation event.
    *
    * @param renderer The rendering algorithm.
+   * @param options
    */
-  render<R>(renderer: EventRenderer<R>, options: EventRenderOptions): R {
-    return renderer.renderOccupation(this)
+  render<R>(renderer: OccupationEventRenderer<R>, options: OccupationRenderOptions): R {
+    return renderer.renderOccupation(this, options)
   }
 }

@@ -2,7 +2,7 @@ import {Place} from '../place/Place'
 import {BirthEventRenderer} from "./BirthEvent";
 import {RR0Time} from "./Time";
 import {OccupationEventRenderer} from "./OccupationEvent";
-import {PeopleRenderOptions} from "../people/render/HTMLPeopleRenderer";
+
 
 export enum RR0EventType {
   birth = 'birth',
@@ -15,11 +15,10 @@ export interface EventRenderer<R> extends BirthEventRenderer<R>, OccupationEvent
   render(event: RR0Event): R
 }
 
+
 export interface EventRenderOptions {
-  [RR0EventType.birth]: {
-    people: PeopleRenderOptions
-  }
 }
+
 
 /**
  * Something that occurred.

@@ -1,8 +1,16 @@
-import {RR0Event} from "./Event";
+import {RR0Event, RR0EventType} from "./Event";
+import {BirthEventRenderOptions} from "./BirthEvent";
+import {OccupationRenderOptions} from "./OccupationEvent";
+
+
+export interface TimelineRenderOptions {
+  [RR0EventType.birth]: BirthEventRenderOptions
+  [RR0EventType.occupation]: OccupationRenderOptions
+}
 
 
 export interface TimelineRenderer<R> {
-  render(timeline: Timeline): R
+  render(timeline: Timeline, options: TimelineRenderOptions): R
 }
 
 
@@ -33,8 +41,8 @@ export class Timeline implements Iterable<RR0Event> {
     return this.events[Symbol.iterator]();
   }
 
-  render<R>(renderer: TimelineRenderer<R>): R {
-    return renderer.render(this)
+  render<R>(renderer: TimelineRenderer<R>, options: TimelineRenderOptions): R {
+    return renderer.render(this, options)
   }
 
   findOfType(type: any): Timeline {

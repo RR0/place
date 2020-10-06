@@ -7,10 +7,12 @@ import {State} from "./place/State";
 import {Country} from "./place/Country";
 import {DateTime} from "./time/DateTime";
 import {CountryCode} from "./place/CountryCode";
-import {HTMLDocRenderer} from "./HTMLDocRenderer";
+import {HTMLDocRenderer, HTMLDocRenderOptions} from "./HTMLDocRenderer";
 import {OccupationEvent, OccupationRole} from "./time/OccupationEvent";
 import {BeforeTime} from "./time/BeforeTime";
 import {Company} from "./org/Company";
+import {PeopleNameFormat} from "./people/render/HTMLPeopleRenderer";
+import {RR0EventType} from "./time/Event";
 
 const user = new User('fr');
 const translator = new Translator(user.locale);
@@ -35,13 +37,23 @@ const bornEvent: BirthEvent = new BirthEvent(
   chicago, father, mother)
 hynek.events.add(bornEvent);
 
-const format = {
-  people: {
-    name: 'full'
+const docRenderer = new HTMLDocRenderer(translator)
+let options: HTMLDocRenderOptions = {
+  title: {
+    name: PeopleNameFormat.full.name
+  },
+  events: {
+    [RR0EventType.birth]: {
+      people: PeopleNameFormat.lastName,
+      parent: {
+        people: PeopleNameFormat.full,
+        occupation: {}
+      }
+    },
+    [RR0EventType.occupation]: {people: PeopleNameFormat.lastName}
   }
 }
-const docRenderer = new HTMLDocRenderer(translator)
-const eventHTML = hynek.render(docRenderer)
+const eventHTML = docRenderer.render(hynek, options)
 const docHtml = `
 ${eventHTML}. 
 Il fait ses études dans les écoles publiques de la ville, et sort du lycée technique Crane en 1927. 
