@@ -4,9 +4,14 @@ import {People} from "../people/People";
 import {PeopleEvent} from './PeopleEvent'
 import {RR0Time} from "./Time";
 import {Organization} from "../org/Organization";
+import {OrganizationRenderOptions} from "../org/render/HTMLOrganizationRenderer";
 
 
 export interface OccupationRenderOptions extends EventRenderOptions {
+  verb: boolean
+  type: boolean
+  org: OrganizationRenderOptions
+  role: boolean
 }
 
 /**

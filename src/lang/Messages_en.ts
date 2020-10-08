@@ -1,10 +1,15 @@
 import {CountryCode} from "../place/CountryCode";
-import {DictionaryMessage, EventMessage, Message, OrgMessage, PlaceMessage, TimeMessage} from "./Message";
+import {DictionaryMessages, EventMessages, Messages, OrgMessages, PlaceMessages, TimeMessages} from "./Messages";
 import {OccupationRole} from "../time/OccupationEvent";
 import {OrganizationType} from "../org/Organization";
 
-class EnglishMessage implements Message {
-  org: OrgMessage = {
+class EnglishMessages implements Messages {
+  org: OrgMessages = {
+    name: {
+      short: '${short}',
+      long: '${long}',
+      short_long: '<abbr title="${long}">${short}</abbr>',
+    },
     type: {
       [OrganizationType.company]: 'company',
       [OrganizationType.army]: 'army',
@@ -14,7 +19,7 @@ class EnglishMessage implements Message {
       [OccupationRole.general]: "general"
     }
   }
-  place: PlaceMessage = {
+  place: PlaceMessages = {
     country: {
       [CountryCode.cz]: {
         name: 'Czechia',
@@ -53,7 +58,7 @@ class EnglishMessage implements Message {
       },
     }
   }
-  event: EventMessage = {
+  event: EventMessages = {
     default: '${when} at ${where} ${type}',
     born: {
       label: '${who} was born on ${when} at ${where}',
@@ -80,17 +85,17 @@ class EnglishMessage implements Message {
       }
     },
     occupation: {
-      label: "work ",
-      role: "as ${role}",
-      for: " for"
+      verb_role_org: "work as {role} for {org}",
+      verb_org: "work for {org}",
+      type: "for {type}",
     }
   }
-  time: TimeMessage = {
+  time: TimeMessages = {
     before: ' before ${date}'
   }
-  dict: DictionaryMessage = {
+  dict: DictionaryMessages = {
     cigar: 'cigar'
   }
 }
 
-export const message_en = new EnglishMessage()
+export const messages_en = new EnglishMessages()

@@ -25,6 +25,6 @@ export class HTMLTimeRenderer extends HTMLRenderer implements TimeRenderer<HTML>
   }
 
   renderBefore(time: BeforeTime): HTML {
-    return this.translator.translate(this.translator.message.time.before, {date: time.aboveDate});
+    return this.translator.translate(this.translator.messages.time.before, {date: time.aboveDate});
   }
 }

@@ -4,10 +4,28 @@ import {People} from "../people/People";
 import {PeopleEvent} from './PeopleEvent'
 import {RR0Time} from "./Time";
 import {PeopleRenderOptions} from "../people/render/HTMLPeopleRenderer";
+import {OccupationRenderOptions} from "./OccupationEvent";
+import {OrganizationDescriptionOptions} from "../org/render/HTMLOrganizationRenderer";
+
+
+export class OccupationFormat {
+  static none: OccupationRenderOptions = {
+    verb: false,
+    type: false,
+    role: false,
+    org: {
+      name: {
+        long: false, short: false
+      },
+      description: OrganizationDescriptionOptions.none,
+      types: {army: {}, company: {products: false}}
+    }
+  }
+}
 
 
 export interface BirthParentRenderOptions {
-  occupation: EventRenderOptions;
+  occupation: OccupationRenderOptions
   people: PeopleRenderOptions
 }
 

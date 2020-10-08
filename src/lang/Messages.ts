@@ -9,38 +9,41 @@ export interface CountryMessage {
   }
 }
 
+
 export interface CountriesMessage {
   [countryCode: string]: CountryMessage
 }
 
-export interface PlaceMessage {
+
+export interface PlaceMessages {
   country: CountriesMessage
 }
 
-interface BornFromAnonymousParentMessage {
+
+export interface BornFromAnonymousParentMessage {
   nationality: string
 }
 
-interface BornFromParentMessage {
+export interface BornFromParentMessage {
   anonymous: BornFromAnonymousParentMessage
 }
 
-interface BornFromAnonymousParentsMessage {
+export interface BornFromAnonymousParentsMessage {
   nationality: string
   nationalities: string
 }
 
-interface BornFromParentsMessage {
+export interface BornFromParentsMessage {
   and: string
   anonymous: BornFromAnonymousParentsMessage
 }
 
-interface ChildMessage {
+export interface ChildMessage {
   male: string,
   female: string
 }
 
-interface BornMessage {
+export interface BornMessage {
   label: string
   child: ChildMessage
   father: BornFromParentMessage
@@ -48,23 +51,28 @@ interface BornMessage {
   parents: BornFromParentsMessage
 }
 
-interface OccupationMessage {
-  label: string
-  role: string
-  for: string
+export interface OccupationMessage {
+  verb_role_org: string
+  verb_org: string
+  type: string
 }
 
-export interface EventMessage {
+export interface EventMessages {
   default: string
   born: BornMessage
   occupation: OccupationMessage
 }
 
-export interface TimeMessage {
+export interface TimeMessages {
   before: string
 }
 
-export interface OrgMessage {
+export interface OrgMessages {
+  name: {
+    short: string
+    long: string
+    short_long: string
+  }
   type: {
     [OrganizationType.company]: string
     [OrganizationType.army]: string
@@ -75,14 +83,22 @@ export interface OrgMessage {
   }
 }
 
-export interface DictionaryMessage {
+
+export interface DictionaryMessages {
   cigar: string
 }
 
-export interface Message {
-  org: OrgMessage
-  time: TimeMessage
-  place: PlaceMessage
-  event: EventMessage
-  dict: DictionaryMessage
+
+export interface WithOrgMessages {
+  org: OrgMessages
+}
+
+export interface WithPlaceMessages {
+  place: PlaceMessages
+}
+
+export interface Messages extends WithOrgMessages, WithPlaceMessages {
+  time: TimeMessages
+  event: EventMessages
+  dict: DictionaryMessages
 }

@@ -5,11 +5,12 @@ import {State} from "../State";
 import {Translator} from "../../lang/Translator";
 import {HTML, HTMLRenderer} from "../../HTMLRenderer";
 import {Gender} from "../../people/People";
+import {WithPlaceMessages} from "../../lang/Messages";
 
 
 export class HTMLPlaceRenderer extends HTMLRenderer implements PlaceRenderer<HTML>, CityRenderer<HTML> {
 
-  constructor(translator: Translator) {
+  constructor(translator: Translator<WithPlaceMessages>) {
     super(translator);
   }
 
@@ -22,11 +23,11 @@ export class HTMLPlaceRenderer extends HTMLRenderer implements PlaceRenderer<HTM
   }
 
   renderCountry(country: Country): HTML {
-    return this.translator.translate(this.translator.message.place.country[country.name].name);
+    return this.translator.translate(this.translator.messages.place.country[country.name].name);
   }
 
   renderNationality(country: Country, gender: Gender): HTML {
-    return this.translator.translate(this.translator.message.place.country[country.name].nationality[gender]);
+    return this.translator.translate(this.translator.messages.place.country[country.name].nationality[gender]);
   }
 
   renderState(state: State): HTML {

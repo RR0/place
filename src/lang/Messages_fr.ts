@@ -1,12 +1,21 @@
 import {CountryCode} from "../place/CountryCode";
-import {Message} from "./Message";
+import {DictionaryMessages, EventMessages, Messages, OrgMessages, PlaceMessages, TimeMessages} from "./Messages";
 import {OccupationRole} from "../time/OccupationEvent";
 import {OrganizationType} from "../org/Organization";
 
-class FrenchMessage implements Message {
-  org = {
+export function frenchPlural(s: string) {
+  return s.endsWith('al') ? s.substring(0, s.length - 2) + 'aux' : s + 's'
+}
+
+class FrenchMessages implements Messages {
+  org: OrgMessages = {
+    name: {
+      short: '${short}',
+      long: '${long}',
+      short_long: '<abbr title="${long}">${short}</abbr>',
+    },
     type: {
-      [OrganizationType.company]: 'société',
+      [OrganizationType.company]: 'une société produisant des ${products:plural}',
       [OrganizationType.army]: 'armée',
     },
     role: {
@@ -14,7 +23,7 @@ class FrenchMessage implements Message {
       [OccupationRole.general]: "général"
     }
   }
-  place = {
+  place: PlaceMessages = {
     country: {
       [CountryCode.cz]: {
         name: 'Tchéquie',
@@ -53,7 +62,7 @@ class FrenchMessage implements Message {
       },
     }
   }
-  event = {
+  event: EventMessages = {
     default: '${when} à ${where} ${type}',
     born: {
       label: '${who} naît le ${when} à ${where}',
@@ -80,17 +89,17 @@ class FrenchMessage implements Message {
       }
     },
     occupation: {
-      label: "travaille",
-      role: " comme ${role}",
-      for: " pour"
+      verb_role_org: "travaille comme {role} chez {org}",
+      verb_org: "travaille chez {org}",
+      type: "dans {type}",
     }
   }
-  time = {
+  time: TimeMessages = {
     before: ' avant le ${date}'
   }
-  dict = {
+  dict: DictionaryMessages = {
     cigar: 'cigare'
   }
 }
 
-export const message_fr = new FrenchMessage();
+export const messages_fr = new FrenchMessages();

@@ -11,13 +11,35 @@ export class HTMLOccupationRenderer extends HTMLRenderer implements OccupationEv
   }
 
   renderOccupation(occupation: OccupationEvent, options: OccupationRenderOptions): HTML {
-    const orgMsg = this.translator.message.org;
-    const organization = occupation.organization;
-    const orgType = this.translator.translate(orgMsg.type[organization.type])
-    const role = this.translator.translate(orgMsg.role[occupation.role])
-    const work = this.translator.translate(this.translator.message.event.occupation.label)
-    const roleStr = this.translator.translate(this.translator.message.event.occupation.role, {role})
-    const org = organization.render(this.orgRenderer)
-    return work + roleStr + org
+    const orgMsg = this.translator.messages.org;
+    const elements: string[] = []
+    const values: any = {}
+    if (options.verb) {
+      elements.push('verb')
+    }
+    if (options.role) {
+      const role = occupation.role;
+      if (role) {
+        elements.push('role')
+        values['role'] = this.translator.translate(orgMsg.role[role])
+      }
+    }
+    if (options.org) {
+      const org = occupation.organization;
+      if (org) {
+        elements.push('org')
+        values['org'] = org.render(this.orgRenderer, options.org)
+      }
+    }
+    if (options.type) {
+      elements.push('type')
+      const org = occupation.organization;
+      if (org) {
+        values['type'] = this.translator.translate(orgMsg.type[org.type])
+      }
+    }
+    const key = elements.join('_')
+    const occupationMsg = this.translator.messages.event.occupation as any;
+    return this.translator.translate(occupationMsg[key], values)
   }
 }

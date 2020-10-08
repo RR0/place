@@ -4,7 +4,7 @@ import {OccupationEvent, OccupationEventRenderer} from "../../OccupationEvent";
 import {Translator} from "../../../lang/Translator";
 import {Gender, People, PeopleRenderer} from "../../../people/People";
 import {TimeRenderer} from "../../Time";
-import {PlaceRenderer} from "../../../place/Place";
+import {Place, PlaceRenderer} from "../../../place/Place";
 import {Country} from "../../../place/Country";
 
 export class HTMLBirthEventRenderer extends HTMLRenderer implements BirthEventRenderer<HTML> {
@@ -23,12 +23,17 @@ export class HTMLBirthEventRenderer extends HTMLRenderer implements BirthEventRe
     const birthPlace = birth.where
     const birthTime = birth.when
     const baby = birth.who
-    const bornMsg = this.translator.message.event.born
+    const bornMsg = this.translator.messages.event.born
     const born = this.translator.translate(bornMsg.label, {
       who: this.peopleRenderer.render(baby, options.people),
       when: birthTime ? birthTime.render(this.timeRenderer) : '',
       where: birthPlace ? birthPlace.render(this.placeRenderer) : '',
     })
+    const parents = this.parents(birth, options, baby, birthPlace);
+    return born + parents
+  }
+
+  private parents<R>(birth: BirthEvent, options: BirthEventRenderOptions, baby: People, birthPlace?: Place) {
     const birthCountry = birthPlace?.country
     let fatherName = '', fatherNationality
     const father = birth.father
@@ -44,6 +49,7 @@ export class HTMLBirthEventRenderer extends HTMLRenderer implements BirthEventRe
         [motherName, motherNationality] = this.parentInfo(mother, birthCountry, options.parent)
       }
     }
+    const bornMsg = this.translator.messages.event.born
     let parents = ''
     if (fatherName || motherName) {
       parents += this.translator.translate(bornMsg.child[baby.gender])
@@ -73,7 +79,7 @@ export class HTMLBirthEventRenderer extends HTMLRenderer implements BirthEventRe
         parents += this.translator.translate(anonParentsMsg.nationalities, {fatherNationality, motherNationality})
       }
     }
-    return born + parents
+    return parents;
   }
 
   private parentNationality(fatherName?: string, nationality?: string, gender?: Gender) {
@@ -84,14 +90,14 @@ export class HTMLBirthEventRenderer extends HTMLRenderer implements BirthEventRe
         parentNationality += ` (${nationality})`
       }
     } else if (nationality) {
-      parentNationality += this.translator.translate(this.translator.message.event.born[gender === Gender.male ? 'father' : 'mother'].anonymous.nationality, {nationality})
+      parentNationality += this.translator.translate(this.translator.messages.event.born[gender === Gender.male ? 'father' : 'mother'].anonymous.nationality, {nationality})
     }
     return parentNationality
   }
 
   private parentInfo<R>(parent: People, birthCountry: Country | undefined, options: BirthParentRenderOptions) {
     const name = this.peopleRenderer.render(parent, options.people)
-    const fatherBirthCountry = parent.birthCountry
+    const fatherBirthCountry = parent.firstCountry
     let nationality = ''
     if (birthCountry !== fatherBirthCountry) {
       nationality += fatherBirthCountry?.renderNationality(this.placeRenderer, parent.gender)
