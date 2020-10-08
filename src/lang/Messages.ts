@@ -102,7 +102,10 @@ export interface WithEventMessages {
   event: EventMessages
 }
 
-export interface Messages extends WithEventMessages {
+export interface WithTimeMessages {
   time: TimeMessages
+}
+
+export interface Messages extends WithTimeMessages {
   dict: DictionaryMessages
 }

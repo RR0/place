@@ -6,11 +6,12 @@ import {Gender, People, PeopleRenderer} from "../../../people/People";
 import {TimeRenderer} from "../../Time";
 import {Place, PlaceRenderer} from "../../../place/Place";
 import {Country} from "../../../place/Country";
+import {WithEventMessages} from "../../../lang/Messages";
 
 export class HTMLBirthEventRenderer extends HTMLRenderer implements BirthEventRenderer<HTML> {
 
   constructor(
-    translator: Translator,
+    translator: Translator<WithEventMessages>,
     private peopleRenderer: PeopleRenderer<HTML>,
     private timeRenderer: TimeRenderer<HTML>,
     private placeRenderer: PlaceRenderer<HTML>,
