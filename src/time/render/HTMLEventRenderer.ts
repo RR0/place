@@ -5,6 +5,7 @@ import {HTML, HTMLRenderer} from "../../HTMLRenderer"
 import {OccupationEvent, OccupationEventRenderer, OccupationRenderOptions} from "../OccupationEvent"
 import {PlaceRenderer} from "../../place/Place";
 import {TimeRenderer} from "../Time";
+import {WithEventMessages} from "../../lang/Messages";
 
 /**
  * Renders events as HTML.
@@ -12,7 +13,7 @@ import {TimeRenderer} from "../Time";
 export class HTMLEventRenderer extends HTMLRenderer implements EventRenderer<HTML> {
 
   constructor(
-    translator: Translator,
+    translator: Translator<WithEventMessages>,
     private placeRenderer: PlaceRenderer<HTML>,
     private timeRenderer: TimeRenderer<HTML>,
     private occupationRenderer: OccupationEventRenderer<HTML>,
@@ -22,7 +23,7 @@ export class HTMLEventRenderer extends HTMLRenderer implements EventRenderer<HTM
   }
 
   render(event: RR0Event): HTML {
-    return this.translator.translate('event.default', {
+    return this.translator.translate(this.translator.messages.event.default, {
       when: event.when ? event.when.render(this.timeRenderer) : '',
       where: event.where ? event.where.render(this.placeRenderer) : '',
       type: event.type
