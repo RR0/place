@@ -2,11 +2,12 @@ import {Translator} from "../../lang/Translator";
 import {HTML, HTMLRenderer} from "../../HTMLRenderer";
 import {OccupationEvent, OccupationEventRenderer, OccupationRenderOptions} from "../OccupationEvent";
 import {OrganizationRenderer} from "../../org/Organization";
+import {WithEventMessages} from "../../lang/Messages";
 
 
 export class HTMLOccupationRenderer extends HTMLRenderer implements OccupationEventRenderer<HTML> {
 
-  constructor(translator: Translator, private orgRenderer: OrganizationRenderer<HTML>) {
+  constructor(translator: Translator<WithEventMessages>, private orgRenderer: OrganizationRenderer<HTML>) {
     super(translator)
   }
 
@@ -29,13 +30,6 @@ export class HTMLOccupationRenderer extends HTMLRenderer implements OccupationEv
       if (org) {
         elements.push('org')
         values['org'] = org.render(this.orgRenderer, options.org)
-      }
-    }
-    if (options.type) {
-      elements.push('type')
-      const org = occupation.organization;
-      if (org) {
-        values['type'] = this.translator.translate(orgMsg.type[org.type])
       }
     }
     const key = elements.join('_')

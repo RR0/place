@@ -13,14 +13,14 @@ import {BeforeTime} from "./time/BeforeTime";
 import {Company} from "./org/Company";
 import {PeopleNameFormat} from "./people/render/HTMLPeopleRenderer";
 import {Messages} from "./lang/Messages";
-import {messages_fr} from "./lang/Messages_fr";
+import {frenchPlural, messages_fr} from "./lang/Messages_fr";
 import {messages_en} from "./lang/Messages_en";
 import {OrganizationDescriptionOptions} from "./org/render/HTMLOrganizationRenderer";
 
 const messagesByLang: { [lang: string]: Messages } = {fr: messages_fr, en: messages_en}
 
 const user = new User('fr');
-const translator = new Translator(user.locale, messagesByLang[user.locale]);
+const translator = new Translator(user.locale, messagesByLang[user.locale], frenchPlural);
 
 const hynek = new People(Gender.male, `Josef`, 'Hynek', `Allen`)
 const usa = new Country(CountryCode.us);

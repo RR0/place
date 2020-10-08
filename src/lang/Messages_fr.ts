@@ -89,9 +89,10 @@ class FrenchMessages implements Messages {
       }
     },
     occupation: {
-      verb_role_org: "travaille comme {role} chez {org}",
-      verb_org: "travaille chez {org}",
-      type: "dans {type}",
+      verb_role_org: "travaille comme ${role} pour ${org}",
+      verb_org: "travaille pour ${org}",
+      role_org: "${role} pour ${org}",
+      type: "dans ${type}",
     }
   }
   time: TimeMessages = {

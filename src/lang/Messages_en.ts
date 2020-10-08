@@ -85,9 +85,10 @@ class EnglishMessages implements Messages {
       }
     },
     occupation: {
-      verb_role_org: "work as {role} for {org}",
-      verb_org: "work for {org}",
-      type: "for {type}",
+      verb_role_org: "work as ${role} for ${org}",
+      verb_org: "work for ${org}",
+      role_org: "${role} for ${org}",
+      type: "for ${type}",
     }
   }
   time: TimeMessages = {

@@ -74,7 +74,7 @@ export interface PeopleRenderOptions {
 
 export class HTMLPeopleRenderer extends HTMLRenderer implements PeopleRenderer<HTML> {
 
-  constructor(translator: Translator) {
+  constructor(translator: Translator<any>) {
     super(translator);
   }
 

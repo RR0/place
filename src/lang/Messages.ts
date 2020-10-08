@@ -54,6 +54,7 @@ export interface BornMessage {
 export interface OccupationMessage {
   verb_role_org: string
   verb_org: string
+  role_org: string
   type: string
 }
 
@@ -97,8 +98,11 @@ export interface WithPlaceMessages {
   place: PlaceMessages
 }
 
-export interface Messages extends WithOrgMessages, WithPlaceMessages {
-  time: TimeMessages
+export interface WithEventMessages {
   event: EventMessages
+}
+
+export interface Messages extends WithEventMessages {
+  time: TimeMessages
   dict: DictionaryMessages
 }
