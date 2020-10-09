@@ -17,11 +17,20 @@ export class HTMLTimeRenderer extends HTMLRenderer implements TimeRenderer<HTML>
   }
 
   renderDate(time: DateTime, options: TimeRenderOptions): HTML {
-    return time.date.toLocaleDateString(this.translator.locale, options);
+    const nativeOptions: any = {}
+    for (const option in options) {
+      if (options.hasOwnProperty(option)) {
+        const value = (options as any)[option]
+        if (value != 'none') {
+          nativeOptions[option] = value
+        }
+      }
+    }
+    return Object.keys(nativeOptions).length > 0 ? time.date.toLocaleDateString(this.translator.locale, nativeOptions) : '';
   }
 
   renderBefore(time: BeforeTime, options: TimeRenderOptions): HTML {
     const date = time.aboveTime.render(this, options);
-    return this.translator.translate(this.translator.messages.time.before, {date});
+    return date ? this.translator.translate(this.translator.messages.time.before, {date}) : '';
   }
 }

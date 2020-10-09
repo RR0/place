@@ -2,14 +2,16 @@ import {EventRenderer, EventRenderOptions, RR0EventType} from "./Event";
 import {Place} from "../place/Place";
 import {People} from "../people/People";
 import {PeopleEvent} from './PeopleEvent'
-import {RR0Time} from "./Time";
+import {RR0Time, TimeRenderFormat} from "./Time";
 import {PeopleRenderOptions} from "../people/render/HTMLPeopleRenderer";
 import {OccupationRenderOptions} from "./OccupationEvent";
 import {OrganizationDescriptionOptions} from "../org/render/HTMLOrganizationRenderer";
 
 
 export class OccupationFormat {
+
   static none: OccupationRenderOptions = {
+    time: TimeRenderFormat.none,
     verb: false,
     type: false,
     role: false,

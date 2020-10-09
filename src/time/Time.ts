@@ -4,6 +4,11 @@ import {BeforeTime} from "./BeforeTime"
 
 export enum TimeWeekdayRenderOptions {
   /**
+   * ""
+   */
+  none = 'none',
+
+  /**
    * "Thursday"
    */
   long = 'long',
@@ -16,11 +21,16 @@ export enum TimeWeekdayRenderOptions {
   /**
    * "T"
    */
-  narrow = 'narrow'
+  narrow = 'narrow',
 }
 
 
 export enum TimeEraRenderOptions {
+  /**
+   * ""
+   */
+  none = 'none',
+
   /**
    * "Anno Domini"
    */
@@ -40,6 +50,11 @@ export enum TimeEraRenderOptions {
 
 export enum TimeYearRenderOptions {
   /**
+   * ""
+   */
+  none = 'none',
+
+  /**
    * "2022"
    */
   numeric = 'numeric',
@@ -52,6 +67,11 @@ export enum TimeYearRenderOptions {
 
 
 export enum TimeMonthRenderOptions {
+  /**
+   * ""
+   */
+  none = 'none',
+
   /**
    * "2"
    */
@@ -81,6 +101,11 @@ export enum TimeMonthRenderOptions {
 
 export enum TimeDayRenderOptions {
   /**
+   * ""
+   */
+  none = 'none',
+
+  /**
    * "1"
    */
   numeric = 'numeric',
@@ -93,6 +118,11 @@ export enum TimeDayRenderOptions {
 
 
 export enum TimeHourRenderOptions {
+  /**
+   * ""
+   */
+  none = 'none',
+
   /**
    * "1"
    */
@@ -107,6 +137,11 @@ export enum TimeHourRenderOptions {
 
 export enum TimeMinuteRenderOptions {
   /**
+   * ""
+   */
+  none = 'none',
+
+  /**
    * "1"
    */
   numeric = 'numeric',
@@ -120,6 +155,11 @@ export enum TimeMinuteRenderOptions {
 
 export enum TimeSecondRenderOptions {
   /**
+   * ""
+   */
+  none = 'none',
+
+  /**
    * "1"
    */
   numeric = 'numeric',
@@ -132,6 +172,11 @@ export enum TimeSecondRenderOptions {
 
 
 export enum TimeZoneRenderOptions {
+  /**
+   * ""
+   */
+  none = 'none',
+
   /**
    * "British Summer Time"
    */
@@ -153,6 +198,13 @@ export interface TimeRenderOptions {
 
 
 export class TimeRenderFormat {
+
+  static readonly none: TimeRenderOptions = {
+    weekday: TimeWeekdayRenderOptions.none,
+    month: TimeMonthRenderOptions.none,
+    day: TimeDayRenderOptions.none,
+    year: TimeYearRenderOptions.none
+  }
 
   static readonly fullDate: TimeRenderOptions = {
     weekday: TimeWeekdayRenderOptions.long,
