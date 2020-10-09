@@ -1,6 +1,6 @@
 import {BirthEvent, BirthEventRenderer, BirthEventRenderOptions} from "../BirthEvent"
 import {Translator} from "../../lang/Translator"
-import {EventRenderer, RR0Event} from "../Event"
+import {EventRenderer, EventRenderOptions, RR0Event} from "../Event"
 import {HTML, HTMLRenderer} from "../../HTMLRenderer"
 import {OccupationEvent, OccupationEventRenderer, OccupationRenderOptions} from "../OccupationEvent"
 import {PlaceRenderer} from "../../place/Place";
@@ -22,9 +22,9 @@ export class HTMLEventRenderer extends HTMLRenderer implements EventRenderer<HTM
     super(translator)
   }
 
-  render(event: RR0Event): HTML {
+  render(event: RR0Event, options: EventRenderOptions): HTML {
     return this.translator.translate(this.translator.messages.event.default, {
-      when: event.when ? event.when.render(this.timeRenderer) : '',
+      when: event.when ? event.when.render(this.timeRenderer, options.time) : '',
       where: event.where ? event.where.render(this.placeRenderer) : '',
       type: event.type
     })

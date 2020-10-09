@@ -8,6 +8,8 @@ import {frenchPlural, messages_fr} from "../../lang/Messages_fr";
 import {OccupationEvent, OccupationRenderOptions, OccupationRole} from "../OccupationEvent";
 import {BeforeTime} from "../BeforeTime";
 import {Company} from "../../org/Company";
+import {TimeRenderFormat} from "../Time";
+import {DateTime} from "../DateTime";
 
 const translator = new Translator('fr', messages_fr, frenchPlural);
 const organizationRenderer = new HTMLOrganizationRenderer(translator);
@@ -19,17 +21,18 @@ const czechoslovakia = new Country(CountryCode.cs);
 test('renders an occupation for an anonymous company', () => {
   const cigarFactory = new Company(undefined, undefined, [translator.messages.dict.cigar]);
   const renderOptions: OccupationRenderOptions = {
-      verb: true,
-      type: true,
-      org: {
-        name: {short: true, long: true},
-        description: OrganizationDescriptionOptions.inline,
-        types: {army: {}, company: {products: true}}
-      },
-      role: false
-    }
-  ;
-  const occupationEvent = new OccupationEvent(father, OccupationRole.worker, cigarFactory, new BeforeTime(birthdate), czechoslovakia);
+    time: TimeRenderFormat.fullDate,
+    verb: true,
+    type: true,
+    org: {
+      name: {short: true, long: true},
+      description: OrganizationDescriptionOptions.inline,
+      types: {army: {}, company: {products: true}}
+    },
+    role: false
+  }
+
+  const occupationEvent = new OccupationEvent(father, OccupationRole.worker, cigarFactory, new BeforeTime(new DateTime(birthdate)), czechoslovakia);
 
   const renderer = new HTMLOccupationRenderer(translator, organizationRenderer);
   const found = occupationEvent.render(renderer, renderOptions)
@@ -40,17 +43,18 @@ test('renders an occupation for an anonymous company', () => {
 test('renders an occupation role for an anonymous company', () => {
   const cigarFactory = new Company(undefined, undefined, [translator.messages.dict.cigar]);
   const renderOptions: OccupationRenderOptions = {
-      verb: false,
-      type: true,
-      org: {
-        name: {short: true, long: true},
-        description: OrganizationDescriptionOptions.inline,
-        types: {army: {}, company: {products: true}}
-      },
-      role: true
-    }
-  ;
-  const occupationEvent = new OccupationEvent(father, OccupationRole.worker, cigarFactory, new BeforeTime(birthdate), czechoslovakia);
+    time: TimeRenderFormat.fullDate,
+    verb: false,
+    type: true,
+    org: {
+      name: {short: true, long: true},
+      description: OrganizationDescriptionOptions.inline,
+      types: {army: {}, company: {products: true}}
+    },
+    role: true
+  }
+
+  const occupationEvent = new OccupationEvent(father, OccupationRole.worker, cigarFactory, new BeforeTime(new DateTime(birthdate)), czechoslovakia);
 
   const renderer = new HTMLOccupationRenderer(translator, organizationRenderer);
   const found = occupationEvent.render(renderer, renderOptions)

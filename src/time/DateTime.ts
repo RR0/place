@@ -1,10 +1,11 @@
-import {RR0Time, TimeRenderer} from "./Time"
+import {RR0Time, TimeRenderer, TimeRenderOptions} from "./Time"
 import {BeforeTime} from "./BeforeTime"
 
 /**
  * Time as a date.
  */
 export class DateTime extends RR0Time {
+
   constructor(readonly date: Date) {
     super()
   }
@@ -17,8 +18,8 @@ export class DateTime extends RR0Time {
     return when ? when.isBeforeDate(this) : null
   }
 
-  render<R>(renderer: TimeRenderer<R>): R {
-    return renderer.renderDate(this)
+  render<R>(renderer: TimeRenderer<R>, options: TimeRenderOptions): R {
+    return renderer.renderDate(this, options)
   }
 
   isBeforeDate(when: DateTime): Boolean {
@@ -30,10 +31,10 @@ export class DateTime extends RR0Time {
   }
 
   isAfterBefore(when: BeforeTime): Boolean | null {
-    return this.date.getTime() >= when.aboveDate.getTime()
+    return this.date.getTime() >= when.aboveTime.date.getTime()
   }
 
   isBeforeBefore(when: BeforeTime): Boolean | null {
-    return this.date.getTime() >= when.aboveDate.getTime() ? false : null
+    return this.date.getTime() >= when.aboveTime.date.getTime() ? false : null
   }
 }

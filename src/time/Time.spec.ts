@@ -13,7 +13,7 @@ test('compare 2 dates', () => {
 
 test('compare date and some date before', () => {
   const birth = new DateTime(new Date(1910, 4, 1));
-  const occupation = new BeforeTime(birth.date);
+  const occupation = new BeforeTime(new DateTime(birth.date));
 
   expect(occupation.isBefore(birth)).toBe(true)
   expect(birth.isBefore(occupation)).toBe(false)
@@ -22,8 +22,8 @@ test('compare date and some date before', () => {
 })
 
 test('compare some dates before another', () => {
-  const beforeA = new BeforeTime(new Date(1910, 3, 30));
-  const beforeB = new BeforeTime(new Date(1910, 4, 1));
+  const beforeA = new BeforeTime(new DateTime(new Date(1910, 3, 30)));
+  const beforeB = new BeforeTime(new DateTime(new Date(1910, 4, 1)));
 
   expect(beforeA.isBefore(beforeB)).toBe(null)
   expect(beforeA.isAfter(beforeB)).toBe(null)

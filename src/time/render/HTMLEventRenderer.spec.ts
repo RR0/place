@@ -14,6 +14,7 @@ import {HTMLOccupationRenderer} from "./HTMLOccupationRenderer";
 import {HTMLOrganizationRenderer} from "../../org/render/HTMLOrganizationRenderer";
 import {HTMLBirthEventRenderer} from "./birth/HTMLBirthEventRenderer";
 import {frenchPlural, messages_fr} from "../../lang/Messages_fr";
+import {TimeRenderFormat} from "../Time";
 
 const hynek = new People(Gender.male, `Josef`, 'Hynek', `Allen`)
 const usa = new Country(CountryCode.us)
@@ -37,6 +38,7 @@ test('renders anonymous parents of same nationality', () => {
   mother.events.add(new BirthEvent(mother, undefined, czechoslovakia))
   const birthEvent: BirthEvent = new BirthEvent(hynek, new DateTime(new Date(1910, 4, 1)), chicago, father, mother)
   const renderOptions: BirthEventRenderOptions = {
+    time: TimeRenderFormat.fullDate,
     people: PeopleNameFormat.middleAbbreviated,
     parent: {
       people: PeopleNameFormat.full,
@@ -56,6 +58,7 @@ test('renders anonymous parents of different nationality', () => {
   mother.events.add(new BirthEvent(mother, undefined, usa))
   const birthEvent: BirthEvent = new BirthEvent(hynek, new DateTime(new Date(1910, 4, 1)), chicago, father, mother)
   const renderOptions: BirthEventRenderOptions = {
+    time: TimeRenderFormat.fullDate,
     people: PeopleNameFormat.middleAbbreviated,
     parent: {
       people: PeopleNameFormat.full,
@@ -75,6 +78,7 @@ test('renders parents of different nationality', () => {
   mother.events.add(new BirthEvent(mother, undefined, czechoslovakia))
   const bornEvent: BirthEvent = new BirthEvent(hynek, new DateTime(new Date(1910, 4, 1)), chicago, father, mother)
   const renderOptions: BirthEventRenderOptions = {
+    time: TimeRenderFormat.fullDate,
     people: PeopleNameFormat.middleAbbreviated,
     parent: {
       people: PeopleNameFormat.full,

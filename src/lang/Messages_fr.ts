@@ -96,7 +96,7 @@ class FrenchMessages implements Messages {
     }
   }
   time: TimeMessages = {
-    before: ' avant le ${date}'
+    before: 'avant le ${date}'
   }
   dict: DictionaryMessages = {
     cigar: 'cigare'

@@ -1,4 +1,4 @@
-import {RR0Time, TimeRenderer} from "../Time";
+import {RR0Time, TimeRenderer, TimeRenderOptions} from "../Time";
 import {DateTime} from "../DateTime";
 import {Translator} from "../../lang/Translator";
 import {HTML, HTMLRenderer} from "../../HTMLRenderer";
@@ -12,20 +12,16 @@ export class HTMLTimeRenderer extends HTMLRenderer implements TimeRenderer<HTML>
     super(translator)
   }
 
-  render(time: RR0Time): HTML {
+  render(time: RR0Time, options: TimeRenderOptions): HTML {
     return time.toString();
   }
 
-  renderDate(time: DateTime): HTML {
-    return time.date.toLocaleDateString(this.translator.locale, {
-      weekday: "long",
-      month: "long",
-      day: "numeric",
-      year: "numeric"
-    });
+  renderDate(time: DateTime, options: TimeRenderOptions): HTML {
+    return time.date.toLocaleDateString(this.translator.locale, options);
   }
 
-  renderBefore(time: BeforeTime): HTML {
-    return this.translator.translate(this.translator.messages.time.before, {date: time.aboveDate});
+  renderBefore(time: BeforeTime, options: TimeRenderOptions): HTML {
+    const date = time.aboveTime.render(this, options);
+    return this.translator.translate(this.translator.messages.time.before, {date});
   }
 }

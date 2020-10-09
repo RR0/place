@@ -27,7 +27,7 @@ export class HTMLBirthEventRenderer extends HTMLRenderer implements BirthEventRe
     const bornMsg = this.translator.messages.event.born
     const born = this.translator.translate(bornMsg.label, {
       who: this.peopleRenderer.render(baby, options.people),
-      when: birthTime ? birthTime.render(this.timeRenderer) : '',
+      when: birthTime ? birthTime.render(this.timeRenderer, options.time) : '',
       where: birthPlace ? birthPlace.render(this.placeRenderer) : '',
     })
     const parents = this.parents(birth, options, baby, birthPlace);
