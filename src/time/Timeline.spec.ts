@@ -15,7 +15,7 @@ const usa = new Country(CountryCode.us)
 const illinois = new State('Illinois', usa)
 const chicago = new City('Chicago', illinois)
 const birthEvent = new BirthEvent(hynek, new DateTime(new Date(1910, 4, 1)), chicago)
-const usaf = new Army('USAF')
+const usaf = new Army(Gender.neutral, 'USAF')
 const occupationEvent = new OccupationEvent(hynek, OccupationRole.worker, usaf, new DateTime(new Date(1948, 3, 1)))
 
 test('find event type', () => {

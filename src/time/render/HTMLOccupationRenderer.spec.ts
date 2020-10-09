@@ -12,6 +12,7 @@ import {TimeRenderFormat} from "../Time";
 import {DateTime} from "../DateTime";
 import {HTMLPlaceRenderer} from "../../place/render/HTMLPlaceRenderer";
 import {Gender} from "../../Entity";
+import {Dictionary} from "../../lang/Dictionary";
 
 const translator = new Translator('fr', messages_fr, frenchPlural);
 const organizationRenderer = new HTMLOrganizationRenderer(translator, new HTMLPlaceRenderer(translator));
@@ -21,7 +22,8 @@ const birthdate = new Date(1910, 4, 1);
 const czechoslovakia = new Country(CountryCode.cs);
 
 test('renders an occupation for an anonymous company', () => {
-  const cigarFactory = new Company(undefined, undefined, [translator.messages.dict.cigar]);
+  const companyGender = Dictionary.getGender(translator.messages.dict.company);
+  const cigarFactory = new Company(companyGender, undefined, undefined, [translator.messages.dict.cigar]);
   const renderOptions: OccupationRenderOptions = {
     time: TimeRenderFormat.fullDate,
     verb: true,
@@ -44,7 +46,8 @@ test('renders an occupation for an anonymous company', () => {
 })
 
 test('renders an occupation role for an anonymous company', () => {
-  const cigarFactory = new Company(undefined, undefined, [translator.messages.dict.cigar]);
+  const companyGender = Dictionary.getGender(translator.messages.dict.company);
+  const cigarFactory = new Company(companyGender, undefined, undefined, [translator.messages.dict.cigar]);
   const renderOptions: OccupationRenderOptions = {
     time: TimeRenderFormat.fullDate,
     verb: false,

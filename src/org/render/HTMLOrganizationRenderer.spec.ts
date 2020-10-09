@@ -4,6 +4,8 @@ import {Company} from "../Company";
 import {Army} from "../Army";
 import {frenchPlural, messages_fr} from "../../lang/Messages_fr";
 import {HTMLPlaceRenderer} from "../../place/render/HTMLPlaceRenderer";
+import {Gender} from "../../Entity";
+import {Dictionary} from "../../lang/Dictionary";
 
 
 const translator = new Translator('fr', messages_fr, frenchPlural);
@@ -14,7 +16,8 @@ test('render organization as an anonymous company', () => {
 
   const renderer = new HTMLOrganizationRenderer(translator, placeRenderer);
   {
-    const cigarFactory = new Company(undefined, undefined, [translator.messages.dict.cigar]);
+    const companyGender = Dictionary.getGender(translator.messages.dict.company);
+    const cigarFactory = new Company(companyGender, undefined, undefined, [translator.messages.dict.cigar]);
     {
       const html = cigarFactory.render(renderer, {
         name: {long: true, short: true},
@@ -32,7 +35,7 @@ test('render organization as a short + long name', () => {
 
   const renderer = new HTMLOrganizationRenderer(translator, placeRenderer);
   {
-    const usaf = new Army('United States Air Force', `USAF`);
+    const usaf = new Army(Gender.neutral, 'United States Air Force', `USAF`);
     {
       const html = usaf.render(renderer, {
         name: {long: true, short: true},

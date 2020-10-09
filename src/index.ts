@@ -18,6 +18,7 @@ import {messages_en} from "./lang/Messages_en";
 import {OrganizationDescriptionOptions} from "./org/render/HTMLOrganizationRenderer";
 import {TimeRenderFormat} from "./time/Time";
 import {Gender} from "./Entity";
+import {Dictionary} from "./lang/Dictionary";
 
 const messagesByLang: { [lang: string]: Messages } = {fr: messages_fr, en: messages_en}
 
@@ -33,7 +34,8 @@ const father = new People(Gender.male, 'Joseph');
 const czechoslovakia = new Country(CountryCode.cs);
 const fatherEvents = father.events;
 fatherEvents.add(new BirthEvent(father, undefined, czechoslovakia))
-const cigarFactory = new Company(undefined, undefined, [translator.messages.dict.cigar]);
+const companyGender = Dictionary.getGender(translator.messages.dict.company);
+const cigarFactory = new Company(companyGender, undefined, undefined, [translator.messages.dict.cigar]);
 fatherEvents.add(new OccupationEvent(father, OccupationRole.worker, cigarFactory, new BeforeTime(new DateTime(birthdate)), czechoslovakia))
 const mother = new People(Gender.female, 'Bertha');
 const motherEvents = mother.events;

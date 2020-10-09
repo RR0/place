@@ -4,8 +4,8 @@ import {Country} from "../Country";
 import {State} from "../State";
 import {Translator} from "../../lang/Translator";
 import {HTML, HTMLRenderer} from "../../HTMLRenderer";
-import {Gender} from "../../people/People";
 import {WithPlaceMessages} from "../../lang/Messages";
+import {Gender} from "../../Entity";
 
 
 export class HTMLPlaceRenderer extends HTMLRenderer implements PlaceRenderer<HTML>, CityRenderer<HTML> {
