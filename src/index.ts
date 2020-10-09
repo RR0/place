@@ -1,4 +1,4 @@
-import {Gender, People} from "./people/People";
+import {People} from "./people/People";
 import {BirthEvent} from "./time/BirthEvent";
 import {City} from "./place/City";
 import {User} from "./user/User";
@@ -17,6 +17,7 @@ import {frenchPlural, messages_fr} from "./lang/Messages_fr";
 import {messages_en} from "./lang/Messages_en";
 import {OrganizationDescriptionOptions} from "./org/render/HTMLOrganizationRenderer";
 import {TimeRenderFormat} from "./time/Time";
+import {Gender} from "./Entity";
 
 const messagesByLang: { [lang: string]: Messages } = {fr: messages_fr, en: messages_en}
 
@@ -59,6 +60,7 @@ let options: HTMLDocRenderOptions = {
           verb: false,
           type: true,
           org: {
+            origin: true,
             name: {short: true, long: true},
             description: OrganizationDescriptionOptions.inline,
             types: {army: {}, company: {products: true}}
@@ -72,6 +74,7 @@ let options: HTMLDocRenderOptions = {
       verb: true,
       type: true,
       org: {
+        origin: true,
         name: {short: true, long: true},
         description: OrganizationDescriptionOptions.inline,
         types: {army: {}, company: {products: true}}

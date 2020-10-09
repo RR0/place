@@ -1,23 +1,17 @@
 import {CountryCode} from "../place/CountryCode";
-import {DictionaryMessages, EventMessages, Messages, OrgMessages, PlaceMessages, TimeMessages} from "./Messages";
+import {EventMessages, Messages, OrgMessages, PlaceMessages, TimeMessages} from "./Messages";
 import {OccupationRole} from "../time/OccupationEvent";
-import {OrganizationType} from "../org/Organization";
+import {DictionaryMessages} from "./Dictionary";
 
 class EnglishMessages implements Messages {
   org: OrgMessages = {
-    name: {
-      short: '${short}',
-      long: '${long}',
-      short_long: '<abbr title="${long}">${short}</abbr>',
-    },
-    type: {
-      [OrganizationType.company]: 'company',
-      [OrganizationType.army]: 'army',
-    },
-    role: {
-      [OccupationRole.worker]: 'worker',
-      [OccupationRole.general]: "general"
-    }
+    short: '${short}',
+    long: '${long}',
+    short_long: '<abbr title="${long}">${short}</abbr>',
+    company_products: 'a company that sells ${products:plural}',
+    company_nationality: 'a ${nationality} company',
+    company_nationality_products: 'a ${nationality} company that sells ${products:plural}',
+    army: 'armée',
   }
   place: PlaceMessages = {
     country: {
@@ -85,9 +79,9 @@ class EnglishMessages implements Messages {
       }
     },
     occupation: {
-      verb_role_org: "work as ${role} for ${org}",
-      verb_org: "work for ${org}",
-      role_org: "${role} for ${org}",
+      org_role_verb: "work as ${role} for ${org}",
+      org_verb: "work for ${org}",
+      org_role: "${role} for ${org}",
       type: "for ${type}",
     }
   }
@@ -95,7 +89,20 @@ class EnglishMessages implements Messages {
     before: ' before ${date}'
   }
   dict: DictionaryMessages = {
-    cigar: 'cigar'
+    cigar: {
+      neutral: 'cigar',
+    },
+    company: {
+      neutral: 'company',
+    },
+    [OccupationRole.general]: {
+      male: 'general',
+      female: 'general',
+    },
+    [OccupationRole.worker]: {
+      male: 'worker',
+      female: 'worker',
+    }
   }
 }
 

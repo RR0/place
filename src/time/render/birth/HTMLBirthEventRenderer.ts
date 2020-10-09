@@ -1,12 +1,13 @@
 import {HTML, HTMLRenderer} from "../../../HTMLRenderer";
-import {BirthEvent, BirthEventRenderer, BirthEventRenderOptions, BirthParentRenderOptions} from "../../BirthEvent";
+import {BirthEvent, BirthEventRenderer, BirthEventRenderOptions} from "../../BirthEvent";
 import {OccupationEvent, OccupationEventRenderer} from "../../OccupationEvent";
 import {Translator} from "../../../lang/Translator";
-import {Gender, People, PeopleRenderer} from "../../../people/People";
+import {People, PeopleRenderer} from "../../../people/People";
 import {TimeRenderer} from "../../Time";
 import {Place, PlaceRenderer} from "../../../place/Place";
 import {Country} from "../../../place/Country";
 import {WithEventMessages} from "../../../lang/Messages";
+import {Gender} from "../../../Entity";
 
 export class HTMLBirthEventRenderer extends HTMLRenderer implements BirthEventRenderer<HTML> {
 
@@ -40,14 +41,16 @@ export class HTMLBirthEventRenderer extends HTMLRenderer implements BirthEventRe
     const father = birth.father
     {
       if (father) {
-        [fatherName, fatherNationality] = this.parentInfo(father, birthCountry, options.parent)
+        fatherName = this.peopleRenderer.render(father, options.parent.people)
+        fatherNationality = this.nationality(father, birthCountry)
       }
     }
     let motherName = '', motherNationality
     const mother = birth.mother
     {
       if (mother) {
-        [motherName, motherNationality] = this.parentInfo(mother, birthCountry, options.parent)
+        motherName = this.peopleRenderer.render(mother, options.parent.people)
+        motherNationality = this.nationality(mother, birthCountry)
       }
     }
     const bornMsg = this.translator.messages.event.born
@@ -96,13 +99,12 @@ export class HTMLBirthEventRenderer extends HTMLRenderer implements BirthEventRe
     return parentNationality
   }
 
-  private parentInfo<R>(parent: People, birthCountry: Country | undefined, options: BirthParentRenderOptions) {
-    const name = this.peopleRenderer.render(parent, options.people)
+  private nationality<R>(parent: People, birthCountry?: Country): HTML {
     const fatherBirthCountry = parent.firstCountry
     let nationality = ''
     if (birthCountry !== fatherBirthCountry) {
       nationality += fatherBirthCountry?.renderNationality(this.placeRenderer, parent.gender)
     }
-    return [name, nationality]
+    return nationality
   }
 }

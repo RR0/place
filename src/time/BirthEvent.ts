@@ -20,7 +20,13 @@ export class OccupationFormat {
         long: false, short: false
       },
       description: OrganizationDescriptionOptions.none,
-      types: {army: {}, company: {products: false}}
+      origin: false,
+      types: {
+        company: {
+          products: false
+        },
+        army: {}
+      }
     }
   }
 }

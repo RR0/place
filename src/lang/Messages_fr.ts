@@ -1,27 +1,23 @@
 import {CountryCode} from "../place/CountryCode";
-import {DictionaryMessages, EventMessages, Messages, OrgMessages, PlaceMessages, TimeMessages} from "./Messages";
+import {EventMessages, Messages, OrgMessages, PlaceMessages, TimeMessages} from "./Messages";
 import {OccupationRole} from "../time/OccupationEvent";
-import {OrganizationType} from "../org/Organization";
+import {DictionaryMessages} from "./Dictionary";
+
 
 export function frenchPlural(s: string) {
   return s.endsWith('al') ? s.substring(0, s.length - 2) + 'aux' : s + 's'
 }
 
+
 class FrenchMessages implements Messages {
   org: OrgMessages = {
-    name: {
-      short: '${short}',
-      long: '${long}',
-      short_long: '<abbr title="${long}">${short}</abbr>',
-    },
-    type: {
-      [OrganizationType.company]: 'une société produisant des ${products:plural}',
-      [OrganizationType.army]: 'armée',
-    },
-    role: {
-      [OccupationRole.worker]: 'ouvrier',
-      [OccupationRole.general]: "général"
-    }
+    short: '${short}',
+    long: '${long}',
+    short_long: '<abbr title="${long}">${short}</abbr>',
+    company_products: 'une société produisant des ${products:plural}',
+    company_nationality: 'une société ${nationality:female}',
+    company_nationality_products: 'une société ${nationality:female} produisant des ${products:plural}',
+    army: 'armée',
   }
   place: PlaceMessages = {
     country: {
@@ -89,9 +85,9 @@ class FrenchMessages implements Messages {
       }
     },
     occupation: {
-      verb_role_org: "travaille comme ${role} pour ${org}",
-      verb_org: "travaille pour ${org}",
-      role_org: "${role} pour ${org}",
+      org_role_verb: "travaille comme ${role} pour ${org}",
+      org_verb: "travaille pour ${org}",
+      org_role: "${role} pour ${org}",
       type: "dans ${type}",
     }
   }
@@ -99,7 +95,20 @@ class FrenchMessages implements Messages {
     before: 'avant le ${date}'
   }
   dict: DictionaryMessages = {
-    cigar: 'cigare'
+    cigar: {
+      male: 'cigare',
+    },
+    company: {
+      female: 'société',
+    },
+    [OccupationRole.general]: {
+      male: 'général',
+      female: 'générale'
+    },
+    [OccupationRole.worker]: {
+      male: 'ouvrier',
+      female: 'ouvrière'
+    }
   }
 }
 

@@ -1,4 +1,4 @@
-import {Gender, People} from "../../people/People";
+import {People} from "../../people/People";
 import {Country} from "../../place/Country";
 import {CountryCode} from "../../place/CountryCode";
 import {Translator} from "../../lang/Translator";
@@ -10,9 +10,11 @@ import {BeforeTime} from "../BeforeTime";
 import {Company} from "../../org/Company";
 import {TimeRenderFormat} from "../Time";
 import {DateTime} from "../DateTime";
+import {HTMLPlaceRenderer} from "../../place/render/HTMLPlaceRenderer";
+import {Gender} from "../../Entity";
 
 const translator = new Translator('fr', messages_fr, frenchPlural);
-const organizationRenderer = new HTMLOrganizationRenderer(translator);
+const organizationRenderer = new HTMLOrganizationRenderer(translator, new HTMLPlaceRenderer(translator));
 
 const father = new People(Gender.male);
 const birthdate = new Date(1910, 4, 1);
@@ -26,6 +28,7 @@ test('renders an occupation for an anonymous company', () => {
     type: true,
     org: {
       name: {short: true, long: true},
+      origin: true,
       description: OrganizationDescriptionOptions.inline,
       types: {army: {}, company: {products: true}}
     },
@@ -48,6 +51,7 @@ test('renders an occupation role for an anonymous company', () => {
     type: true,
     org: {
       name: {short: true, long: true},
+      origin: true,
       description: OrganizationDescriptionOptions.inline,
       types: {army: {}, company: {products: true}}
     },

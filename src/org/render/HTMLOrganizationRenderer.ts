@@ -4,6 +4,8 @@ import {Company} from "../Company";
 import {Translator} from "../../lang/Translator";
 import {Army} from "../Army";
 import {WithOrgMessages} from "../../lang/Messages";
+import {PlaceRenderer} from "../../place/Place";
+import {Dictionary} from "../../lang/Dictionary";
 
 
 export interface OrganizationNameOptions {
@@ -22,9 +24,10 @@ export enum OrganizationDescriptionOptions {
 export interface OrganizationRenderOptions {
   name: OrganizationNameOptions
   description: OrganizationDescriptionOptions
+  origin: boolean
   types: {
     [OrganizationType.company]: {
-      products: boolean
+      products: boolean,
     }
     [OrganizationType.army]: {}
   }
@@ -33,26 +36,17 @@ export interface OrganizationRenderOptions {
 
 export class HTMLOrganizationRenderer extends HTMLRenderer implements OrganizationRenderer<HTML> {
 
-  constructor(translator: Translator<WithOrgMessages>) {
+  constructor(translator: Translator<WithOrgMessages>, private placeRenderer: PlaceRenderer<HTML>) {
     super(translator);
   }
 
   render(org: Organization, options: OrganizationRenderOptions): HTML {
-    const values: any = {}
-    const elements: string[] = []
-    const nameOptions = options.name;
-    if (nameOptions.short && org.shortName) {
-      values.short = org.shortName
-      elements.push('short')
-    }
-    if (nameOptions.long && org.longName) {
-      values.long = org.longName
-      elements.push('long')
-    }
     let name = ''
-    if (elements.length > 0) {
-      const nameKey = elements.join('_')
-      name += this.translator.translate((this.translator.messages.org.name as any)[nameKey], values);
+    const values = this.getValues(org, options);
+    const keys = Object.keys(values);
+    if (keys.length > 0) {
+      const nameKey = keys.join('_')
+      name += this.translator.translate((this.translator.messages.org as any)[nameKey], values);
     }
     return name
   }
@@ -67,12 +61,34 @@ export class HTMLOrganizationRenderer extends HTMLRenderer implements Organizati
   }
 
   renderCompany(company: Company, options: OrganizationRenderOptions): HTML {
-    const name = this.render(company, options)
-    let type = ''
+    let name = ''
+    const values = this.getValues(company, options);
     if (options.description !== OrganizationDescriptionOptions.none) {
-      const products = company.products.join(', ');
-      type = this.translator.translate(this.translator.messages.org.type[OrganizationType.company], {products})
+      values.products = company.products.map(p => Object.values(p)[0]).join(', ')
     }
-    return `${name}${name && type ? ', ' : ''}${type}`
+    const keys = Object.keys(values);
+    if (keys.length > 0) {
+      const key = this.translator.compoundKey(keys.concat('company'))
+      name += this.translator.translate((this.translator.messages.org as any)[key], values);
+    }
+    return name
+  }
+
+  private getValues(org: Organization, options: OrganizationRenderOptions): { [key: string]: any } {
+    const values: any = {}
+    const nameOptions = options.name;
+    if (nameOptions.short && org.shortName) {
+      values.short = org.shortName
+    }
+    if (nameOptions.long && org.longName) {
+      values.long = org.longName
+    }
+    if (options.origin) {
+      const firstCountry = org.firstCountry
+      if (firstCountry) {
+        values.nationality = firstCountry.renderNationality(this.placeRenderer, Dictionary.getGender(this.translator.messages.dict.company))
+      }
+    }
+    return values;
   }
 }

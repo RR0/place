@@ -1,5 +1,5 @@
 import {State} from "../../place/State";
-import {Gender, People} from "../../people/People";
+import {People} from "../../people/People";
 import {Country} from "../../place/Country";
 import {City} from "../../place/City";
 import {CountryCode} from "../../place/CountryCode";
@@ -15,6 +15,7 @@ import {HTMLOrganizationRenderer} from "../../org/render/HTMLOrganizationRendere
 import {HTMLBirthEventRenderer} from "./birth/HTMLBirthEventRenderer";
 import {frenchPlural, messages_fr} from "../../lang/Messages_fr";
 import {TimeRenderFormat} from "../Time";
+import {Gender} from "../../Entity";
 
 const hynek = new People(Gender.male, `Josef`, 'Hynek', `Allen`)
 const usa = new Country(CountryCode.us)
@@ -25,7 +26,7 @@ const translator = new Translator('fr', messages_fr, frenchPlural);
 const peopleRenderer = new HTMLPeopleRenderer(translator);
 const placeRenderer = new HTMLPlaceRenderer(translator);
 const timeRenderer = new HTMLTimeRenderer(translator);
-const organizationRenderer = new HTMLOrganizationRenderer(translator);
+const organizationRenderer = new HTMLOrganizationRenderer(translator, placeRenderer);
 const occupationRenderer = new HTMLOccupationRenderer(translator, organizationRenderer);
 const birthEventRenderer = new HTMLBirthEventRenderer(translator, peopleRenderer, timeRenderer, placeRenderer, occupationRenderer);
 const renderer = new HTMLEventRenderer(translator, placeRenderer, timeRenderer, occupationRenderer, birthEventRenderer);

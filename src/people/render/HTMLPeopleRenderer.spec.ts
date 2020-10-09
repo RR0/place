@@ -1,7 +1,8 @@
 import {HTMLPeopleRenderer, NameCase, PeopleNameFormat} from "./HTMLPeopleRenderer";
-import {Gender, People} from "../People";
+import {People} from "../People";
 import {Translator} from "../../lang/Translator";
 import {frenchPlural, messages_fr} from "../../lang/Messages_fr";
+import {Gender} from "../../Entity";
 
 test('render people', () => {
 

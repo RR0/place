@@ -12,27 +12,21 @@ export class HTMLOccupationRenderer extends HTMLRenderer implements OccupationEv
   }
 
   renderOccupation(occupation: OccupationEvent, options: OccupationRenderOptions): HTML {
-    const orgMsg = this.translator.messages.org;
-    const elements: string[] = []
     const values: any = {}
-    if (options.verb) {
-      elements.push('verb')
-    }
     if (options.role) {
       const role = occupation.role;
       if (role) {
-        elements.push('role')
-        values['role'] = this.translator.translate(orgMsg.role[role])
+        const gender = occupation.who.gender
+        values.role = this.translator.translate(this.translator.messages.dict[role][gender])
       }
     }
     if (options.org) {
       const org = occupation.organization;
       if (org) {
-        elements.push('org')
-        values['org'] = org.render(this.orgRenderer, options.org)
+        values.org = org.render(this.orgRenderer, options.org)
       }
     }
-    const key = elements.join('_')
+    const key = this.translator.compoundKey(Object.keys(values).concat(options.verb ? 'verb' : []))
     const occupationMsg = this.translator.messages.event.occupation as any;
     return this.translator.translate(occupationMsg[key], values)
   }
