@@ -4,7 +4,7 @@ import {DictionaryMessages} from "./Dictionary";
 import {PlaceMessages} from "../place/PlaceMessages";
 import {TimeMessages} from "../time/TimeMessages";
 import {EventMessages} from "../time/EventMessages";
-import {OrgMessages} from "../time/org/OrgMessages";
+import {OrgMessages} from "../org/OrgMessages";
 
 
 export function frenchPlural(s: string) {
@@ -97,7 +97,7 @@ class FrenchMessages implements Messages {
     },
     org: {
       foundation: {
-        label: '${org} a été fondée le ${when} à ${where}',
+        label: '${org} est fondée le ${when} à ${where}',
         org: {
           short: '${short}',
           long: '${long}',

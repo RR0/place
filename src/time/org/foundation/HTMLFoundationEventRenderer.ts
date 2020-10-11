@@ -1,14 +1,14 @@
 import {Translator} from "../../../lang/Translator";
 import {TimeRenderer} from "../../Time";
-import {Gender, People, PeopleRenderer} from "../../../people/People";
+import {People, PeopleRenderer} from "../../../people/People";
 import {Country} from "../../../place/country/Country";
 import {HTML, HTMLRenderer} from "../../../HTMLRenderer";
-import {WithEventMessages} from "../../../lang/Messages";
 import {Place, PlaceRenderer} from "../../../place/Place";
 import {FoundationEvent, FoundationEventRenderer, FoundationEventRenderOptions} from "./FoundationEvent";
 import {OccupationEvent, OccupationEventRenderer} from "../../people/occupation/OccupationEvent";
 import {Organization, OrganizationRenderer} from "../../../org/Organization";
 import {Dictionary} from "../../../lang/Dictionary";
+import {WithEventMessages} from "../../EventMessages";
 
 export class HTMLFoundationEventRenderer extends HTMLRenderer implements FoundationEventRenderer<HTML> {
 
@@ -27,9 +27,9 @@ export class HTMLFoundationEventRenderer extends HTMLRenderer implements Foundat
     const foundationPlace = foundation.where
     const foundationTime = foundation.when
     const newOrg = foundation.org
-    const foundationMsg = this.translator.messages.event.born
+    const foundationMsg = this.translator.messages.event.org.foundation
     const born = this.translator.translate(foundationMsg.label, {
-      who: this.peopleRenderer.render(newOrg, options.people),
+      org: this.orgRenderer.render(newOrg, options.organization),
       when: foundationTime ? foundationTime.render(this.timeRenderer, options.time) : '',
       where: foundationPlace ? foundationPlace.render(this.placeRenderer) : '',
     })
@@ -39,79 +39,69 @@ export class HTMLFoundationEventRenderer extends HTMLRenderer implements Foundat
 
   private founders<R>(foundation: FoundationEvent, options: FoundationEventRenderOptions, baby: Organization, foundationPlace?: Place) {
     const foundationCountry = foundationPlace?.country
-    for (const founder in foundation.founders) {
-      let fatherName = '', fatherNationality
-      if (founder instanceof People) {
-        const founderPeople = founder as People
-        fatherName = this.peopleRenderer.render(founderPeople, options.founders.people)
-        fatherNationality = this.peopleNationality(founderPeople, foundationCountry)
-      } else if (founder instanceof Organization) {
-        const founderOrg = founder as Organization
-        fatherName = this.orgRenderer.render(founderOrg, options.founders.organization)
-        fatherNationality = this.orgNationality(founderOrg, foundationCountry)
-      }
-    }
-    const bornMsg = this.translator.messages.event.born
-    let parents = ''
-    if (fatherName || motherName) {
-      parents += this.translator.translate(bornMsg.child[baby.gender])
-      parents += this.parentNationality(fatherName, fatherNationality, father?.gender)
-      const occupations = father!.events.findOfType(OccupationEvent);
-      if (occupations.length > 0) {
-        let occupationAtFoundation: OccupationEvent | undefined = undefined
-        for (const occupation of occupations) {
-          occupationAtFoundation = occupation as OccupationEvent
-          if (occupation.isAfter(foundation)) {
-            break;
+    const founders = foundation.founders;
+    let foundersStr = ''
+    if (founders) {
+      for (const founder of founders) {
+        let founderName = '', fatherNationality
+        if (founder instanceof People) {
+          const founderPeople = founder as People
+          founderName = this.peopleRenderer.render(founderPeople, options.founders.people)
+          fatherNationality = this.peopleNationality(founderPeople, foundationCountry)
+        } else {
+          const founderOrg = founder as Organization
+          founderName = this.orgRenderer.render(founderOrg, options.founders.organization)
+          fatherNationality = this.orgNationality(founderOrg, foundationCountry)
+        }
+        const foundationMsg = this.translator.messages.event.org.foundation
+        foundersStr += foundation.org.render(this.orgRenderer, options.organization)
+        foundersStr += this.founderNationality(founderName, fatherNationality)
+        const occupations = founder!.events.findOfType(OccupationEvent);
+        if (occupations.length > 0) {
+          let occupationAtFoundation: OccupationEvent | undefined = undefined
+          for (const occupation of occupations) {
+            occupationAtFoundation = occupation as OccupationEvent
+            if (occupation.isAfter(foundation)) {
+              break;
+            }
+          }
+          if (occupationAtFoundation) {
+            foundersStr += occupationAtFoundation.render(this.occupationRenderer, options.founders.occupation)
           }
         }
-        if (occupationAtFoundation) {
-          parents += occupationAtFoundation.render(this.occupationRenderer, options.founders.occupation)
-        }
-      }
-      if (fatherName && motherName) {
-        parents += this.translator.translate(bornMsg.parents.and)
-      }
-      parents += this.parentNationality(motherName, motherNationality, mother?.gender)
-    } else {
-      const anonParentsMsg = bornMsg.parents.anonymous
-      if (fatherNationality === motherNationality) {
-        parents += this.translator.translate(anonParentsMsg.nationality, {nationality: fatherNationality})
-      } else {
-        parents += this.translator.translate(anonParentsMsg.nationalities, {fatherNationality, motherNationality})
       }
     }
-    return parents;
+    return foundersStr;
   }
 
-  private parentNationality(fatherName?: string, nationality?: string, gender?: Gender) {
-    let parentNationality = ''
-    if (fatherName) {
-      parentNationality += fatherName
+  private founderNationality(founderName?: string, nationality?: string) {
+    let founderNationality = ''
+    if (founderName) {
+      founderNationality += founderName
       if (nationality) {
-        parentNationality += ` (${nationality})`
+        founderNationality += ` (${nationality})`
       }
     } else if (nationality) {
-      parentNationality += this.translator.translate(this.translator.messages.event.born[gender === Gender.male ? 'father' : 'mother'].anonymous.nationality, {nationality})
+      founderNationality += this.translator.translate(this.translator.messages.event.org.foundation.founder.anonymous.nationality, {nationality})
     }
-    return parentNationality
+    return founderNationality
   }
 
   private peopleNationality<R>(parent: People, foundationCountry?: Country): HTML {
-    const fatherFoundationCountry = parent.birthCountry
+    const founderFoundationCountry = parent.birthCountry
     let nationality = ''
-    if (foundationCountry !== fatherFoundationCountry) {
-      nationality += fatherFoundationCountry?.renderNationality(this.placeRenderer, parent.gender)
+    if (foundationCountry !== founderFoundationCountry) {
+      nationality += founderFoundationCountry?.renderNationality(this.placeRenderer, parent.gender)
     }
     return nationality
   }
 
   private orgNationality<R>(org: Organization, foundationCountry?: Country): HTML {
-    const fatherFoundationCountry = org.firstCountry
+    const founderFoundationCountry = org.firstCountry
     let nationality = ''
-    if (foundationCountry !== fatherFoundationCountry) {
+    if (foundationCountry !== founderFoundationCountry) {
       const orgGender = Dictionary.getGender(this.translator.messages.dict[org.type]);
-      nationality += fatherFoundationCountry?.renderNationality(this.placeRenderer, orgGender)
+      nationality += founderFoundationCountry?.renderNationality(this.placeRenderer, orgGender)
     }
     return nationality
   }

@@ -3,9 +3,14 @@ import {EventRenderer, EventRenderOptions, RR0Event} from "../Event"
 import {HTML, HTMLRenderer} from "../../HTMLRenderer"
 import {PlaceRenderer} from "../../place/Place";
 import {TimeRenderer} from "../Time";
-import {WithEventMessages} from "../../lang/Messages";
 import {OccupationEvent, OccupationEventRenderer, OccupationRenderOptions} from "../people/occupation/OccupationEvent";
 import {BirthEvent, BirthEventRenderer, BirthEventRenderOptions} from "../people/birth/BirthEvent";
+import {WithEventMessages} from "../EventMessages";
+import {
+  FoundationEvent,
+  FoundationEventRenderer,
+  FoundationEventRenderOptions
+} from "../org/foundation/FoundationEvent";
 
 /**
  * Renders events as HTML.
@@ -17,7 +22,8 @@ export class HTMLEventRenderer extends HTMLRenderer implements EventRenderer<HTM
     private placeRenderer: PlaceRenderer<HTML>,
     private timeRenderer: TimeRenderer<HTML>,
     private occupationRenderer: OccupationEventRenderer<HTML>,
-    private birthEventRenderer: BirthEventRenderer<HTML>
+    private birthEventRenderer: BirthEventRenderer<HTML>,
+    private foundationRenderer: FoundationEventRenderer<HTML>,
   ) {
     super(translator)
   }
@@ -36,5 +42,9 @@ export class HTMLEventRenderer extends HTMLRenderer implements EventRenderer<HTM
 
   renderOccupation(event: OccupationEvent, options: OccupationRenderOptions): HTML {
     return this.occupationRenderer.renderOccupation(event, options)
+  }
+
+  renderFoundation(event: FoundationEvent, options: FoundationEventRenderOptions): HTML {
+    return this.foundationRenderer.renderFoundation(event, options);
   }
 }

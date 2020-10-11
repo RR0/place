@@ -42,10 +42,9 @@ export class FoundationEvent extends OrganizationEvent {
    * @param org Which organization was founded.
    * @param when When it was founded.
    * @param where Where it was founded.
-   * @param father The father of that born child.
-   * @param mother The mother of that born child.
+   * @param founders
    */
-  constructor(org: Organization, when?: RR0Time, where?: Place, readonly founders?: Organization | People) {
+  constructor(org: Organization, when?: RR0Time, where?: Place, readonly founders?: (Organization | People)[]) {
     super(RR0EventType.foundation, org, when, where);
   }
 

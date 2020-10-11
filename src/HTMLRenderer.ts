@@ -2,7 +2,7 @@ import {Renderer} from "./Renderer";
 
 export type HTML = string
 
-export class HTMLRenderer extends Renderer {
+export class HTMLRenderer<M = any> extends Renderer<M> {
 
   protected paragraph(content: HTML): HTML {
     return this.tag('p', content);

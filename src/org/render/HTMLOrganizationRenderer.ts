@@ -3,9 +3,9 @@ import {Organization, OrganizationRenderer, OrganizationType} from "../Organizat
 import {Company} from "../Company";
 import {Translator} from "../../lang/Translator";
 import {Army} from "../Army";
-import {WithOrgMessages} from "../../lang/Messages";
 import {PlaceRenderer} from "../../place/Place";
 import {Dictionary} from "../../lang/Dictionary";
+import {WithOrgMessages} from "../OrgMessages";
 
 
 export interface OrganizationNameOptions {

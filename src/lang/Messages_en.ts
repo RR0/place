@@ -4,7 +4,7 @@ import {DictionaryMessages} from "./Dictionary";
 import {PlaceMessages} from "../place/PlaceMessages";
 import {TimeMessages} from "../time/TimeMessages";
 import {EventMessages} from "../time/EventMessages";
-import {OrgMessages} from "../time/org/OrgMessages";
+import {OrgMessages} from "../org/OrgMessages";
 
 class EnglishMessages implements Messages {
   org: OrgMessages = {

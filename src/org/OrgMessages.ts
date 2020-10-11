@@ -1,4 +1,5 @@
-import {OrganizationType} from "../../org/Organization";
+import {OrganizationType} from "./Organization";
+
 
 export interface OrgMessages {
   short: string
@@ -9,6 +10,7 @@ export interface OrgMessages {
   company_nationality_products: string
   [OrganizationType.army]: string
 }
+
 
 export interface WithOrgMessages {
   org: OrgMessages

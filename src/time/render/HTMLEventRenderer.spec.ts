@@ -15,6 +15,7 @@ import {TimeRenderFormat} from "../Time";
 import {HTMLOccupationRenderer} from "../people/occupation/HTMLOccupationRenderer";
 import {BirthEvent, BirthEventRenderOptions, OccupationFormat} from "../people/birth/BirthEvent";
 import {HTMLBirthEventRenderer} from "../people/birth/HTMLBirthEventRenderer";
+import {HTMLFoundationEventRenderer} from "../org/foundation/HTMLFoundationEventRenderer";
 
 const hynek = new People(Gender.male, 'Josef', 'Hynek', `Allen`)
 const usa = new Country(CountryCode.us)
@@ -25,10 +26,11 @@ const translator = new Translator('fr', messages_fr, frenchPlural);
 const peopleRenderer = new HTMLPeopleRenderer(translator);
 const placeRenderer = new HTMLPlaceRenderer(translator);
 const timeRenderer = new HTMLTimeRenderer(translator);
-const organizationRenderer = new HTMLOrganizationRenderer(translator, placeRenderer);
-const occupationRenderer = new HTMLOccupationRenderer(translator, organizationRenderer);
+const orgRenderer = new HTMLOrganizationRenderer(translator, placeRenderer);
+const occupationRenderer = new HTMLOccupationRenderer(translator, orgRenderer);
 const birthEventRenderer = new HTMLBirthEventRenderer(translator, peopleRenderer, timeRenderer, placeRenderer, occupationRenderer);
-const renderer = new HTMLEventRenderer(translator, placeRenderer, timeRenderer, occupationRenderer, birthEventRenderer);
+const foundationRenderer = new HTMLFoundationEventRenderer(translator, peopleRenderer, orgRenderer, timeRenderer, placeRenderer, occupationRenderer);
+const renderer = new HTMLEventRenderer(translator, placeRenderer, timeRenderer, occupationRenderer, birthEventRenderer, foundationRenderer);
 
 test('renders anonymous parents of same nationality', () => {
   const father = new People(Gender.male);

@@ -3,7 +3,7 @@ import {DateTime} from "../DateTime";
 import {Translator} from "../../lang/Translator";
 import {HTML, HTMLRenderer} from "../../HTMLRenderer";
 import {BeforeTime} from "../BeforeTime";
-import {WithTimeMessages} from "../../lang/Messages";
+import {WithTimeMessages} from "../TimeMessages";
 
 
 export class HTMLTimeRenderer extends HTMLRenderer implements TimeRenderer<HTML> {
