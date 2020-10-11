@@ -1,10 +1,10 @@
-import {EventRenderOptions, RR0EventType} from "./Event";
-import {Place} from "../place/Place";
-import {People} from "../people/People";
-import {PeopleEvent} from './PeopleEvent'
-import {RR0Time} from "./Time";
-import {Organization} from "../org/Organization";
-import {OrganizationRenderOptions} from "../org/render/HTMLOrganizationRenderer";
+import {PeopleEvent} from "../PeopleEvent";
+import {OrganizationRenderOptions} from "../../../org/render/HTMLOrganizationRenderer";
+import {RR0Time} from "../../Time";
+import {People} from "../../../people/People";
+import {Place} from "../../../place/Place";
+import {EventRenderOptions, RR0EventType} from "../../Event";
+import {Organization} from "../../../org/Organization";
 
 
 export interface OccupationRenderOptions extends EventRenderOptions {
@@ -13,6 +13,7 @@ export interface OccupationRenderOptions extends EventRenderOptions {
   org: OrganizationRenderOptions
   role: boolean
 }
+
 
 /**
  * An Occupation event rendering algorithm.

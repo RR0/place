@@ -1,6 +1,6 @@
 import {RR0Event, RR0EventType} from "./Event";
-import {BirthEventRenderOptions} from "./BirthEvent";
-import {OccupationRenderOptions} from "./OccupationEvent";
+import {BirthEventRenderOptions} from "./people/birth/BirthEvent";
+import {OccupationRenderOptions} from "./people/occupation/OccupationEvent";
 
 
 export interface TimelineRenderOptions {

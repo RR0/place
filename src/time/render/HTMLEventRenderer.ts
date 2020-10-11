@@ -1,11 +1,11 @@
-import {BirthEvent, BirthEventRenderer, BirthEventRenderOptions} from "../BirthEvent"
 import {Translator} from "../../lang/Translator"
 import {EventRenderer, EventRenderOptions, RR0Event} from "../Event"
 import {HTML, HTMLRenderer} from "../../HTMLRenderer"
-import {OccupationEvent, OccupationEventRenderer, OccupationRenderOptions} from "../OccupationEvent"
 import {PlaceRenderer} from "../../place/Place";
 import {TimeRenderer} from "../Time";
 import {WithEventMessages} from "../../lang/Messages";
+import {OccupationEvent, OccupationEventRenderer, OccupationRenderOptions} from "../people/occupation/OccupationEvent";
+import {BirthEvent, BirthEventRenderer, BirthEventRenderOptions} from "../people/birth/BirthEvent";
 
 /**
  * Renders events as HTML.

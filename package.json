@@ -4,7 +4,7 @@
   "description": "JavaScript and TypeScript example starter project",
   "main": "index.html",
   "scripts": {
-    "run": "parcel index.html",
+    "serve": "parcel index.html",
     "start": "parcel index.html --open",
     "build": "parcel build index.html",
     "test": "jest"

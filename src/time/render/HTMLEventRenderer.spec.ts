@@ -3,18 +3,18 @@ import {Gender, People} from "../../people/People";
 import {Country} from "../../place/Country";
 import {City} from "../../place/City";
 import {CountryCode} from "../../place/CountryCode";
-import {BirthEvent, BirthEventRenderOptions, OccupationFormat} from "../BirthEvent";
 import {DateTime} from "../DateTime";
 import {HTMLEventRenderer} from "./HTMLEventRenderer";
 import {Translator} from "../../lang/Translator";
 import {HTMLPeopleRenderer, PeopleNameFormat} from "../../people/render/HTMLPeopleRenderer";
 import {HTMLTimeRenderer} from "./HTMLTimeRenderer";
 import {HTMLPlaceRenderer} from "../../place/render/HTMLPlaceRenderer";
-import {HTMLOccupationRenderer} from "./people/occupation/HTMLOccupationRenderer";
 import {HTMLOrganizationRenderer} from "../../org/render/HTMLOrganizationRenderer";
-import {HTMLBirthEventRenderer} from "./people/birth/HTMLBirthEventRenderer";
 import {frenchPlural, messages_fr} from "../../lang/Messages_fr";
 import {TimeRenderFormat} from "../Time";
+import {HTMLOccupationRenderer} from "../people/occupation/HTMLOccupationRenderer";
+import {BirthEvent, BirthEventRenderOptions, OccupationFormat} from "../people/birth/BirthEvent";
+import {HTMLBirthEventRenderer} from "../people/birth/HTMLBirthEventRenderer";
 
 const hynek = new People(Gender.male, `Josef`, 'Hynek', `Allen`)
 const usa = new Country(CountryCode.us)

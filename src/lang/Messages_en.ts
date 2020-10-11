@@ -1,7 +1,7 @@
 import {CountryCode} from "../place/CountryCode";
 import {EventMessages, Messages, OrgMessages, PlaceMessages, TimeMessages} from "./Messages";
-import {OccupationRole} from "../time/OccupationEvent";
 import {DictionaryMessages} from "./Dictionary";
+import {OccupationRole} from "../time/people/occupation/OccupationEvent";
 
 class EnglishMessages implements Messages {
   org: OrgMessages = {

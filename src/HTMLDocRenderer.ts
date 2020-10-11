@@ -5,10 +5,10 @@ import {HTMLEventRenderer} from "./time/render/HTMLEventRenderer";
 import {Translator} from "./lang/Translator";
 import {HTML, HTMLRenderer} from "./HTMLRenderer";
 import {People} from "./people/People";
-import {HTMLOccupationRenderer} from "./time/render/people/occupation/HTMLOccupationRenderer";
 import {HTMLOrganizationRenderer} from "./org/render/HTMLOrganizationRenderer";
-import {HTMLBirthEventRenderer} from "./time/render/people/birth/HTMLBirthEventRenderer";
 import {TimelineRenderOptions} from "./time/Timeline";
+import {HTMLOccupationRenderer} from "./time/people/occupation/HTMLOccupationRenderer";
+import {HTMLBirthEventRenderer} from "./time/people/birth/HTMLBirthEventRenderer";
 
 
 export interface HTMLDocRenderOptions {

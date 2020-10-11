@@ -1,19 +1,16 @@
-import {Translator} from "../../../../lang/Translator";
-import {
-  HTMLOrganizationRenderer,
-  OrganizationDescriptionOptions
-} from "../../../../org/render/HTMLOrganizationRenderer";
-import {Company} from "../../../../org/Company";
-import {OccupationEvent, OccupationRenderOptions, OccupationRole} from "../../../OccupationEvent";
-import {Gender, People} from "../../../../people/People";
-import {DateTime} from "../../../DateTime";
-import {TimeRenderFormat} from "../../../Time";
+import {Translator} from "../../../lang/Translator";
+import {HTMLOrganizationRenderer, OrganizationDescriptionOptions} from "../../../org/render/HTMLOrganizationRenderer";
+import {Company} from "../../../org/Company";
+import {OccupationEvent, OccupationRenderOptions, OccupationRole} from "./OccupationEvent";
+import {Gender, People} from "../../../people/People";
+import {DateTime} from "../../DateTime";
+import {TimeRenderFormat} from "../../Time";
 import {HTMLOccupationRenderer} from "./HTMLOccupationRenderer";
-import {BeforeTime} from "../../../BeforeTime";
-import {frenchPlural, messages_fr} from "../../../../lang/Messages_fr";
-import {HTMLPlaceRenderer} from "../../../../place/render/HTMLPlaceRenderer";
-import {Country} from "../../../../place/Country";
-import {CountryCode} from "../../../../place/CountryCode";
+import {BeforeTime} from "../../BeforeTime";
+import {frenchPlural, messages_fr} from "../../../lang/Messages_fr";
+import {HTMLPlaceRenderer} from "../../../place/render/HTMLPlaceRenderer";
+import {Country} from "../../../place/Country";
+import {CountryCode} from "../../../place/CountryCode";
 
 const translator = new Translator('fr', messages_fr, frenchPlural);
 const organizationRenderer = new HTMLOrganizationRenderer(translator, new HTMLPlaceRenderer(translator));

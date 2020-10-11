@@ -1,5 +1,5 @@
 import {Gender, People} from "./people/People";
-import {BirthEvent} from "./time/BirthEvent";
+import {BirthEvent} from "./time/people/birth/BirthEvent";
 import {City} from "./place/City";
 import {User} from "./user/User";
 import {Translator} from "./lang/Translator";
@@ -8,7 +8,7 @@ import {Country} from "./place/Country";
 import {DateTime} from "./time/DateTime";
 import {CountryCode} from "./place/CountryCode";
 import {HTMLDocRenderer, HTMLDocRenderOptions} from "./HTMLDocRenderer";
-import {OccupationEvent, OccupationRole} from "./time/OccupationEvent";
+import {OccupationEvent, OccupationRole} from "./time/people/occupation/OccupationEvent";
 import {BeforeTime} from "./time/BeforeTime";
 import {Company} from "./org/Company";
 import {PeopleNameFormat} from "./people/render/HTMLPeopleRenderer";

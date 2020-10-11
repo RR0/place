@@ -1,7 +1,7 @@
 import {Place} from '../place/Place'
-import {BirthEventRenderer} from "./BirthEvent";
 import {RR0Time, TimeRenderOptions} from "./Time";
-import {OccupationEventRenderer} from "./OccupationEvent";
+import {BirthEventRenderer} from "./people/birth/BirthEvent";
+import {OccupationEventRenderer} from "./people/occupation/OccupationEvent";
 
 
 export enum RR0EventType {

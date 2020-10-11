@@ -1,13 +1,13 @@
 import {Timeline} from "./Timeline";
-import {BirthEvent} from "./BirthEvent";
 import {Country} from "../place/Country";
 import {State} from "../place/State";
 import {City} from "../place/City";
 import {Gender, People} from "../people/People";
 import {DateTime} from "./DateTime";
 import {CountryCode} from "../place/CountryCode";
-import {OccupationEvent, OccupationRole} from "./OccupationEvent";
 import {Army} from "../org/Army";
+import {BirthEvent} from "./people/birth/BirthEvent";
+import {OccupationEvent, OccupationRole} from "./people/occupation/OccupationEvent";
 
 const hynek = new People(Gender.male, `Josef`, 'Hynek', `Allen`)
 const usa = new Country(CountryCode.us)
