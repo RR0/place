@@ -10,9 +10,9 @@ import {Translator} from "../../lang/Translator";
 import {HTMLPeopleRenderer, PeopleNameFormat} from "../../people/render/HTMLPeopleRenderer";
 import {HTMLTimeRenderer} from "./HTMLTimeRenderer";
 import {HTMLPlaceRenderer} from "../../place/render/HTMLPlaceRenderer";
-import {HTMLOccupationRenderer} from "./HTMLOccupationRenderer";
+import {HTMLOccupationRenderer} from "./people/occupation/HTMLOccupationRenderer";
 import {HTMLOrganizationRenderer} from "../../org/render/HTMLOrganizationRenderer";
-import {HTMLBirthEventRenderer} from "./birth/HTMLBirthEventRenderer";
+import {HTMLBirthEventRenderer} from "./people/birth/HTMLBirthEventRenderer";
 import {frenchPlural, messages_fr} from "../../lang/Messages_fr";
 import {TimeRenderFormat} from "../Time";
 

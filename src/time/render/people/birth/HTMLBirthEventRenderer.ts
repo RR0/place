@@ -1,12 +1,12 @@
-import {HTML, HTMLRenderer} from "../../../HTMLRenderer";
-import {BirthEvent, BirthEventRenderer, BirthEventRenderOptions} from "../../BirthEvent";
-import {OccupationEvent, OccupationEventRenderer} from "../../OccupationEvent";
-import {Translator} from "../../../lang/Translator";
-import {Gender, People, PeopleRenderer} from "../../../people/People";
-import {TimeRenderer} from "../../Time";
-import {Place, PlaceRenderer} from "../../../place/Place";
-import {Country} from "../../../place/Country";
-import {WithEventMessages} from "../../../lang/Messages";
+import {HTML, HTMLRenderer} from "../../../../HTMLRenderer";
+import {WithEventMessages} from "../../../../lang/Messages";
+import {BirthEvent, BirthEventRenderer, BirthEventRenderOptions} from "../../../BirthEvent";
+import {Place, PlaceRenderer} from "../../../../place/Place";
+import {TimeRenderer} from "../../../Time";
+import {Gender, People, PeopleRenderer} from "../../../../people/People";
+import {OccupationEvent, OccupationEventRenderer} from "../../../OccupationEvent";
+import {Translator} from "../../../../lang/Translator";
+import {Country} from "../../../../place/Country";
 
 export class HTMLBirthEventRenderer extends HTMLRenderer implements BirthEventRenderer<HTML> {
 

@@ -5,9 +5,9 @@ import {HTMLEventRenderer} from "./time/render/HTMLEventRenderer";
 import {Translator} from "./lang/Translator";
 import {HTML, HTMLRenderer} from "./HTMLRenderer";
 import {People} from "./people/People";
-import {HTMLOccupationRenderer} from "./time/render/HTMLOccupationRenderer";
+import {HTMLOccupationRenderer} from "./time/render/people/occupation/HTMLOccupationRenderer";
 import {HTMLOrganizationRenderer} from "./org/render/HTMLOrganizationRenderer";
-import {HTMLBirthEventRenderer} from "./time/render/birth/HTMLBirthEventRenderer";
+import {HTMLBirthEventRenderer} from "./time/render/people/birth/HTMLBirthEventRenderer";
 import {TimelineRenderOptions} from "./time/Timeline";
 
 
@@ -24,13 +24,13 @@ export class HTMLDocRenderer extends HTMLRenderer {
   readonly placeRenderer = new HTMLPlaceRenderer(this.translator);
   readonly peopleRenderer = new HTMLPeopleRenderer(this.translator);
   readonly timeRenderer = new HTMLTimeRenderer(this.translator);
-  readonly orgRenderer = new HTMLOrganizationRenderer(this.translator);
+  readonly orgRenderer = new HTMLOrganizationRenderer(this.translator, this.placeRenderer);
   readonly occupationRenderer = new HTMLOccupationRenderer(this.translator, this.orgRenderer);
   readonly birthEventRenderer = new HTMLBirthEventRenderer(this.translator,
     this.peopleRenderer, this.timeRenderer, this.placeRenderer, this.occupationRenderer);
   readonly eventRenderer = new HTMLEventRenderer(this.translator, this.placeRenderer, this.timeRenderer, this.occupationRenderer, this.birthEventRenderer);
 
-  constructor(translator: Translator) {
+  constructor(translator: Translator<any>) {
     super(translator);
   }
 
