@@ -2,15 +2,17 @@ import {Place} from '../place/Place'
 import {RR0Time, TimeRenderOptions} from "./Time";
 import {BirthEventRenderer} from "./people/birth/BirthEvent";
 import {OccupationEventRenderer} from "./people/occupation/OccupationEvent";
+import {FoundationEventRenderer} from "./org/foundation/FoundationEvent";
 
 
 export enum RR0EventType {
   birth = 'birth',
   occupation = 'occupation',
+  foundation = 'foundation',
 }
 
 
-export interface EventRenderer<R> extends BirthEventRenderer<R>, OccupationEventRenderer<R> {
+export interface EventRenderer<R> extends BirthEventRenderer<R>, OccupationEventRenderer<R>, FoundationEventRenderer<R> {
 
   render(event: RR0Event, options: EventRenderOptions): R
 }

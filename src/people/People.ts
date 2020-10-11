@@ -1,6 +1,6 @@
 import {PeopleRenderOptions} from "./render/HTMLPeopleRenderer";
 import {Timeline} from "../time/Timeline";
-import {Country} from "../place/Country";
+import {Country} from "../place/country/Country";
 
 
 export enum Gender {

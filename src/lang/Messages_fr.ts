@@ -1,7 +1,10 @@
-import {CountryCode} from "../place/CountryCode";
-import {EventMessages, Messages, OrgMessages, PlaceMessages, TimeMessages} from "./Messages";
+import {CountryCode} from "../place/country/CountryCode";
+import {Messages} from "./Messages";
 import {DictionaryMessages} from "./Dictionary";
-import {OccupationRole} from "../time/people/occupation/OccupationEvent";
+import {PlaceMessages} from "../place/PlaceMessages";
+import {TimeMessages} from "../time/TimeMessages";
+import {EventMessages} from "../time/EventMessages";
+import {OrgMessages} from "../time/org/OrgMessages";
 
 
 export function frenchPlural(s: string) {
@@ -60,35 +63,63 @@ class FrenchMessages implements Messages {
   }
   event: EventMessages = {
     default: '${when} à ${where} ${type}',
-    born: {
-      label: '${who} naît le ${when} à ${where}',
-      child: {
-        male: ", fils de ",
-        female: ", fille de "
-      },
-      father: {
-        anonymous: {
-          nationality: " d'un père ${nationality}"
+    people: {
+      born: {
+        label: '${who} naît le ${when} à ${where}',
+        child: {
+          male: ", fils de ",
+          female: ", fille de "
+        },
+        father: {
+          anonymous: {
+            nationality: " d'un père ${nationality}"
+          }
+        },
+        mother: {
+          anonymous: {
+            nationality: " d'une mère ${nationality}"
+          }
+        },
+        parents: {
+          and: " et ",
+          anonymous: {
+            nationality: " de parents ${nationality}s",
+            nationalities: " d'un père ${fatherNationality} et d'une mère ${motherNationality}"
+          }
         }
       },
-      mother: {
-        anonymous: {
-          nationality: " d'une mère ${nationality}"
-        }
-      },
-      parents: {
-        and: " et ",
-        anonymous: {
-          nationality: " de parents ${nationality}s",
-          nationalities: " d'un père ${fatherNationality} et d'une mère ${motherNationality}"
-        }
+      occupation: {
+        org_role_verb: "travaille comme ${role} pour ${org}",
+        org_verb: "travaille pour ${org}",
+        org_role: "${role} pour ${org}",
+        type: "dans ${type}",
       }
     },
-    occupation: {
-      org_role_verb: "travaille comme ${role} pour ${org}",
-      org_verb: "travaille pour ${org}",
-      org_role: "${role} pour ${org}",
-      type: "dans ${type}",
+    org: {
+      foundation: {
+        label: '${org} a été fondée le ${when} à ${where}',
+        org: {
+          short: '${short}',
+          long: '${long}',
+          short_long: '<abbr title="${long}">${short}</abbr>',
+          company_products: 'a company that sells ${products:plural}',
+          company_nationality: 'a ${nationality} company',
+          company_nationality_products: 'a ${nationality} company that sells ${products:plural}',
+          army: 'armée',
+        },
+        founder: {
+          anonymous: {
+            nationality: ' from a ${nationality} father'
+          }
+        },
+        founders: {
+          and: " and ",
+          anonymous: {
+            nationality: " from ${nationality} parents",
+            nationalities: " from a ${fatherNationality} father and a ${motherNationality} mother"
+          }
+        }
+      }
     }
   }
   time: TimeMessages = {
@@ -101,11 +132,11 @@ class FrenchMessages implements Messages {
     company: {
       female: 'société',
     },
-    [OccupationRole.general]: {
+    general: {
       male: 'général',
       female: 'générale'
     },
-    [OccupationRole.worker]: {
+    worker: {
       male: 'ouvrier',
       female: 'ouvrière'
     }

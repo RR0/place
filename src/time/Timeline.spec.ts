@@ -1,10 +1,10 @@
 import {Timeline} from "./Timeline";
-import {Country} from "../place/Country";
+import {Country} from "../place/country/Country";
 import {State} from "../place/State";
 import {City} from "../place/City";
 import {Gender, People} from "../people/People";
 import {DateTime} from "./DateTime";
-import {CountryCode} from "../place/CountryCode";
+import {CountryCode} from "../place/country/CountryCode";
 import {Army} from "../org/Army";
 import {BirthEvent} from "./people/birth/BirthEvent";
 import {OccupationEvent, OccupationRole} from "./people/occupation/OccupationEvent";

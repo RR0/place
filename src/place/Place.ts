@@ -1,5 +1,5 @@
 import {CityRenderer} from "./City";
-import {Country, CountryRenderer} from "./Country";
+import {Country, CountryRenderer} from "./country/Country";
 import {StateRenderer} from "./State";
 
 

@@ -1,7 +1,10 @@
-import {CountryCode} from "../place/CountryCode";
-import {EventMessages, Messages, OrgMessages, PlaceMessages, TimeMessages} from "./Messages";
+import {CountryCode} from "../place/country/CountryCode";
+import {Messages} from "./Messages";
 import {DictionaryMessages} from "./Dictionary";
-import {OccupationRole} from "../time/people/occupation/OccupationEvent";
+import {PlaceMessages} from "../place/PlaceMessages";
+import {TimeMessages} from "../time/TimeMessages";
+import {EventMessages} from "../time/EventMessages";
+import {OrgMessages} from "../time/org/OrgMessages";
 
 class EnglishMessages implements Messages {
   org: OrgMessages = {
@@ -54,35 +57,63 @@ class EnglishMessages implements Messages {
   }
   event: EventMessages = {
     default: '${when} at ${where} ${type}',
-    born: {
-      label: '${who} was born on ${when} at ${where}',
-      child: {
-        male: ", son of ",
-        female: ", daughter of "
-      },
-      father: {
-        anonymous: {
-          nationality: ' from a ${nationality} father'
+    people: {
+      born: {
+        label: '${who} was born on ${when} at ${where}',
+        child: {
+          male: ", son of ",
+          female: ", daughter of "
+        },
+        father: {
+          anonymous: {
+            nationality: ' from a ${nationality} father'
+          }
+        },
+        mother: {
+          anonymous: {
+            nationality: ' from a ${nationality} mother'
+          }
+        },
+        parents: {
+          and: " and ",
+          anonymous: {
+            nationality: " from ${nationality} parents",
+            nationalities: " from a ${fatherNationality} father and a ${motherNationality} mother"
+          }
         }
       },
-      mother: {
-        anonymous: {
-          nationality: ' from a ${nationality} mother'
-        }
-      },
-      parents: {
-        and: " and ",
-        anonymous: {
-          nationality: " from ${nationality} parents",
-          nationalities: " from a ${fatherNationality} father and a ${motherNationality} mother"
-        }
+      occupation: {
+        org_role_verb: "work as ${role} for ${org}",
+        org_verb: "work for ${org}",
+        org_role: "${role} for ${org}",
+        type: "for ${type}",
       }
     },
-    occupation: {
-      org_role_verb: "work as ${role} for ${org}",
-      org_verb: "work for ${org}",
-      org_role: "${role} for ${org}",
-      type: "for ${type}",
+    org: {
+      foundation: {
+        label: '${who} was founded on ${when} at ${where}',
+        org: {
+          short: '${short}',
+          long: '${long}',
+          short_long: '<abbr title="${long}">${short}</abbr>',
+          company_products: 'a company that sells ${products:plural}',
+          company_nationality: 'a ${nationality} company',
+          company_nationality_products: 'a ${nationality} company that sells ${products:plural}',
+          army: 'armée',
+        },
+        founder: {
+          anonymous: {
+            nationality: ' from a ${nationality} father'
+          }
+        },
+        founders: {
+          and: " and ",
+          anonymous: {
+            nationality: " from ${nationality} parents",
+            nationalities: " from a ${fatherNationality} father and a ${motherNationality} mother"
+          }
+        }
+      }
     }
   }
   time: TimeMessages = {
@@ -95,11 +126,11 @@ class EnglishMessages implements Messages {
     company: {
       neutral: 'company',
     },
-    [OccupationRole.general]: {
+    general: {
       male: 'general',
       female: 'general',
     },
-    [OccupationRole.worker]: {
+    worker: {
       male: 'worker',
       female: 'worker',
     }

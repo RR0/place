@@ -1,8 +1,8 @@
 import {HTML, HTMLRenderer} from "../../../HTMLRenderer";
-import {WithEventMessages} from "../../../lang/Messages";
 import {OccupationEvent, OccupationEventRenderer, OccupationRenderOptions} from "./OccupationEvent";
 import {Translator} from "../../../lang/Translator";
 import {OrganizationRenderer} from "../../../org/Organization";
+import {WithEventMessages} from "../../EventMessages";
 
 
 export class HTMLOccupationRenderer extends HTMLRenderer implements OccupationEventRenderer<HTML> {
@@ -27,7 +27,7 @@ export class HTMLOccupationRenderer extends HTMLRenderer implements OccupationEv
       }
     }
     const key = this.translator.compoundKey(Object.keys(values).concat(options.verb ? 'verb' : []))
-    const occupationMsg = this.translator.messages.event.occupation as any;
+    const occupationMsg = this.translator.messages.event.people.occupation
     return this.translator.translate(occupationMsg[key], values)
   }
 }

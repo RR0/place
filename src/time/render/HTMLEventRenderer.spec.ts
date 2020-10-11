@@ -1,8 +1,8 @@
 import {State} from "../../place/State";
 import {Gender, People} from "../../people/People";
-import {Country} from "../../place/Country";
+import {Country} from "../../place/country/Country";
 import {City} from "../../place/City";
-import {CountryCode} from "../../place/CountryCode";
+import {CountryCode} from "../../place/country/CountryCode";
 import {DateTime} from "../DateTime";
 import {HTMLEventRenderer} from "./HTMLEventRenderer";
 import {Translator} from "../../lang/Translator";
@@ -16,7 +16,7 @@ import {HTMLOccupationRenderer} from "../people/occupation/HTMLOccupationRendere
 import {BirthEvent, BirthEventRenderOptions, OccupationFormat} from "../people/birth/BirthEvent";
 import {HTMLBirthEventRenderer} from "../people/birth/HTMLBirthEventRenderer";
 
-const hynek = new People(Gender.male, `Josef`, 'Hynek', `Allen`)
+const hynek = new People(Gender.male, 'Josef', 'Hynek', `Allen`)
 const usa = new Country(CountryCode.us)
 const illinois = new State('Illinois', usa)
 const chicago = new City('Chicago', illinois)

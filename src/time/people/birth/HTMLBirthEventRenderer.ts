@@ -3,10 +3,10 @@ import {Translator} from "../../../lang/Translator";
 import {TimeRenderer} from "../../Time";
 import {Gender, People, PeopleRenderer} from "../../../people/People";
 import {OccupationEvent, OccupationEventRenderer} from "../occupation/OccupationEvent";
-import {Country} from "../../../place/Country";
+import {Country} from "../../../place/country/Country";
 import {HTML, HTMLRenderer} from "../../../HTMLRenderer";
-import {WithEventMessages} from "../../../lang/Messages";
 import {Place, PlaceRenderer} from "../../../place/Place";
+import {WithEventMessages} from "../../EventMessages";
 
 export class HTMLBirthEventRenderer extends HTMLRenderer implements BirthEventRenderer<HTML> {
 
@@ -24,7 +24,7 @@ export class HTMLBirthEventRenderer extends HTMLRenderer implements BirthEventRe
     const birthPlace = birth.where
     const birthTime = birth.when
     const baby = birth.who
-    const bornMsg = this.translator.messages.event.born
+    const bornMsg = this.translator.messages.event.people.born
     const born = this.translator.translate(bornMsg.label, {
       who: this.peopleRenderer.render(baby, options.people),
       when: birthTime ? birthTime.render(this.timeRenderer, options.time) : '',
@@ -52,7 +52,7 @@ export class HTMLBirthEventRenderer extends HTMLRenderer implements BirthEventRe
         motherNationality = this.nationality(mother, birthCountry)
       }
     }
-    const bornMsg = this.translator.messages.event.born
+    const bornMsg = this.translator.messages.event.people.born
     let parents = ''
     if (fatherName || motherName) {
       parents += this.translator.translate(bornMsg.child[baby.gender])

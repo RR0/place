@@ -1,6 +1,6 @@
-import {Place} from "./Place";
+import {Place} from "../Place";
 import {CountryCode} from "./CountryCode";
-import {Gender} from "../people/People";
+import {Gender} from "../../people/People";
 
 
 export interface CountryRenderer<R> {

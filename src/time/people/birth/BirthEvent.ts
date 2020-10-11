@@ -1,6 +1,6 @@
 import {OccupationRenderOptions} from "../occupation/OccupationEvent";
 import {RR0Time, TimeRenderFormat} from "../../Time";
-import {EventRenderer, EventRenderOptions, RR0EventType} from "../../Event";
+import {EventRenderOptions, RR0EventType} from "../../Event";
 import {PeopleEvent} from "../PeopleEvent";
 import {PeopleRenderOptions} from "../../../people/render/HTMLPeopleRenderer";
 import {People} from "../../../people/People";
@@ -77,7 +77,7 @@ export class BirthEvent extends PeopleEvent {
    * @param renderer The rendering algorithm.
    * @param options
    */
-  render<R>(renderer: EventRenderer<R>, options: BirthEventRenderOptions): R {
+  render<R>(renderer: BirthEventRenderer<R>, options: BirthEventRenderOptions): R {
     return renderer.renderBirth(this, options)
   }
 }

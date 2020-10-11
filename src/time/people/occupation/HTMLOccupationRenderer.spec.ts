@@ -9,8 +9,8 @@ import {HTMLOccupationRenderer} from "./HTMLOccupationRenderer";
 import {BeforeTime} from "../../BeforeTime";
 import {frenchPlural, messages_fr} from "../../../lang/Messages_fr";
 import {HTMLPlaceRenderer} from "../../../place/render/HTMLPlaceRenderer";
-import {Country} from "../../../place/Country";
-import {CountryCode} from "../../../place/CountryCode";
+import {Country} from "../../../place/country/Country";
+import {CountryCode} from "../../../place/country/CountryCode";
 
 const translator = new Translator('fr', messages_fr, frenchPlural);
 const organizationRenderer = new HTMLOrganizationRenderer(translator, new HTMLPlaceRenderer(translator));
