@@ -1,7 +1,8 @@
 import {Company} from "./Company";
 import {Army} from "./Army";
 import {OrganizationRenderOptions} from "./render/HTMLOrganizationRenderer";
-import {Entity, Gender} from "../Entity";
+import {Timeline} from "../time/Timeline";
+import {Country} from "../place/Country";
 
 
 export interface OrganizationRenderer<R> {
@@ -20,10 +21,15 @@ export enum OrganizationType {
 }
 
 
-export abstract class Organization extends Entity {
+export abstract class Organization {
 
-  protected constructor(readonly type: OrganizationType, gender: Gender, readonly longName?: string, readonly shortName?: string) {
-    super(gender)
+  readonly events = new Timeline()
+
+  protected constructor(readonly type: OrganizationType, readonly longName?: string, readonly shortName?: string) {
+  }
+
+  get firstCountry(): Country | undefined {
+    return this.events.get(0)?.where?.country
   }
 
   abstract render<R>(renderer: OrganizationRenderer<R>, options: OrganizationRenderOptions): R

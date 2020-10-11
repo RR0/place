@@ -1,8 +1,10 @@
-import {Gender} from "../Entity";
+import {Gender} from "../people/People";
+
 
 export interface WordMessage {
   [gender: string]: string
 }
+
 
 export interface DictionaryMessages {
   cigar: WordMessage
@@ -10,6 +12,7 @@ export interface DictionaryMessages {
   general: WordMessage
   worker: WordMessage
 }
+
 
 export class Dictionary {
 

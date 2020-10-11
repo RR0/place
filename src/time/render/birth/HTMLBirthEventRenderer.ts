@@ -2,12 +2,11 @@ import {HTML, HTMLRenderer} from "../../../HTMLRenderer";
 import {BirthEvent, BirthEventRenderer, BirthEventRenderOptions} from "../../BirthEvent";
 import {OccupationEvent, OccupationEventRenderer} from "../../OccupationEvent";
 import {Translator} from "../../../lang/Translator";
-import {People, PeopleRenderer} from "../../../people/People";
+import {Gender, People, PeopleRenderer} from "../../../people/People";
 import {TimeRenderer} from "../../Time";
 import {Place, PlaceRenderer} from "../../../place/Place";
 import {Country} from "../../../place/Country";
 import {WithEventMessages} from "../../../lang/Messages";
-import {Gender} from "../../../Entity";
 
 export class HTMLBirthEventRenderer extends HTMLRenderer implements BirthEventRenderer<HTML> {
 
@@ -100,7 +99,7 @@ export class HTMLBirthEventRenderer extends HTMLRenderer implements BirthEventRe
   }
 
   private nationality<R>(parent: People, birthCountry?: Country): HTML {
-    const fatherBirthCountry = parent.firstCountry
+    const fatherBirthCountry = parent.birthCountry
     let nationality = ''
     if (birthCountry !== fatherBirthCountry) {
       nationality += fatherBirthCountry?.renderNationality(this.placeRenderer, parent.gender)

@@ -1,5 +1,13 @@
 import {PeopleRenderOptions} from "./render/HTMLPeopleRenderer";
-import {Entity, Gender} from "../Entity";
+import {Timeline} from "../time/Timeline";
+import {Country} from "../place/Country";
+
+
+export enum Gender {
+  neutral = 'neutral',
+  male = 'male',
+  female = 'female'
+}
 
 
 export interface PeopleRenderer<R> {
@@ -7,13 +15,18 @@ export interface PeopleRenderer<R> {
 }
 
 
-export class People extends Entity {
+export class People {
 
-  constructor(gender: Gender, readonly firstName?: string, readonly lastName?: string, readonly middleName?: string) {
-    super(gender);
+  readonly events = new Timeline()
+
+  constructor(readonly gender: Gender, readonly firstName?: string, readonly lastName?: string, readonly middleName?: string) {
   }
 
   render<R>(renderer: PeopleRenderer<R>, options: PeopleRenderOptions): R {
     return renderer.render(this, options)
+  }
+
+  get birthCountry(): Country | undefined {
+    return this.events.get(0)?.where?.country
   }
 }

@@ -1,5 +1,5 @@
 import {State} from "../../place/State";
-import {People} from "../../people/People";
+import {Gender, People} from "../../people/People";
 import {Country} from "../../place/Country";
 import {City} from "../../place/City";
 import {CountryCode} from "../../place/CountryCode";
@@ -15,7 +15,6 @@ import {HTMLOrganizationRenderer} from "../../org/render/HTMLOrganizationRendere
 import {HTMLBirthEventRenderer} from "./birth/HTMLBirthEventRenderer";
 import {frenchPlural, messages_fr} from "../../lang/Messages_fr";
 import {TimeRenderFormat} from "../Time";
-import {Gender} from "../../Entity";
 
 const hynek = new People(Gender.male, `Josef`, 'Hynek', `Allen`)
 const usa = new Country(CountryCode.us)
