@@ -18,8 +18,8 @@ class FrenchMessages implements Messages {
     long: '${long}',
     short_long: '<abbr title="${long}">${short}</abbr>',
     company_products: 'une société produisant des ${products:plural}',
-    company_nationality: 'une société ${nationality:female}',
-    company_nationality_products: 'une société ${nationality:female} produisant des ${products:plural}',
+    company_nationality: 'une société ${nationality}',
+    company_nationality_products: 'une société ${nationality} produisant des ${products:plural}',
     army: 'armée',
   }
   place: PlaceMessages = {
