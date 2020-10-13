@@ -37,7 +37,9 @@ test('render an anonymous company', () => {
 test('render an army with short + long name', () => {
   const renderer = new HTMLOrganizationRenderer(translator, placeRenderer);
   {
-    const usaf = new Army('United States Air Force', `USAF`);
+    translator.add(translator.messages.dict, 'usaf_short', 'USAF')
+    translator.add(translator.messages.dict, 'usaf_long', 'United States Air Force')
+    const usaf = new Army('usaf_long', 'usaf_short');
     {
       const html = usaf.render(renderer, {
         name: {long: true, short: true},
@@ -52,9 +54,11 @@ test('render an army with short + long name', () => {
 
 
 test('render a school with long name', () => {
+  const key = 'craneTech'
+  translator.add(translator.messages.dict, key, 'Lycée technique Crane')
   const renderer = new HTMLOrganizationRenderer(translator, placeRenderer);
   {
-    const craneTech = new School('Lycée technique Crane');
+    const craneTech = new School(key);
     {
       const html = craneTech.render(renderer, {
         name: {long: true, short: true},

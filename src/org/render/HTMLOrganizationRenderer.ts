@@ -88,10 +88,10 @@ export class HTMLOrganizationRenderer extends HTMLRenderer implements Organizati
     const values: any = {}
     const nameOptions = options.name;
     if (nameOptions.short && ObjectUtils.isSet(org.shortName)) {
-      values.short = org.shortName
+      values.short = this.translator.translateKey(this.translator.messages.dict, org.shortName!)
     }
     if (nameOptions.long && ObjectUtils.isSet(org.longName)) {
-      values.long = org.longName
+      values.long = this.translator.translateKey(this.translator.messages.dict, org.longName!)
     }
     if (options.origin) {
       const firstCountry = org.firstCountry

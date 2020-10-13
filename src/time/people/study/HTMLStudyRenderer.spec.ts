@@ -44,7 +44,8 @@ test('renders a study for an anonymous school', () => {
 
 
 test('renders a study for a named high school', () => {
-  const school = new School('Lycée technique Crane', undefined)
+  translator.add(translator.messages.dict, 'craneTech', 'Lycée technique Crane')
+  const school = new School('craneTech', undefined)
   const renderOptions: StudyRenderOptions = {
     time: TimeRenderFormat.fullDate,
     verb: true,

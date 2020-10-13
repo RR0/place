@@ -1,4 +1,6 @@
-export type KeyValue<V = any> = { [valueKey: string]: V };
+export interface KeyValue<V = any> {
+  [valueKey: string]: V
+}
 
 
 export class ObjectUtils {

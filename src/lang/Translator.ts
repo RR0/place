@@ -11,7 +11,7 @@ export interface DictionaryMessages extends KeyValue {
 }
 
 
-export class Translator<T> {
+export class Translator<T extends KeyValue> {
 
   constructor(readonly locale: string, readonly messages: T, readonly plural: (s: string) => string) {
   }
@@ -22,6 +22,10 @@ export class Translator<T> {
 
   getGender(word: WordMessage): Gender {
     return (Gender as any)[Object.keys(word)[0]]
+  }
+
+  add(obj: KeyValue, key: string, value: any) {
+    obj[key] = value
   }
 
   translateKey(obj: KeyValue, key: string, values: KeyValue = {}): string {
