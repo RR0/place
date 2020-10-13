@@ -1,4 +1,4 @@
-import {State} from "../../place/State";
+import {State} from "../../place/state/State";
 import {Gender, People} from "../../people/People";
 import {Country} from "../../place/country/Country";
 import {City} from "../../place/City";

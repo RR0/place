@@ -1,6 +1,6 @@
 import {Timeline} from "./Timeline";
 import {Country} from "../place/country/Country";
-import {State} from "../place/State";
+import {State} from "../place/state/State";
 import {City} from "../place/City";
 import {Gender, People} from "../people/People";
 import {DateTime} from "./DateTime";

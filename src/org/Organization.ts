@@ -3,6 +3,7 @@ import {Army} from "./Army";
 import {OrganizationRenderOptions} from "./render/HTMLOrganizationRenderer";
 import {Timeline} from "../time/Timeline";
 import {Country} from "../place/country/Country";
+import {School} from "./School";
 
 
 export interface OrganizationRenderer<R> {
@@ -12,12 +13,15 @@ export interface OrganizationRenderer<R> {
   renderCompany(company: Company, options: OrganizationRenderOptions): R;
 
   renderArmy(army: Army, options: OrganizationRenderOptions): R;
+
+  renderSchool(school: School, options: OrganizationRenderOptions): R;
 }
 
 
 export enum OrganizationType {
   company = 'company',
   army = 'army',
+  school = 'school',
 }
 
 

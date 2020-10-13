@@ -3,7 +3,7 @@ import {BirthEvent} from "./time/people/birth/BirthEvent";
 import {City} from "./place/City";
 import {User} from "./user/User";
 import {Translator} from "./lang/Translator";
-import {State} from "./place/State";
+import {State} from "./place/state/State";
 import {Country} from "./place/country/Country";
 import {DateTime} from "./time/DateTime";
 import {CountryCode} from "./place/country/CountryCode";
@@ -84,7 +84,7 @@ let options: HTMLDocRenderOptions = {
 }
 const eventHTML = docRenderer.render(hynek, options)
 const docHtml = `
-${eventHTML}. 
+${eventHTML} 
 Il fait ses études dans les écoles publiques de la ville, et sort du lycée technique Crane en 1927. 
 Il entre alors à l'Université de Chicago, dont il obtient un B.S. en 1931, puis un doctorat en astrophysique en 1935</p>.
 `;

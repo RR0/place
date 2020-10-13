@@ -1,3 +1,5 @@
+import {KeyValue, ObjectUtils} from "../util/ObjectUtils";
+
 export class Translator<T> {
 
   constructor(readonly locale: string, readonly messages: T, private plural: (s: string) => string) {
@@ -7,17 +9,27 @@ export class Translator<T> {
     return subKeys.sort().join('_')
   }
 
-  translate(template: string, values: { [valueKey: string]: any } = {}): string {
+  translateKey(obj: KeyValue, key: string, values: KeyValue = {}): string {
+    if (!obj.hasOwnProperty(key)) {
+      throw Error(`No key "${key}" found in ${JSON.stringify(obj)}`)
+    }
+    return this.translate(obj[key], values)
+  }
+
+  translate(template: string, values: KeyValue = {}): string {
     console.assert(template, 'Translation requires a template')
     let translated = template
     for (const key in values) {
       if (values.hasOwnProperty(key)) {
         const value = values[key];
-        if (value) {
+        if (ObjectUtils.isSet(value)) {
           translated = translated.replace(`\$\{${`${key}:plural`}\}`, this.plural(value) as any as string)
           translated = translated.replace(`\$\{${key}\}`, value as any as string)
         }
       }
+    }
+    if (translated.indexOf('${') > 0) {
+      throw Error(`Parameter was not replaced in "${translated}"`)
     }
     return translated;
   }

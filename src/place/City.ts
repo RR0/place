@@ -1,5 +1,5 @@
 import {Place} from "./Place";
-import {State} from "./State";
+import {State} from "./state/State";
 
 
 export interface CityRenderer<R> {

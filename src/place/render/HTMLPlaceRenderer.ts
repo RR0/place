@@ -1,7 +1,7 @@
 import {City, CityRenderer} from "../City";
 import {Place, PlaceRenderer} from "../Place";
 import {Country} from "../country/Country";
-import {State} from "../State";
+import {State} from "../state/State";
 import {Translator} from "../../lang/Translator";
 import {HTML, HTMLRenderer} from "../../HTMLRenderer";
 import {Gender} from "../../people/People";

@@ -6,6 +6,8 @@ import {Army} from "../Army";
 import {PlaceRenderer} from "../../place/Place";
 import {Dictionary} from "../../lang/Dictionary";
 import {WithOrgMessages} from "../OrgMessages";
+import {School} from "../School";
+import {ObjectUtils} from "../../util/ObjectUtils";
 
 
 export interface OrganizationNameOptions {
@@ -66,27 +68,36 @@ export class HTMLOrganizationRenderer extends HTMLRenderer implements Organizati
     if (options.description !== OrganizationDescriptionOptions.none) {
       values.products = company.products.map(p => Object.values(p)[0]).join(', ')
     }
-    const keys = Object.keys(values);
+    const keys = Object.keys(values)
     if (keys.length > 0) {
       const key = this.translator.compoundKey(keys.concat('company'))
-      name += this.translator.translate((this.translator.messages.org as any)[key], values);
+      name += this.translator.translate((this.translator.messages.org as any)[key], values)
     }
+    return name
+  }
+
+  renderSchool(school: School, options: OrganizationRenderOptions): HTML {
+    let name = ''
+    const values = this.getValues(school, options);
+    const keys = Object.keys(values)
+    const key = this.translator.compoundKey(keys.concat('school'))
+    name += this.translator.translateKey(this.translator.messages.org, key, values)
     return name
   }
 
   private getValues(org: Organization, options: OrganizationRenderOptions): { [key: string]: any } {
     const values: any = {}
     const nameOptions = options.name;
-    if (nameOptions.short && org.shortName) {
+    if (nameOptions.short && ObjectUtils.isSet(org.shortName)) {
       values.short = org.shortName
     }
-    if (nameOptions.long && org.longName) {
+    if (nameOptions.long && ObjectUtils.isSet(org.longName)) {
       values.long = org.longName
     }
     if (options.origin) {
       const firstCountry = org.firstCountry
-      if (firstCountry) {
-        values.nationality = firstCountry.renderNationality(this.placeRenderer, Dictionary.getGender(this.translator.messages.dict.company))
+      if (ObjectUtils.isSet(firstCountry)) {
+        values.nationality = firstCountry!.renderNationality(this.placeRenderer, Dictionary.getGender(this.translator.messages.dict.company))
       }
     }
     return values;

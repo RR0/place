@@ -20,6 +20,8 @@ class FrenchMessages implements Messages {
     company_products: 'une société produisant des ${products:plural}',
     company_nationality: 'une société ${nationality}',
     company_nationality_products: 'une société ${nationality} produisant des ${products:plural}',
+    long_school: '${long}',
+    school: 'une école',
     army: 'armée',
   }
   place: PlaceMessages = {
@@ -30,6 +32,7 @@ class FrenchMessages implements Messages {
           male: 'tchèque',
           female: 'tchèque',
         },
+        state: {}
       },
       [CountryCode.cs]: {
         name: 'Tchécoslovaquie',
@@ -37,6 +40,7 @@ class FrenchMessages implements Messages {
           male: 'tchécoslovaque',
           female: 'tchécoslovaque',
         },
+        state: {}
       },
       [CountryCode.fr]: {
         name: 'France',
@@ -44,6 +48,9 @@ class FrenchMessages implements Messages {
           male: 'français',
           female: 'française'
         },
+        state: {
+          idf: {short: 'IDF', long: 'Île de France'}
+        }
       },
       [CountryCode.sk]: {
         name: 'Slovaquie',
@@ -51,6 +58,7 @@ class FrenchMessages implements Messages {
           male: 'slovaque',
           female: 'slovaque'
         },
+        state: {}
       },
       [CountryCode.us]: {
         name: 'États-Unis',
@@ -58,6 +66,9 @@ class FrenchMessages implements Messages {
           male: 'américain',
           female: 'américaine',
         },
+        state: {
+          il: {short: 'IL', long: 'Illinois'}
+        }
       },
     }
   }
@@ -93,6 +104,9 @@ class FrenchMessages implements Messages {
         org_verb: "travaille pour ${org}",
         org_role: "${role} pour ${org}",
         type: "dans ${type}",
+      },
+      study: {
+        school_verb: "étudie à ${school}",
       }
     },
     org: {
@@ -102,21 +116,23 @@ class FrenchMessages implements Messages {
           short: '${short}',
           long: '${long}',
           short_long: '<abbr title="${long}">${short}</abbr>',
-          company_products: 'a company that sells ${products:plural}',
-          company_nationality: 'a ${nationality} company',
-          company_nationality_products: 'a ${nationality} company that sells ${products:plural}',
+          company_products: '(une société vendant des ${products:plural})',
+          company_nationality: '(une société ${nationality})',
+          company_nationality_products: '(une société ${nationality} vendant des ${products:plural})',
+          school: '(une école)',
+          long_school: '($long)',
           army: 'armée',
         },
         founder: {
           anonymous: {
-            nationality: ' from a ${nationality} father'
+            nationality: ' par un ${nationality}'
           }
         },
         founders: {
-          and: " and ",
+          and: " et ",
           anonymous: {
-            nationality: " from ${nationality} parents",
-            nationalities: " from a ${fatherNationality} father and a ${motherNationality} mother"
+            nationality: " par des fondateurs ${nationality}",
+            nationalities: " par un fondateur ${nationality}"
           }
         }
       }
@@ -143,4 +159,4 @@ class FrenchMessages implements Messages {
   }
 }
 
-export const messages_fr = new FrenchMessages();
+export const messages_fr = new FrenchMessages()

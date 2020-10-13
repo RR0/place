@@ -8,6 +8,8 @@ export interface OrgMessages {
   company_products: string
   company_nationality: string
   company_nationality_products: string
+  school: string
+  long_school: string
   [OrganizationType.army]: string
 }
 

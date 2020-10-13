@@ -3,17 +3,21 @@ import {RR0Time, TimeRenderOptions} from "./Time";
 import {BirthEventRenderer} from "./people/birth/BirthEvent";
 import {OccupationEventRenderer} from "./people/occupation/OccupationEvent";
 import {FoundationEventRenderer} from "./org/foundation/FoundationEvent";
+import {StudyEventRenderer} from "./people/study/StudyEvent";
 
 
 export enum RR0EventType {
   birth = 'birth',
   occupation = 'occupation',
   foundation = 'foundation',
+  study = 'study',
 }
 
 
-export interface EventRenderer<R> extends BirthEventRenderer<R>, OccupationEventRenderer<R>, FoundationEventRenderer<R> {
-
+export interface EventRenderer<R> extends BirthEventRenderer<R>, OccupationEventRenderer<R>, FoundationEventRenderer<R>, StudyEventRenderer<R> {
+  /**
+   * Render an event.
+   */
   render(event: RR0Event, options: EventRenderOptions): R
 }
 

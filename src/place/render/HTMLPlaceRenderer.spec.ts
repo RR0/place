@@ -1,6 +1,6 @@
 import {HTMLPlaceRenderer} from "./HTMLPlaceRenderer";
 import {City} from "../City";
-import {State} from "../State";
+import {State} from "../state/State";
 import {Country} from "../country/Country";
 import {Translator} from "../../lang/Translator";
 import {CountryCode} from "../country/CountryCode";
