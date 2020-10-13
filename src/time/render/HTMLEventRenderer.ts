@@ -11,12 +11,12 @@ import {
   FoundationEventRenderer,
   FoundationEventRenderOptions
 } from "../org/foundation/FoundationEvent";
+import {StudyEvent, StudyEventRenderer, StudyRenderOptions} from "../people/study/StudyEvent";
 
 /**
  * Renders events as HTML.
  */
 export class HTMLEventRenderer extends HTMLRenderer implements EventRenderer<HTML> {
-
   constructor(
     translator: Translator<WithEventMessages>,
     private placeRenderer: PlaceRenderer<HTML>,
@@ -24,6 +24,7 @@ export class HTMLEventRenderer extends HTMLRenderer implements EventRenderer<HTM
     private occupationRenderer: OccupationEventRenderer<HTML>,
     private birthEventRenderer: BirthEventRenderer<HTML>,
     private foundationRenderer: FoundationEventRenderer<HTML>,
+    private studyRenderer: StudyEventRenderer<HTML>,
   ) {
     super(translator)
   }
@@ -46,5 +47,9 @@ export class HTMLEventRenderer extends HTMLRenderer implements EventRenderer<HTM
 
   renderFoundation(event: FoundationEvent, options: FoundationEventRenderOptions): HTML {
     return this.foundationRenderer.renderFoundation(event, options);
+  }
+
+  renderStudy(event: StudyEvent, options: StudyRenderOptions): HTML {
+    return this.studyRenderer.renderStudy(event, options);
   }
 }

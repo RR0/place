@@ -16,6 +16,7 @@ import {HTMLOccupationRenderer} from "../people/occupation/HTMLOccupationRendere
 import {BirthEvent, BirthEventRenderOptions, OccupationFormat} from "../people/birth/BirthEvent";
 import {HTMLBirthEventRenderer} from "../people/birth/HTMLBirthEventRenderer";
 import {HTMLFoundationEventRenderer} from "../org/foundation/HTMLFoundationEventRenderer";
+import {HTMLStudyRenderer} from "../people/study/HTMLStudyRenderer";
 
 const hynek = new People(Gender.male, 'Josef', 'Hynek', `Allen`)
 const usa = new Country(CountryCode.us)
@@ -30,7 +31,9 @@ const orgRenderer = new HTMLOrganizationRenderer(translator, placeRenderer);
 const occupationRenderer = new HTMLOccupationRenderer(translator, orgRenderer);
 const birthEventRenderer = new HTMLBirthEventRenderer(translator, peopleRenderer, timeRenderer, placeRenderer, occupationRenderer);
 const foundationRenderer = new HTMLFoundationEventRenderer(translator, peopleRenderer, orgRenderer, timeRenderer, placeRenderer, occupationRenderer);
-const renderer = new HTMLEventRenderer(translator, placeRenderer, timeRenderer, occupationRenderer, birthEventRenderer, foundationRenderer);
+const studyRenderer = new HTMLStudyRenderer(translator, orgRenderer);
+const renderer = new HTMLEventRenderer(translator, placeRenderer, timeRenderer, occupationRenderer, birthEventRenderer, foundationRenderer, studyRenderer);
+
 
 test('renders anonymous parents of same nationality', () => {
   const father = new People(Gender.male);
@@ -51,6 +54,7 @@ test('renders anonymous parents of same nationality', () => {
   expect(found).toBe('Josef A. Hynek naît le dimanche 1 mai 1910 à Chicago (Illinois, États-Unis) de parents tchécoslovaques')
 })
 
+
 test('renders anonymous parents of different nationality', () => {
   const father = new People(Gender.male);
   const czechoslovakia = new Country(CountryCode.cs);
@@ -70,6 +74,7 @@ test('renders anonymous parents of different nationality', () => {
   const found = birthEvent.render(renderer, renderOptions)
   expect(found).toBe("Josef A. Hynek naît le dimanche 1 mai 1910 à Chicago (Illinois, États-Unis) d'un père tchécoslovaque et d'une mère américaine")
 })
+
 
 test('renders parents of different nationality', () => {
   const father = new People(Gender.male, 'Joseph');
