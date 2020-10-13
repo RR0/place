@@ -1,18 +1,14 @@
 import {HTMLPlaceRenderer} from "./HTMLPlaceRenderer";
 import {City} from "../City";
-import {State} from "../state/State";
-import {Country} from "../country/Country";
 import {Translator} from "../../lang/Translator";
-import {CountryCode} from "../country/CountryCode";
 import {frenchPlural, messages_fr} from "../../lang/Messages_fr";
+import {States} from "../state/States";
 // jest.mock('../../lang/Translator');
 
 test('render city', () => {
   const translator = new Translator('fr', messages_fr, frenchPlural);
   const renderer = new HTMLPlaceRenderer(translator);
-  const usa = new Country(CountryCode.us);
-  const illinois = new State('Illinois', usa);
-  const city = new City('Chicago', illinois)
+  const city = new City('Chicago', States.illinois)
   const html = renderer.renderCity(city);
   expect(html).toBe('Chicago (Illinois, États-Unis)')
 })

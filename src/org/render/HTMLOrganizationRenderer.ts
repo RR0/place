@@ -4,7 +4,6 @@ import {Company} from "../Company";
 import {Translator} from "../../lang/Translator";
 import {Army} from "../Army";
 import {PlaceRenderer} from "../../place/Place";
-import {Dictionary} from "../../lang/Dictionary";
 import {WithOrgMessages} from "../OrgMessages";
 import {School} from "../School";
 import {ObjectUtils} from "../../util/ObjectUtils";
@@ -97,7 +96,7 @@ export class HTMLOrganizationRenderer extends HTMLRenderer implements Organizati
     if (options.origin) {
       const firstCountry = org.firstCountry
       if (ObjectUtils.isSet(firstCountry)) {
-        values.nationality = firstCountry!.renderNationality(this.placeRenderer, Dictionary.getGender(this.translator.messages.dict.company))
+        values.nationality = firstCountry!.renderNationality(this.placeRenderer, this.translator.getGender(this.translator.messages.dict.company))
       }
     }
     return values;

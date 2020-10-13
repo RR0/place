@@ -1,12 +1,27 @@
 import {KeyValue, ObjectUtils} from "../util/ObjectUtils";
+import {Gender} from "../people/People";
+
+
+export interface WordMessage {
+  [gender: string]: string
+}
+
+
+export interface DictionaryMessages extends KeyValue {
+}
+
 
 export class Translator<T> {
 
-  constructor(readonly locale: string, readonly messages: T, private plural: (s: string) => string) {
+  constructor(readonly locale: string, readonly messages: T, readonly plural: (s: string) => string) {
   }
 
   compoundKey(subKeys: string[]): string {
     return subKeys.sort().join('_')
+  }
+
+  getGender(word: WordMessage): Gender {
+    return (Gender as any)[Object.keys(word)[0]]
   }
 
   translateKey(obj: KeyValue, key: string, values: KeyValue = {}): string {

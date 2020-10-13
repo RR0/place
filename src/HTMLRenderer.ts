@@ -1,6 +1,8 @@
 import {Renderer} from "./Renderer";
 
+
 export type HTML = string
+
 
 export class HTMLRenderer<M = any> extends Renderer<M> {
 

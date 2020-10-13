@@ -3,6 +3,7 @@ import {RR0Time} from "../Time";
 import {People} from "../../people/People";
 import {Place} from "../../place/Place";
 
+
 /**
  * Something that occurred about some people.
  */

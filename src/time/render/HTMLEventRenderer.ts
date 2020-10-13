@@ -13,6 +13,7 @@ import {
 } from "../org/foundation/FoundationEvent";
 import {StudyEvent, StudyEventRenderer, StudyRenderOptions} from "../people/study/StudyEvent";
 
+
 /**
  * Renders events as HTML.
  */

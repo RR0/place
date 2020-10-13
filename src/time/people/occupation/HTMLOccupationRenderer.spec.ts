@@ -9,15 +9,15 @@ import {HTMLOccupationRenderer} from "./HTMLOccupationRenderer";
 import {BeforeTime} from "../../BeforeTime";
 import {frenchPlural, messages_fr} from "../../../lang/Messages_fr";
 import {HTMLPlaceRenderer} from "../../../place/render/HTMLPlaceRenderer";
-import {Country} from "../../../place/country/Country";
-import {CountryCode} from "../../../place/country/CountryCode";
+import {Countries} from "../../../place/country/Countries";
+
 
 const translator = new Translator('fr', messages_fr, frenchPlural);
 const organizationRenderer = new HTMLOrganizationRenderer(translator, new HTMLPlaceRenderer(translator));
 
 const father = new People(Gender.male);
 const birthdate = new Date(1910, 4, 1);
-const czechoslovakia = new Country(CountryCode.cs);
+
 
 test('renders an occupation for an anonymous company', () => {
   const cigarFactory = new Company(undefined, undefined, [translator.messages.dict.cigar]);
@@ -34,13 +34,14 @@ test('renders an occupation for an anonymous company', () => {
     role: false
   }
 
-  const occupationEvent = new OccupationEvent(father, OccupationRole.worker, cigarFactory, new BeforeTime(new DateTime(birthdate)), czechoslovakia);
+  const occupationEvent = new OccupationEvent(father, OccupationRole.worker, cigarFactory, new BeforeTime(new DateTime(birthdate)), Countries.cs);
 
   const renderer = new HTMLOccupationRenderer(translator, organizationRenderer);
   const found = occupationEvent.render(renderer, renderOptions)
 
   expect(found).toBe('travaille pour une société produisant des cigares')
 })
+
 
 test('renders an occupation role for an anonymous company', () => {
   const cigarFactory = new Company(undefined, undefined, [translator.messages.dict.cigar]);
@@ -57,7 +58,7 @@ test('renders an occupation role for an anonymous company', () => {
     role: true
   }
 
-  const occupationEvent = new OccupationEvent(father, OccupationRole.worker, cigarFactory, new BeforeTime(new DateTime(birthdate)), czechoslovakia);
+  const occupationEvent = new OccupationEvent(father, OccupationRole.worker, cigarFactory, new BeforeTime(new DateTime(birthdate)), Countries.cs);
 
   const renderer = new HTMLOccupationRenderer(translator, organizationRenderer);
   const found = occupationEvent.render(renderer, renderOptions)

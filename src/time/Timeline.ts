@@ -1,11 +1,15 @@
 import {RR0Event, RR0EventType} from "./Event";
 import {BirthEventRenderOptions} from "./people/birth/BirthEvent";
 import {OccupationRenderOptions} from "./people/occupation/OccupationEvent";
+import {FoundationEventRenderOptions} from "./org/foundation/FoundationEvent";
+import {StudyRenderOptions} from "./people/study/StudyEvent";
 
 
 export interface TimelineRenderOptions {
   [RR0EventType.birth]: BirthEventRenderOptions
   [RR0EventType.occupation]: OccupationRenderOptions
+  [RR0EventType.foundation]: FoundationEventRenderOptions
+  [RR0EventType.study]: StudyRenderOptions
 }
 
 

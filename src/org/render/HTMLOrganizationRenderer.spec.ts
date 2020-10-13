@@ -16,7 +16,6 @@ const placeRenderer = new HTMLPlaceRenderer(translator);
 
 
 test('render an anonymous company', () => {
-
   const renderer = new HTMLOrganizationRenderer(translator, placeRenderer);
   {
     const cigarFactory = new Company(undefined, undefined, [translator.messages.dict.cigar]);
@@ -36,7 +35,6 @@ test('render an anonymous company', () => {
 
 
 test('render an army with short + long name', () => {
-
   const renderer = new HTMLOrganizationRenderer(translator, placeRenderer);
   {
     const usaf = new Army('United States Air Force', `USAF`);
@@ -54,7 +52,6 @@ test('render an army with short + long name', () => {
 
 
 test('render a school with long name', () => {
-
   const renderer = new HTMLOrganizationRenderer(translator, placeRenderer);
   {
     const craneTech = new School('Lycée technique Crane');

@@ -1,4 +1,5 @@
-export type KeyValue = { [valueKey: string]: any };
+export type KeyValue<V = any> = { [valueKey: string]: V };
+
 
 export class ObjectUtils {
 

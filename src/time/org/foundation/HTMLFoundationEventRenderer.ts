@@ -7,7 +7,6 @@ import {Place, PlaceRenderer} from "../../../place/Place";
 import {FoundationEvent, FoundationEventRenderer, FoundationEventRenderOptions} from "./FoundationEvent";
 import {OccupationEvent, OccupationEventRenderer} from "../../people/occupation/OccupationEvent";
 import {Organization, OrganizationRenderer} from "../../../org/Organization";
-import {Dictionary} from "../../../lang/Dictionary";
 import {WithEventMessages} from "../../EventMessages";
 
 export class HTMLFoundationEventRenderer extends HTMLRenderer implements FoundationEventRenderer<HTML> {
@@ -33,11 +32,11 @@ export class HTMLFoundationEventRenderer extends HTMLRenderer implements Foundat
       when: foundationTime ? foundationTime.render(this.timeRenderer, options.time) : '',
       where: foundationPlace ? foundationPlace.render(this.placeRenderer) : '',
     })
-    const founders = this.founders(foundation, options, newOrg, foundationPlace);
+    const founders = this.founders(foundation, options, foundationPlace);
     return born + founders
   }
 
-  private founders<R>(foundation: FoundationEvent, options: FoundationEventRenderOptions, baby: Organization, foundationPlace?: Place) {
+  private founders<R>(foundation: FoundationEvent, options: FoundationEventRenderOptions, foundationPlace?: Place) {
     const foundationCountry = foundationPlace?.country
     const founders = foundation.founders;
     let foundersStr = ''
@@ -53,7 +52,6 @@ export class HTMLFoundationEventRenderer extends HTMLRenderer implements Foundat
           founderName = this.orgRenderer.render(founderOrg, options.founders.organization)
           fatherNationality = this.orgNationality(founderOrg, foundationCountry)
         }
-        const foundationMsg = this.translator.messages.event.org.foundation
         foundersStr += foundation.org.render(this.orgRenderer, options.organization)
         foundersStr += this.founderNationality(founderName, fatherNationality)
         const occupations = founder!.events.findOfType(OccupationEvent);
@@ -100,7 +98,7 @@ export class HTMLFoundationEventRenderer extends HTMLRenderer implements Foundat
     const founderFoundationCountry = org.firstCountry
     let nationality = ''
     if (foundationCountry !== founderFoundationCountry) {
-      const orgGender = Dictionary.getGender(this.translator.messages.dict[org.type]);
+      const orgGender = this.translator.getGender(this.translator.messages.dict[org.type]);
       nationality += founderFoundationCountry?.renderNationality(this.placeRenderer, orgGender)
     }
     return nationality

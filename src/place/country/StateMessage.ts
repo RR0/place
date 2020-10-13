@@ -3,6 +3,7 @@ export interface StateMessage {
   long: string
 }
 
+
 export interface StatesMessages {
   [stateKey: string]: StateMessage
 }

@@ -1,6 +1,7 @@
 import {DateTime} from "./DateTime";
 import {BeforeTime} from "./BeforeTime";
 
+
 test('compare 2 dates', () => {
   const date1 = new DateTime(new Date(1910, 3, 30));
   const date2 = new DateTime(new Date(1910, 4, 1));
@@ -11,6 +12,7 @@ test('compare 2 dates', () => {
   expect(date2.isAfter(date1)).toBe(true)
 })
 
+
 test('compare date and some date before', () => {
   const birth = new DateTime(new Date(1910, 4, 1));
   const occupation = new BeforeTime(new DateTime(birth.date));
@@ -20,6 +22,7 @@ test('compare date and some date before', () => {
   expect(occupation.isAfter(birth)).toBe(false)
   expect(birth.isAfter(occupation)).toBe(true)
 })
+
 
 test('compare some dates before another', () => {
   const beforeA = new BeforeTime(new DateTime(new Date(1910, 3, 30)));

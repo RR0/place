@@ -1,8 +1,5 @@
-import {State} from "../../place/state/State";
 import {Gender, People} from "../../people/People";
-import {Country} from "../../place/country/Country";
 import {City} from "../../place/City";
-import {CountryCode} from "../../place/country/CountryCode";
 import {DateTime} from "../DateTime";
 import {HTMLEventRenderer} from "./HTMLEventRenderer";
 import {Translator} from "../../lang/Translator";
@@ -17,11 +14,12 @@ import {BirthEvent, BirthEventRenderOptions, OccupationFormat} from "../people/b
 import {HTMLBirthEventRenderer} from "../people/birth/HTMLBirthEventRenderer";
 import {HTMLFoundationEventRenderer} from "../org/foundation/HTMLFoundationEventRenderer";
 import {HTMLStudyRenderer} from "../people/study/HTMLStudyRenderer";
+import {Countries} from "../../place/country/Countries";
+import {States} from "../../place/state/States";
+
 
 const hynek = new People(Gender.male, 'Josef', 'Hynek', `Allen`)
-const usa = new Country(CountryCode.us)
-const illinois = new State('Illinois', usa)
-const chicago = new City('Chicago', illinois)
+const chicago = new City('Chicago', States.illinois)
 
 const translator = new Translator('fr', messages_fr, frenchPlural);
 const peopleRenderer = new HTMLPeopleRenderer(translator);
@@ -37,10 +35,9 @@ const renderer = new HTMLEventRenderer(translator, placeRenderer, timeRenderer, 
 
 test('renders anonymous parents of same nationality', () => {
   const father = new People(Gender.male);
-  const czechoslovakia = new Country(CountryCode.cs);
-  father.events.add(new BirthEvent(father, undefined, czechoslovakia))
+  father.events.add(new BirthEvent(father, undefined, Countries.cs))
   const mother = new People(Gender.female);
-  mother.events.add(new BirthEvent(mother, undefined, czechoslovakia))
+  mother.events.add(new BirthEvent(mother, undefined, Countries.cs))
   const birthEvent: BirthEvent = new BirthEvent(hynek, new DateTime(new Date(1910, 4, 1)), chicago, father, mother)
   const renderOptions: BirthEventRenderOptions = {
     time: TimeRenderFormat.fullDate,
@@ -57,11 +54,9 @@ test('renders anonymous parents of same nationality', () => {
 
 test('renders anonymous parents of different nationality', () => {
   const father = new People(Gender.male);
-  const czechoslovakia = new Country(CountryCode.cs);
-  const usa = new Country(CountryCode.us);
-  father.events.add(new BirthEvent(father, undefined, czechoslovakia))
+  father.events.add(new BirthEvent(father, undefined, Countries.cs))
   const mother = new People(Gender.female);
-  mother.events.add(new BirthEvent(mother, undefined, usa))
+  mother.events.add(new BirthEvent(mother, undefined, Countries.us))
   const birthEvent: BirthEvent = new BirthEvent(hynek, new DateTime(new Date(1910, 4, 1)), chicago, father, mother)
   const renderOptions: BirthEventRenderOptions = {
     time: TimeRenderFormat.fullDate,
@@ -78,11 +73,9 @@ test('renders anonymous parents of different nationality', () => {
 
 test('renders parents of different nationality', () => {
   const father = new People(Gender.male, 'Joseph');
-  const czechoslovakia = new Country(CountryCode.cs);
-  const usa = new Country(CountryCode.us);
-  father.events.add(new BirthEvent(father, undefined, usa))
+  father.events.add(new BirthEvent(father, undefined, Countries.us))
   const mother = new People(Gender.female, 'Bertha');
-  mother.events.add(new BirthEvent(mother, undefined, czechoslovakia))
+  mother.events.add(new BirthEvent(mother, undefined, Countries.cs))
   const bornEvent: BirthEvent = new BirthEvent(hynek, new DateTime(new Date(1910, 4, 1)), chicago, father, mother)
   const renderOptions: BirthEventRenderOptions = {
     time: TimeRenderFormat.fullDate,
