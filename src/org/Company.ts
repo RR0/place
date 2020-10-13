@@ -1,6 +1,6 @@
 import {Organization, OrganizationRenderer, OrganizationType} from "./Organization";
 import {OrganizationRenderOptions} from "./render/HTMLOrganizationRenderer";
-import {WordMessage} from "../lang/Dictionary";
+import {WordMessage} from "../lang/Translator";
 
 
 export class Company extends Organization {
