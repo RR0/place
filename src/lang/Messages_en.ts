@@ -1,10 +1,10 @@
 import {CountryCode} from "../place/country/CountryCode";
 import {Messages} from "./Messages";
-import {DictionaryMessages} from "./Dictionary";
 import {PlaceMessages} from "../place/PlaceMessages";
 import {TimeMessages} from "../time/TimeMessages";
 import {EventMessages} from "../time/EventMessages";
 import {OrgMessages} from "../org/OrgMessages";
+import {DictionaryMessages} from "./Translator";
 
 
 export function englishPlural(s: string) {
