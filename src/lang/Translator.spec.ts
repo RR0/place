@@ -43,9 +43,9 @@ test('translate to plurals', () => {
 
 
 test('adds new translation', () => {
-  const translator = new Translator('fr', {key: 'value is ${param}'}, grammar_fr)
-  translator.add(translator.messages, 'newKey', 'new value is ${param}')
-  const translated = translator.translate((translator.messages as any)['newKey'], {param: 'paramValue'})
+  const translator = new Translator('fr', {dict: {key: 'value is ${param}'}}, grammar_fr)
+  translator.add('newKey', 'new value is ${param}')
+  const translated = translator.translate((translator.messages.dict as any)['newKey'], {param: 'paramValue'})
   expect(translated).toBe('new value is paramValue')
 })
 

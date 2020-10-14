@@ -20,7 +20,7 @@ const birthdate = new Date(1910, 4, 1);
 
 
 test('renders an occupation for an anonymous company', () => {
-  const cigarFactory = new Company(undefined, undefined, [translator.messages.dict.cigar]);
+  const cigarFactory = new Company(undefined, undefined, ['cigar']);
   const renderOptions: OccupationRenderOptions = {
     time: TimeRenderFormat.fullDate,
     verb: true,
@@ -44,7 +44,7 @@ test('renders an occupation for an anonymous company', () => {
 
 
 test('renders an occupation role for an anonymous company', () => {
-  const cigarFactory = new Company(undefined, undefined, [translator.messages.dict.cigar]);
+  const cigarFactory = new Company(undefined, undefined, ['cigar']);
   const renderOptions: OccupationRenderOptions = {
     time: TimeRenderFormat.fullDate,
     verb: false,

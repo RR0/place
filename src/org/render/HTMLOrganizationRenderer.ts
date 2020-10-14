@@ -64,13 +64,14 @@ export class HTMLOrganizationRenderer extends HTMLRenderer implements Organizati
   renderCompany(company: Company, options: OrganizationRenderOptions): HTML {
     let name = ''
     const values = this.getValues(company, options);
+    const translator = this.translator;
     if (options.description !== OrganizationDescriptionOptions.none) {
-      values.products = company.products.map(p => Object.values(p)[0]).join(', ')
+      values.products = company.products.map(p => translator.translate(Object.values(translator.messages.dict[p])[0] as string)).join(', ')
     }
     const keys = Object.keys(values)
     if (keys.length > 0) {
-      const key = this.translator.compoundKey(keys.concat('company'))
-      name += this.translator.translate((this.translator.messages.org as any)[key], values)
+      const key = translator.compoundKey(keys.concat('company'))
+      name += translator.translate((translator.messages.org as any)[key], values)
     }
     return name
   }

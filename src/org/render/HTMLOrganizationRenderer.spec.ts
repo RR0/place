@@ -18,7 +18,7 @@ const placeRenderer = new HTMLPlaceRenderer(translator);
 test('render an anonymous company', () => {
   const renderer = new HTMLOrganizationRenderer(translator, placeRenderer);
   {
-    const cigarFactory = new Company(undefined, undefined, [translator.messages.dict.cigar]);
+    const cigarFactory = new Company(undefined, undefined, ['cigar']);
     const beforeNow = new BeforeTime(new DateTime(new Date()));
     cigarFactory.events.add(new FoundationEvent(cigarFactory, beforeNow, Countries.cs))
     {
@@ -37,8 +37,8 @@ test('render an anonymous company', () => {
 test('render an army with short + long name', () => {
   const renderer = new HTMLOrganizationRenderer(translator, placeRenderer);
   {
-    translator.add(translator.messages.dict, 'usaf_short', 'USAF')
-    translator.add(translator.messages.dict, 'usaf_long', 'United States Air Force')
+    translator.add('usaf_short', 'USAF')
+    translator.add('usaf_long', 'United States Air Force')
     const usaf = new Army('usaf_long', 'usaf_short');
     {
       const html = usaf.render(renderer, {
@@ -55,7 +55,7 @@ test('render an army with short + long name', () => {
 
 test('render a school with long name', () => {
   const key = 'craneTech'
-  translator.add(translator.messages.dict, key, 'Lycée technique Crane')
+  translator.add(key, 'Lycée technique Crane')
   const renderer = new HTMLOrganizationRenderer(translator, placeRenderer);
   {
     const craneTech = new School(SchoolType.highSchool, key);

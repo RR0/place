@@ -32,8 +32,8 @@ export class Translator<T extends KeyValue> {
     return (Gender as any)[Object.keys(word)[0]]
   }
 
-  add(obj: KeyValue, key: string, value: any) {
-    obj[key] = value
+  add(key: string, value: any) {
+    this.messages.dict[key] = value
   }
 
   translateKey(obj: KeyValue, key: string, values: KeyValue = {}): string {
