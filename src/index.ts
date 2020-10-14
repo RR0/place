@@ -2,22 +2,26 @@ import {User} from "./user/User"
 import {Translator} from "./lang/Translator"
 import {HTMLDocRenderer, HTMLDocRenderOptions} from "./HTMLDocRenderer"
 import {PeopleNameFormat} from "./people/render/HTMLPeopleRenderer"
-import {Messages} from "./lang/Messages"
 import {grammar_fr, messages_fr} from "./lang/Messages_fr"
-import {messages_en} from "./lang/Messages_en"
+import {grammar_en, messages_en} from "./lang/Messages_en"
 import {OrganizationDescriptionOptions} from "./org/render/HTMLOrganizationRenderer"
 import {TimeRenderFormat} from "./time/Time"
 import {KeyValue} from "./util/ObjectUtils"
-import content from "./people/h/HynekJAllen"
+import {Language} from "./lang/Language";
 
-const messagesByLang: KeyValue<Messages> = {fr: messages_fr, en: messages_en}
+// import content from "./people/h/HynekJAllen"
 
-const user = new User('fr')
-const messages = messagesByLang[user.locale]
-const fr = new Translator(user.locale, messages, grammar_fr)
-fr.add('craneTech', 'Lycée technique Crane')
+const languages: KeyValue<Language> = {
+  fr: {messages: messages_fr, grammar: grammar_fr},
+  en: {messages: messages_en, grammar: grammar_en}
+}
 
-const docRenderer = new HTMLDocRenderer(fr)
+const user = new User('en')
+const language = languages[user.locale];
+const lang = new Translator(user.locale, language.messages, language.grammar)
+lang.add('craneTech', 'Lycée technique Crane')
+
+const docRenderer = new HTMLDocRenderer(lang)
 const orgOptions = {
   origin: true,
   name: {short: true, long: true},
@@ -78,4 +82,8 @@ const options: HTMLDocRenderOptions = {
 }
 
 const app = document.getElementById("app")
-app!.innerHTML = docRenderer.render(content, options)
+if (app) {
+  import("./people/h/HynekJAllen").then(content => {
+    app.innerHTML = docRenderer.render(content.default, options)
+  })
+}
