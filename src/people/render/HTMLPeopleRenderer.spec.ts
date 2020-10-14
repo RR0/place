@@ -1,11 +1,11 @@
 import {HTMLPeopleRenderer, NameCase, PeopleNameFormat} from "./HTMLPeopleRenderer";
 import {Gender, People} from "../People";
 import {Translator} from "../../lang/Translator";
-import {frenchPlural, messages_fr} from "../../lang/Messages_fr";
+import {grammar_fr, messages_fr} from "../../lang/Messages_fr";
 
 test('render people', () => {
 
-  const translator = new Translator('fr', messages_fr, frenchPlural);
+  const translator = new Translator('fr', messages_fr, grammar_fr);
   const renderer = new HTMLPeopleRenderer(translator);
   {
     const peopleWithMiddleName = new People(Gender.male, `Josef`, 'Hynek', `Allen`);

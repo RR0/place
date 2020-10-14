@@ -1,12 +1,12 @@
 import {Translator} from "../../lang/Translator";
-import {frenchPlural, messages_fr} from "../../lang/Messages_fr";
+import {grammar_fr, messages_fr} from "../../lang/Messages_fr";
 import {HTMLTimeRenderer} from "./HTMLTimeRenderer";
 import {DateTime} from "../DateTime";
 import {TimeRenderFormat, TimeRenderOptions} from "../Time";
 import {BeforeTime} from "../BeforeTime";
 
 
-const translator = new Translator('fr', messages_fr, frenchPlural);
+const translator = new Translator('fr', messages_fr, grammar_fr);
 
 
 test('renders date', () => {

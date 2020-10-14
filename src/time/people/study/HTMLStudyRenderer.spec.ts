@@ -6,13 +6,13 @@ import {DateTime} from "../../DateTime"
 import {TimeRenderFormat} from "../../Time"
 import {HTMLStudyRenderer} from "./HTMLStudyRenderer"
 import {BeforeTime} from "../../BeforeTime"
-import {frenchPlural, messages_fr} from "../../../lang/Messages_fr"
+import {grammar_fr, messages_fr} from "../../../lang/Messages_fr"
 import {HTMLPlaceRenderer} from "../../../place/render/HTMLPlaceRenderer"
-import {School} from "../../../org/School"
+import {School, SchoolType} from "../../../org/School"
 import {Countries} from "../../../place/country/Countries";
 
 
-const translator = new Translator('fr', messages_fr, frenchPlural)
+const translator = new Translator('fr', messages_fr, grammar_fr)
 const organizationRenderer = new HTMLOrganizationRenderer(translator, new HTMLPlaceRenderer(translator))
 
 const hynek = new People(Gender.male)
@@ -20,7 +20,7 @@ const birthdate = new Date(1910, 4, 1)
 
 
 test('renders a study for an anonymous school', () => {
-  const school = new School(undefined, undefined)
+  const school = new School(SchoolType.primary, undefined, undefined)
   const renderOptions: StudyRenderOptions = {
     time: TimeRenderFormat.fullDate,
     verb: true,
@@ -39,13 +39,13 @@ test('renders a study for an anonymous school', () => {
   const renderer = new HTMLStudyRenderer(translator, organizationRenderer)
   const found = studyEvent.render(renderer, renderOptions)
 
-  expect(found).toBe('étudie à une école')
+  expect(found).toBe("étudie à l'école")
 })
 
 
 test('renders a study for a named high school', () => {
   translator.add(translator.messages.dict, 'craneTech', 'Lycée technique Crane')
-  const school = new School('craneTech', undefined)
+  const school = new School(SchoolType.highSchool, 'craneTech', undefined)
   const renderOptions: StudyRenderOptions = {
     time: TimeRenderFormat.fullDate,
     verb: true,
@@ -64,6 +64,6 @@ test('renders a study for a named high school', () => {
   const renderer = new HTMLStudyRenderer(translator, organizationRenderer)
   const found = studyEvent.render(renderer, renderOptions)
 
-  expect(found).toBe('étudie à Lycée technique Crane')
+  expect(found).toBe('étudie au Lycée technique Crane')
 })
 

@@ -11,9 +11,17 @@ export interface DictionaryMessages extends KeyValue {
 }
 
 
+export interface Grammar {
+
+  plural(s: string): string
+
+  at(s: string, gender: Gender): string
+}
+
+
 export class Translator<T extends KeyValue> {
 
-  constructor(readonly locale: string, readonly messages: T, readonly plural: (s: string) => string) {
+  constructor(readonly locale: string, readonly messages: T, readonly grammar: Grammar) {
   }
 
   compoundKey(subKeys: string[]): string {
@@ -42,7 +50,7 @@ export class Translator<T extends KeyValue> {
       if (values.hasOwnProperty(key)) {
         const value = values[key];
         if (ObjectUtils.isSet(value)) {
-          translated = translated.replace(`\$\{${`${key}:plural`}\}`, this.plural(value) as any as string)
+          translated = translated.replace(`\$\{${`${key}:plural`}\}`, this.grammar.plural(value) as any as string)
           translated = translated.replace(`\$\{${key}\}`, value as any as string)
         }
       }

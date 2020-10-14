@@ -7,12 +7,12 @@ import {DateTime} from "../../DateTime";
 import {TimeRenderFormat} from "../../Time";
 import {HTMLOccupationRenderer} from "./HTMLOccupationRenderer";
 import {BeforeTime} from "../../BeforeTime";
-import {frenchPlural, messages_fr} from "../../../lang/Messages_fr";
+import {grammar_fr, messages_fr} from "../../../lang/Messages_fr";
 import {HTMLPlaceRenderer} from "../../../place/render/HTMLPlaceRenderer";
 import {Countries} from "../../../place/country/Countries";
 
 
-const translator = new Translator('fr', messages_fr, frenchPlural);
+const translator = new Translator('fr', messages_fr, grammar_fr);
 const organizationRenderer = new HTMLOrganizationRenderer(translator, new HTMLPlaceRenderer(translator));
 
 const father = new People(Gender.male);

@@ -10,7 +10,7 @@ import {BeforeTime} from "./time/BeforeTime"
 import {Company} from "./org/Company"
 import {PeopleNameFormat} from "./people/render/HTMLPeopleRenderer"
 import {Messages} from "./lang/Messages"
-import {frenchPlural, messages_fr} from "./lang/Messages_fr"
+import {grammar_fr, messages_fr} from "./lang/Messages_fr"
 import {messages_en} from "./lang/Messages_en"
 import {OrganizationDescriptionOptions} from "./org/render/HTMLOrganizationRenderer"
 import {TimeRenderFormat} from "./time/Time"
@@ -22,7 +22,7 @@ const messagesByLang: KeyValue<Messages> = {fr: messages_fr, en: messages_en}
 
 const user = new User('fr')
 const messages = messagesByLang[user.locale]
-const translator = new Translator(user.locale, messages, frenchPlural)
+const translator = new Translator(user.locale, messages, grammar_fr)
 
 const hynek = new People(Gender.male, `Josef`, 'Hynek', `Allen`)
 const chicago = new City('Chicago', States.illinois)

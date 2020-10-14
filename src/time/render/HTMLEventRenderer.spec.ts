@@ -7,7 +7,7 @@ import {HTMLPeopleRenderer, PeopleNameFormat} from "../../people/render/HTMLPeop
 import {HTMLTimeRenderer} from "./HTMLTimeRenderer";
 import {HTMLPlaceRenderer} from "../../place/render/HTMLPlaceRenderer";
 import {HTMLOrganizationRenderer} from "../../org/render/HTMLOrganizationRenderer";
-import {frenchPlural, messages_fr} from "../../lang/Messages_fr";
+import {grammar_fr, messages_fr} from "../../lang/Messages_fr";
 import {TimeRenderFormat} from "../Time";
 import {HTMLOccupationRenderer} from "../people/occupation/HTMLOccupationRenderer";
 import {BirthEvent, BirthEventRenderOptions, OccupationFormat} from "../people/birth/BirthEvent";
@@ -21,7 +21,7 @@ import {States} from "../../place/state/States";
 const hynek = new People(Gender.male, 'Josef', 'Hynek', `Allen`)
 const chicago = new City('Chicago', States.illinois)
 
-const translator = new Translator('fr', messages_fr, frenchPlural);
+const translator = new Translator('fr', messages_fr, grammar_fr);
 const peopleRenderer = new HTMLPeopleRenderer(translator);
 const placeRenderer = new HTMLPlaceRenderer(translator);
 const timeRenderer = new HTMLTimeRenderer(translator);

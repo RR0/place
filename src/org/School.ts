@@ -2,9 +2,16 @@ import {Organization, OrganizationRenderer, OrganizationType} from "./Organizati
 import {OrganizationRenderOptions} from "./render/HTMLOrganizationRenderer";
 
 
+export enum SchoolType {
+  primary = 'primarySchool',
+  highSchool = 'highSchool',
+  university = 'university'
+}
+
+
 export class School extends Organization {
 
-  constructor(longName?: string, shortName?: string) {
+  constructor(readonly schoolType: SchoolType, longName?: string, shortName?: string) {
     super(OrganizationType.school, longName, shortName);
   }
 

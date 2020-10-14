@@ -2,16 +2,16 @@ import {Translator} from "../../lang/Translator";
 import {HTMLOrganizationRenderer, OrganizationDescriptionOptions} from "./HTMLOrganizationRenderer";
 import {Company} from "../Company";
 import {Army} from "../Army";
-import {frenchPlural, messages_fr} from "../../lang/Messages_fr";
+import {grammar_fr, messages_fr} from "../../lang/Messages_fr";
 import {HTMLPlaceRenderer} from "../../place/render/HTMLPlaceRenderer";
 import {FoundationEvent} from "../../time/org/foundation/FoundationEvent";
 import {BeforeTime} from "../../time/BeforeTime";
 import {DateTime} from "../../time/DateTime";
-import {School} from "../School";
+import {School, SchoolType} from "../School";
 import {Countries} from "../../place/country/Countries";
 
 
-const translator = new Translator('fr', messages_fr, frenchPlural);
+const translator = new Translator('fr', messages_fr, grammar_fr);
 const placeRenderer = new HTMLPlaceRenderer(translator);
 
 
@@ -58,7 +58,7 @@ test('render a school with long name', () => {
   translator.add(translator.messages.dict, key, 'Lycée technique Crane')
   const renderer = new HTMLOrganizationRenderer(translator, placeRenderer);
   {
-    const craneTech = new School(key);
+    const craneTech = new School(SchoolType.highSchool, key);
     {
       const html = craneTech.render(renderer, {
         name: {long: true, short: true},

@@ -1,3 +1,3 @@
 export interface StudyMessage {
-  school_verb: string
+  at_school_verb: string
 }

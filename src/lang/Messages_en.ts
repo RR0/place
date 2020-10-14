@@ -4,12 +4,22 @@ import {PlaceMessages} from "../place/PlaceMessages";
 import {TimeMessages} from "../time/TimeMessages";
 import {EventMessages} from "../time/EventMessages";
 import {OrgMessages} from "../org/OrgMessages";
-import {DictionaryMessages} from "./Translator";
+import {DictionaryMessages, Grammar} from "./Translator";
+import {Gender} from "../people/People";
 
 
-export function englishPlural(s: string) {
-  return s.endsWith('y') ? s.substring(0, s.length - 1) + 'ies' : s + 's'
+class EnglishGrammar implements Grammar {
+
+  plural(s: string) {
+    return s.endsWith('y') ? s.substring(0, s.length - 1) + 'ies' : s + 's'
+  }
+
+  at(s: string, gender: Gender): string {
+    return 'at the '
+  }
 }
+
+export const grammar_en = new EnglishGrammar()
 
 
 class EnglishMessages implements Messages {
@@ -21,8 +31,8 @@ class EnglishMessages implements Messages {
     company_nationality: 'a ${nationality} company',
     company_nationality_products: 'a ${nationality} company that sells ${products:plural}',
     long_school: '${long}',
-    school: 'une école',
-    army: 'armée',
+    school: 'school',
+    army: 'army',
   }
   place: PlaceMessages = {
     country: {
@@ -106,7 +116,7 @@ class EnglishMessages implements Messages {
         type: "for ${type}",
       },
       study: {
-        school_verb: "studies at ${school}",
+        at_school_verb: "studies ${at}${school}",
       }
     },
     org: {
@@ -120,8 +130,8 @@ class EnglishMessages implements Messages {
           company_nationality: 'a ${nationality} company',
           company_nationality_products: 'a ${nationality} company that sells ${products:plural}',
           long_school: '${long}',
-          school: 'une école',
-          army: 'armée',
+          school: 'school',
+          army: 'army',
         },
         founder: {
           anonymous: {
@@ -151,6 +161,12 @@ class EnglishMessages implements Messages {
     general: {
       male: 'general',
       female: 'general',
+    },
+    highSchool: {
+      neutral: 'high school'
+    },
+    primarySchool: {
+      neutral: 'school'
     },
     worker: {
       male: 'worker',

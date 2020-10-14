@@ -4,12 +4,22 @@ import {PlaceMessages} from "../place/PlaceMessages";
 import {TimeMessages} from "../time/TimeMessages";
 import {EventMessages} from "../time/EventMessages";
 import {OrgMessages} from "../org/OrgMessages";
-import {DictionaryMessages} from "./Translator";
+import {DictionaryMessages, Grammar} from "./Translator";
+import {Gender} from "../people/People";
 
 
-export function frenchPlural(s: string) {
-  return s.endsWith('al') ? s.substring(0, s.length - 2) + 'aux' : s + 's'
+class FrenchGrammar implements Grammar {
+
+  plural(s: string) {
+    return s.endsWith('al') ? s.substring(0, s.length - 2) + 'aux' : s + 's'
+  }
+
+  at(s: string, gender: Gender): string {
+    return 'aàâäéeêèiïîoôuùûy'.includes(s.charAt(0)) ? `à l'` : gender === Gender.male ? 'au ' : gender === Gender.female ? 'à la ' : 'à l'
+  }
 }
+
+export const grammar_fr = new FrenchGrammar()
 
 
 class FrenchMessages implements Messages {
@@ -21,7 +31,7 @@ class FrenchMessages implements Messages {
     company_nationality: 'une société ${nationality}',
     company_nationality_products: 'une société ${nationality} produisant des ${products:plural}',
     long_school: '${long}',
-    school: 'une école',
+    school: 'école',
     army: 'armée',
   }
   place: PlaceMessages = {
@@ -106,7 +116,7 @@ class FrenchMessages implements Messages {
         type: "dans ${type}",
       },
       study: {
-        school_verb: "étudie à ${school}",
+        at_school_verb: "étudie ${at}${school}",
       }
     },
     org: {
@@ -151,6 +161,12 @@ class FrenchMessages implements Messages {
     general: {
       male: 'général',
       female: 'générale'
+    },
+    highSchool: {
+      male: 'lycée'
+    },
+    primarySchool: {
+      female: 'école'
     },
     worker: {
       male: 'ouvrier',
