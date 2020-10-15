@@ -2,7 +2,7 @@
   "name": "@rr0/facts",
   "version": "0.1.1",
   "description": "Facts representation API",
-  "main": "dist/index.7aa186a7.js",
+  "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "license": "MIT",
   "homepage": "https://github.com/RR0/facts",
