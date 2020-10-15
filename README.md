@@ -2,7 +2,7 @@
 
 [![RR0](https://circleci.com/gh/RR0/facts.svg?style=svg)](https://app.circleci.com/pipelines/github/RR0/facts)
 
-Facts representation API
+Facts representation and rendering API
 
 ## Installation
 
@@ -10,8 +10,14 @@ Facts representation API
 npm install @rr0/facts --save
 ```
 
+## Design
+Once facts are represented using assembled business objects 
+(`Time`, `Place`, `People`, `Organization`, and several `Event` subtypes),
+they can be provided as parameters to some `Renderer`, which will use a `Translator` to convert them to text (or HTML
+ markup, etc.). 
+
 ## Example
-Let's say we want to render the timeline of some people:
+Say we want to render the timeline of some people:
 ```js
 import {
   Translator, grammar_fr,
@@ -23,7 +29,8 @@ import {
   User,
 } from '@rr0/facts';
 
-const hynek = new People(Gender.male, `Josef`, 'Hynek', `Allen`)
+// The timeline
+const hynek = new People(Gender.male, 'Josef', 'Hynek', 'Allen')
 const chicago = new City('Chicago', States.illinois)
 const birthDate = new DateTime(new Date(1910, 4, 1));
 const father = new People(Gender.male, 'Joseph')
@@ -36,12 +43,12 @@ hynek.events.add(new BirthEvent(hynek, birthDate, chicago, father, mother))
 const craneTech = new School(SchoolType.highSchool, 'craneTech')
 hynek.events.add(new StudyEvent(hynek, craneTech, new BeforeTime(new DateTime(new Date(1927, 1, 1)))))
 
+// The options
 const user = new User('fr');
 const language = languages[user.locale];
 const lang = new Translator(user.locale, messages_fr, grammar_fr);
 lang.add('craneTech', 'Lycée technique Crane');
 
-const docRenderer = new HTMLDocRenderer(lang);
 const orgOptions = {
   origin: true,
   name: {short: true, long: true},
@@ -109,9 +116,11 @@ const options: HTMLDocRenderOptions = {
   }
 };
 
+// The rendering
+const docRenderer = new HTMLDocRenderer(lang);
 const contentHTML = docRenderer.render(hynek, options);
 ```
-will produce some in `contentHTML` the HTML code:
+will return in `contentHTML` the HTML code:
 
 ```html
 <h1>Josef Allen Hynek</h1>
