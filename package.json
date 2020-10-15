@@ -1,6 +1,6 @@
 {
   "name": "@rr0/facts",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Facts representation API",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
