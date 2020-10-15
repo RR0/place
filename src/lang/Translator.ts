@@ -44,7 +44,7 @@ export class Translator<T extends KeyValue> {
   }
 
   translate(template: string, values: KeyValue = {}): string {
-    console.assert(template, 'Translation requires a template')
+    console.assert(Boolean(template), 'Translation requires a template')
     let translated = template
     for (const key in values) {
       if (values.hasOwnProperty(key)) {
