@@ -3,3 +3,4 @@
 .circleci
 .idea
 jest.config.js
+/src/**/*
