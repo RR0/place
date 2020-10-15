@@ -4,9 +4,25 @@
 
 Facts representation API
 
-## Example
+## Installation
 
+```
+npm install @rr0/facts --save
+```
+
+## Example
+Let's say we want to render the timeline of some people:
 ```js
+import {
+  Translator, grammar_fr,
+  HTML, HTMLDocRenderer, HTMLDocRenderOptions,
+  Language, messages_en, messages_fr,
+  OrganizationDescriptionOptions,
+  PeopleNameFormat,
+  TimeRenderFormat,
+  User,
+} from '@rr0/facts';
+
 const hynek = new People(Gender.male, `Josef`, 'Hynek', `Allen`)
 const chicago = new City('Chicago', States.illinois)
 const birthDate = new DateTime(new Date(1910, 4, 1));
@@ -101,4 +117,17 @@ will produce some in `contentHTML` the HTML code:
 <h1>Josef Allen Hynek</h1>
 <p>Hynek naît le dimanche 1 mai 1910 à Chicago (Illinois, États-Unis), fils de Joseph (tchécoslovaque)Joseph est ouvrier chez une société produisant des cigares et Bertha (tchécoslovaque).</p>
 <p>Il étudie au Lycée technique Crane.</p></div>
+```
+
+Change the parameters of the `Translator` to a `en` locale and to use 
+`messages_en`, and `grammar_en` and change the custom translation to:
+```
+lang.add('craneTech', 'Crane Tech high school');
+```
+then you will get instead:
+
+```html
+<h1>Josef Allen Hynek</h1>
+<p>Hynek was born on Sunday, May 1, 1910 at Chicago (Illinois, USA), son of Joseph (czechoslovak)Joseph is worker for a company that sells cigars and Bertha (czechoslovak).</p>
+<p>He studies at the Crane Tech high school.</p>
 ```
