@@ -8,18 +8,18 @@
   "homepage": "https://github.com/RR0/facts",
   "repository": "https://github.com/RR0/facts.git",
   "scripts": {
-    "build": "parcel build src/index.ts --no-scope-hoist",
+    "build": "parcel build src/index.ts --no-scope-hoist --no-source-maps",
     "prepare": "npm run build",
     "prepublishOnly": "npm test",
     "test": "jest"
   },
   "dependencies": {},
   "devDependencies": {
-    "parcel": "^2.0.0-beta.1",
+    "parcel": "2.0.0-beta.1",
     "@types/jest": "^26.0.14",
     "jest": "^26.4.2",
     "ts-jest": "^26.4.1",
-    "typescript": "^4.0.3"
+    "typescript": "4.0.3"
   },
   "keywords": [
     "facts",
