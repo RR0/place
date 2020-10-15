@@ -6,6 +6,7 @@ import {EventMessages} from "../time/EventMessages";
 import {OrgMessages} from "../org/OrgMessages";
 import {DictionaryMessages, Grammar} from "./Translator";
 import {Gender} from "../people/People";
+import {PeopleMessages} from "../people/PeopleMessages";
 
 
 class FrenchGrammar implements Grammar {
@@ -23,6 +24,13 @@ export const grammar_fr = new FrenchGrammar()
 
 
 class FrenchMessages implements Messages {
+  people: PeopleMessages = {
+    pronoun: {
+      male: 'il',
+      female: 'elle',
+      neutral: 'ça'
+    }
+  }
   org: OrgMessages = {
     short: '${short}',
     long: '${long}',
@@ -110,13 +118,15 @@ class FrenchMessages implements Messages {
         }
       },
       occupation: {
-        org_role_verb: "travaille comme ${role} pour ${org}",
-        org_verb: "travaille pour ${org}",
+        org_role_verb: "${who} travaille comme ${role} pour ${org}",
+        org_verb: "$travaille pour ${org}",
+        org_verb_who: "${who} travaille pour ${org}",
         org_role: "${role} pour ${org}",
-        type: "dans ${type}",
+        org_role_who: "${who} est ${role} chez ${org}",
       },
       study: {
         at_school_verb: "étudie ${at}${school}",
+        at_school_verb_who: "${who} étudie ${at}${school}",
       }
     },
     org: {

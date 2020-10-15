@@ -1,6 +1,6 @@
-import {People, PeopleRenderer} from "../People";
-import {Translator} from "../../lang/Translator";
-import {HTML, HTMLRenderer} from "../../HTMLRenderer";
+import {People, PeopleRenderer} from "../People"
+import {Translator} from "../../lang/Translator"
+import {HTML, HTMLRenderer} from "../../HTMLRenderer"
 
 
 export enum NameCase {
@@ -13,20 +13,20 @@ export enum NameCase {
 
 class NameCaseUtil {
 
-  static apply(name: string, cas: NameCase): string {
+  static render(name: string, cas: NameCase): string {
     switch (cas) {
       case NameCase.none:
         name = ''
-        break;
+        break
       case NameCase.camelCase:
         name = name.charAt(0).toLocaleUpperCase() + name.substring(1)
-        break;
+        break
       case NameCase.upperCase:
         name = name.toLocaleUpperCase()
-        break;
+        break
       case NameCase.initials:
         name = name.charAt(0).toLocaleUpperCase() + '.'
-        break;
+        break
     }
     return name
   }
@@ -34,7 +34,26 @@ class NameCaseUtil {
 
 export class PeopleNameFormat {
 
+  static readonly none: PeopleRenderOptions = {
+    pronoun: false,
+    name: {
+      first: NameCase.none,
+      middle: NameCase.none,
+      last: NameCase.none,
+    }
+  }
+
+  static readonly pronoun: PeopleRenderOptions = {
+    pronoun: true,
+    name: {
+      first: NameCase.none,
+      middle: NameCase.none,
+      last: NameCase.none,
+    }
+  }
+
   static readonly full: PeopleRenderOptions = {
+    pronoun: false,
     name: {
       first: NameCase.camelCase,
       middle: NameCase.camelCase,
@@ -43,6 +62,7 @@ export class PeopleNameFormat {
   }
 
   static readonly middleAbbreviated: PeopleRenderOptions = {
+    pronoun: false,
     name: {
       first: NameCase.camelCase,
       middle: NameCase.initials,
@@ -51,6 +71,7 @@ export class PeopleNameFormat {
   }
 
   static readonly lastName: PeopleRenderOptions = {
+    pronoun: false,
     name: {
       first: NameCase.none,
       middle: NameCase.none,
@@ -66,8 +87,8 @@ export interface PeopleNameRenderOptions {
   last: NameCase
 }
 
-
 export interface PeopleRenderOptions {
+  pronoun: boolean
   name: PeopleNameRenderOptions
 }
 
@@ -75,15 +96,21 @@ export interface PeopleRenderOptions {
 export class HTMLPeopleRenderer extends HTMLRenderer implements PeopleRenderer<HTML> {
 
   constructor(translator: Translator<any>) {
-    super(translator);
+    super(translator)
   }
 
   render(people: People, options: PeopleRenderOptions): HTML {
-    const nameOptions = options.name || {}
-    const firstName = people.firstName ? NameCaseUtil.apply(people.firstName, nameOptions.first) : ''
-    const middle = people.middleName ? NameCaseUtil.apply(people.middleName, nameOptions.middle) : ''
-    const last = people.lastName ? NameCaseUtil.apply(people.lastName, nameOptions.last) : ''
-    const first = `${firstName}${firstName && middle ? ' ' : ''}${middle}`
-    return `${first}${first && last ? ' ' : ''}${last}`
+    let rendered
+    if (options.pronoun) {
+      rendered = this.translator.translate(this.translator.messages.people.pronoun[people.gender])
+    } else {
+      const nameOptions = options.name
+      const firstName = people.firstName ? NameCaseUtil.render(people.firstName, nameOptions.first) : ''
+      const middle = people.middleName ? NameCaseUtil.render(people.middleName, nameOptions.middle) : ''
+      const last = people.lastName ? NameCaseUtil.render(people.lastName, nameOptions.last) : ''
+      const first = `${firstName}${firstName && middle ? ' ' : ''}${middle}`
+      rendered = `${first}${first && last ? ' ' : ''}${last}`
+    }
+    return rendered
   }
 }

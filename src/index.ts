@@ -7,7 +7,7 @@ import {grammar_en, messages_en} from "./lang/Messages_en"
 import {OrganizationDescriptionOptions} from "./org/render/HTMLOrganizationRenderer"
 import {TimeRenderFormat} from "./time/Time"
 import {KeyValue} from "./util/ObjectUtils"
-import {Language} from "./lang/Language";
+import {Language} from "./lang/Language"
 
 // import content from "./people/h/HynekJAllen"
 
@@ -16,8 +16,8 @@ const languages: KeyValue<Language> = {
   en: {messages: messages_en, grammar: grammar_en}
 }
 
-const user = new User('en')
-const language = languages[user.locale];
+const user = new User('fr')
+const language = languages[user.locale]
 const lang = new Translator(user.locale, language.messages, language.grammar)
 lang.add('craneTech', 'Lycée technique Crane')
 
@@ -27,20 +27,23 @@ const orgOptions = {
   name: {short: true, long: true},
   description: OrganizationDescriptionOptions.inline,
   types: {army: {}, company: {products: true}}
-};
-const timeOptions = TimeRenderFormat.fullDate;
-const peopleOptions = PeopleNameFormat.full;
+}
+const timeOptions = TimeRenderFormat.fullDate
+const peopleOptions = PeopleNameFormat.full
 const options: HTMLDocRenderOptions = {
   title: {
     name: peopleOptions.name
   },
   events: {
     birth: {
+      verb: true,
+      who: peopleOptions,
       time: timeOptions,
       people: PeopleNameFormat.lastName,
       parent: {
         people: peopleOptions,
         occupation: {
+          who: peopleOptions,
           time: timeOptions,
           verb: false,
           type: true,
@@ -50,6 +53,7 @@ const options: HTMLDocRenderOptions = {
       }
     },
     occupation: {
+      who: peopleOptions,
       time: timeOptions,
       verb: true,
       type: true,
@@ -57,8 +61,11 @@ const options: HTMLDocRenderOptions = {
       role: true
     },
     foundation: {
+      verb: true,
+      who: peopleOptions,
       founders: {
         occupation: {
+          who: peopleOptions,
           org: orgOptions,
           role: false,
           time: timeOptions,
@@ -72,6 +79,7 @@ const options: HTMLDocRenderOptions = {
       time: timeOptions
     },
     study: {
+      who: peopleOptions,
       org: orgOptions,
       role: false,
       time: timeOptions,

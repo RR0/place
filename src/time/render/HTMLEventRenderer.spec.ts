@@ -26,10 +26,10 @@ const peopleRenderer = new HTMLPeopleRenderer(translator);
 const placeRenderer = new HTMLPlaceRenderer(translator);
 const timeRenderer = new HTMLTimeRenderer(translator);
 const orgRenderer = new HTMLOrganizationRenderer(translator, placeRenderer);
-const occupationRenderer = new HTMLOccupationRenderer(translator, orgRenderer);
+const occupationRenderer = new HTMLOccupationRenderer(translator, orgRenderer, peopleRenderer);
 const birthEventRenderer = new HTMLBirthEventRenderer(translator, peopleRenderer, timeRenderer, placeRenderer, occupationRenderer);
 const foundationRenderer = new HTMLFoundationEventRenderer(translator, peopleRenderer, orgRenderer, timeRenderer, placeRenderer, occupationRenderer);
-const studyRenderer = new HTMLStudyRenderer(translator, orgRenderer);
+const studyRenderer = new HTMLStudyRenderer(translator, orgRenderer, peopleRenderer);
 const renderer = new HTMLEventRenderer(translator, placeRenderer, timeRenderer, occupationRenderer, birthEventRenderer, foundationRenderer, studyRenderer);
 
 
@@ -40,6 +40,8 @@ test('renders anonymous parents of same nationality', () => {
   mother.events.add(new BirthEvent(mother, undefined, Countries.cs))
   const birthEvent: BirthEvent = new BirthEvent(hynek, new DateTime(new Date(1910, 4, 1)), chicago, father, mother)
   const renderOptions: BirthEventRenderOptions = {
+    verb: true,
+    who: PeopleNameFormat.full,
     time: TimeRenderFormat.fullDate,
     people: PeopleNameFormat.middleAbbreviated,
     parent: {
@@ -59,6 +61,8 @@ test('renders anonymous parents of different nationality', () => {
   mother.events.add(new BirthEvent(mother, undefined, Countries.us))
   const birthEvent: BirthEvent = new BirthEvent(hynek, new DateTime(new Date(1910, 4, 1)), chicago, father, mother)
   const renderOptions: BirthEventRenderOptions = {
+    verb: true,
+    who: PeopleNameFormat.full,
     time: TimeRenderFormat.fullDate,
     people: PeopleNameFormat.middleAbbreviated,
     parent: {
@@ -78,6 +82,8 @@ test('renders parents of different nationality', () => {
   mother.events.add(new BirthEvent(mother, undefined, Countries.cs))
   const bornEvent: BirthEvent = new BirthEvent(hynek, new DateTime(new Date(1910, 4, 1)), chicago, father, mother)
   const renderOptions: BirthEventRenderOptions = {
+    verb: true,
+    who: PeopleNameFormat.full,
     time: TimeRenderFormat.fullDate,
     people: PeopleNameFormat.middleAbbreviated,
     parent: {

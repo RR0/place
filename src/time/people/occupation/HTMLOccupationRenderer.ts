@@ -3,21 +3,22 @@ import {OccupationEvent, OccupationEventRenderer, OccupationRenderOptions} from 
 import {Translator} from "../../../lang/Translator";
 import {OrganizationRenderer} from "../../../org/Organization";
 import {WithEventMessages} from "../../EventMessages";
+import {HTMLPeopleRenderer} from "../../../people/render/HTMLPeopleRenderer";
 
 
 export class HTMLOccupationRenderer extends HTMLRenderer implements OccupationEventRenderer<HTML> {
 
-  constructor(translator: Translator<WithEventMessages>, private orgRenderer: OrganizationRenderer<HTML>) {
+  constructor(translator: Translator<WithEventMessages>, private orgRenderer: OrganizationRenderer<HTML>, private peopleRenderer: HTMLPeopleRenderer) {
     super(translator)
   }
 
   renderOccupation(occupation: OccupationEvent, options: OccupationRenderOptions): HTML {
     const values: any = {}
+    values.who = this.peopleRenderer.render(occupation.who, options.who)
     if (options.role) {
       const role = occupation.role;
       if (role) {
-        const gender = occupation.who.gender
-        values.role = this.translator.translate(this.translator.messages.dict[role][gender])
+        values.role = this.translator.translate(this.translator.messages.dict[role][occupation.who.gender])
       }
     }
     if (options.org) {
@@ -27,7 +28,6 @@ export class HTMLOccupationRenderer extends HTMLRenderer implements OccupationEv
       }
     }
     const key = this.translator.compoundKey(Object.keys(values).concat(options.verb ? 'verb' : []))
-    const occupationMsg = this.translator.messages.event.people.occupation
-    return this.translator.translate(occupationMsg[key], values)
+    return this.translator.translateKey(this.translator.messages.event.people.occupation, key, values)
   }
 }

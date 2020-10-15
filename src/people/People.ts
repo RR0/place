@@ -11,6 +11,7 @@ export enum Gender {
 
 
 export interface PeopleRenderer<R> {
+
   render(people: People, options: PeopleRenderOptions): R
 }
 

@@ -6,6 +6,7 @@ import {EventMessages} from "../time/EventMessages";
 import {OrgMessages} from "../org/OrgMessages";
 import {DictionaryMessages, Grammar} from "./Translator";
 import {Gender} from "../people/People";
+import {PeopleMessages} from "../people/PeopleMessages";
 
 
 class EnglishGrammar implements Grammar {
@@ -23,6 +24,13 @@ export const grammar_en = new EnglishGrammar()
 
 
 class EnglishMessages implements Messages {
+  people: PeopleMessages = {
+    pronoun: {
+      male: 'he',
+      female: 'she',
+      neutral: 'it'
+    }
+  }
   org: OrgMessages = {
     short: '${short}',
     long: '${long}',
@@ -110,13 +118,15 @@ class EnglishMessages implements Messages {
         }
       },
       occupation: {
-        org_role_verb: "work as ${role} for ${org}",
-        org_verb: "work for ${org}",
+        org_role_verb: "works as ${role} for ${org}",
+        org_verb: "works for ${org}",
+        org_verb_who: "${who} works for ${org}",
         org_role: "${role} for ${org}",
-        type: "for ${type}",
+        org_role_who: "${who} is ${role} for ${org}",
       },
       study: {
         at_school_verb: "studies ${at}${school}",
+        at_school_verb_who: "${who} studies ${at}${school}",
       }
     },
     org: {

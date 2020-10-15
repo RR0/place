@@ -4,6 +4,7 @@ import {BirthEventRenderer} from "./people/birth/BirthEvent";
 import {OccupationEventRenderer} from "./people/occupation/OccupationEvent";
 import {FoundationEventRenderer} from "./org/foundation/FoundationEvent";
 import {StudyEventRenderer} from "./people/study/StudyEvent";
+import {PeopleRenderOptions} from "../people/render/HTMLPeopleRenderer";
 
 
 export enum RR0EventType {
@@ -23,7 +24,9 @@ export interface EventRenderer<R> extends BirthEventRenderer<R>, OccupationEvent
 
 
 export interface EventRenderOptions {
+  who: PeopleRenderOptions
   time: TimeRenderOptions
+  verb: boolean
 }
 
 

@@ -4,16 +4,18 @@ import {Translator} from "../../../lang/Translator";
 import {OrganizationRenderer} from "../../../org/Organization";
 import {WithEventMessages} from "../../EventMessages";
 import {StringUtils} from "../../../util/StringUtils";
+import {HTMLPeopleRenderer} from "../../../people/render/HTMLPeopleRenderer";
 
 
 export class HTMLStudyRenderer extends HTMLRenderer implements StudyEventRenderer<HTML> {
 
-  constructor(translator: Translator<WithEventMessages>, private orgRenderer: OrganizationRenderer<HTML>) {
+  constructor(translator: Translator<WithEventMessages>, private orgRenderer: OrganizationRenderer<HTML>, private peopleRenderer: HTMLPeopleRenderer) {
     super(translator)
   }
 
   renderStudy(study: StudyEvent, options: StudyRenderOptions): HTML {
     const values: any = {}
+    values.who = this.peopleRenderer.render(study.who, options.who)
     const school = study.school;
     if (school) {
       values.school = school.render(this.orgRenderer, options.org)
