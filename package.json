@@ -8,7 +8,7 @@
   "homepage": "https://github.com/RR0/facts",
   "repository": "https://github.com/RR0/facts.git",
   "scripts": {
-    "build": "parcel build src/index.ts --no-scope-hoist --no-source-maps",
+    "build": "parcel build src/index.ts --no-scope-hoist",
     "prepare": "npm run build",
     "prepublishOnly": "npm test",
     "test": "jest"
