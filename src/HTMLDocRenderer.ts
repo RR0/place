@@ -40,9 +40,13 @@ export class HTMLDocRenderer extends HTMLRenderer {
   }
 
   render(people: People, options: HTMLDocRenderOptions): HTML {
-    const titleHTML = this.h1(this.peopleRenderer.render(people, PeopleNameFormat.full));
+    const titleHTML = this.renderTitle(people);
     const bioHTML = this.renderEvents(people, options.events);
     return titleHTML + bioHTML;
+  }
+
+  private renderTitle(people: People) {
+    return this.h1(this.peopleRenderer.render(people, PeopleNameFormat.full));
   }
 
   private renderEvents(people: People, options: TimelineRenderOptions): HTML {

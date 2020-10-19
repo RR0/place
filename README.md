@@ -130,7 +130,7 @@ will return in `contentHTML` the HTML code:
 
 Change the parameters of the `Translator` to a `en` locale and to use 
 `messages_en`, and `grammar_en` and change the custom translation to:
-```
+```js
 lang.add('craneTech', 'Crane Tech high school');
 ```
 then you will get instead:

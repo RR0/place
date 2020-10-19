@@ -7,7 +7,10 @@
   "types": "dist/index.d.ts",
   "license": "MIT",
   "homepage": "https://github.com/RR0/facts",
-  "repository": "https://github.com/RR0/facts.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RR0/facts.git"
+  },
   "scripts": {
     "build": "parcel build src/index.ts --no-scope-hoist",
     "prepare": "npm run build",
