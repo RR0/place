@@ -1,7 +1,7 @@
 {
   "name": "@rr0/facts",
   "author": "Jérôme Beau",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Facts representation API",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
