@@ -4,23 +4,8 @@ import {PlaceMessages} from "../place/PlaceMessages";
 import {TimeMessages} from "../time/TimeMessages";
 import {EventMessages} from "../time/EventMessages";
 import {OrgMessages} from "../org/OrgMessages";
-import {DictionaryMessages, Grammar} from "./Translator";
-import {Gender} from "../people/People";
 import {PeopleMessages} from "../people/PeopleMessages";
-
-
-class EnglishGrammar implements Grammar {
-
-  plural(s: string) {
-    return s.endsWith('y') ? s.substring(0, s.length - 1) + 'ies' : s + 's'
-  }
-
-  at(s: string, gender: Gender): string {
-    return 'at the '
-  }
-}
-
-export const grammar_en = new EnglishGrammar()
+import {KeyValue} from "@rr0/common";
 
 
 class EnglishMessages implements Messages {
@@ -161,7 +146,7 @@ class EnglishMessages implements Messages {
   time: TimeMessages = {
     before: 'before ${date}'
   }
-  dict: DictionaryMessages = {
+  dict: KeyValue = {
     cigar: {
       neutral: 'cigar',
     },

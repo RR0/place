@@ -1,4 +1,3 @@
-import {Translator} from "../../lang/Translator"
 import {EventRenderer, EventRenderOptions, RR0Event} from "../Event"
 import {HTML, HTMLRenderer} from "../../HTMLRenderer"
 import {PlaceRenderer} from "../../place/Place";
@@ -12,6 +11,7 @@ import {
   FoundationEventRenderOptions
 } from "../org/foundation/FoundationEvent";
 import {StudyEvent, StudyEventRenderer, StudyRenderOptions} from "../people/study/StudyEvent";
+import {Translation} from "@rr0/lang";
 
 
 /**
@@ -19,7 +19,7 @@ import {StudyEvent, StudyEventRenderer, StudyRenderOptions} from "../people/stud
  */
 export class HTMLEventRenderer extends HTMLRenderer implements EventRenderer<HTML> {
   constructor(
-    translator: Translator<WithEventMessages>,
+    translation: Translation<WithEventMessages>,
     private placeRenderer: PlaceRenderer<HTML>,
     private timeRenderer: TimeRenderer<HTML>,
     private occupationRenderer: OccupationEventRenderer<HTML>,
@@ -27,11 +27,11 @@ export class HTMLEventRenderer extends HTMLRenderer implements EventRenderer<HTM
     private foundationRenderer: FoundationEventRenderer<HTML>,
     private studyRenderer: StudyEventRenderer<HTML>,
   ) {
-    super(translator)
+    super(translation)
   }
 
   render(event: RR0Event, options: EventRenderOptions): HTML {
-    return this.translator.translate(this.translator.messages.event.default, {
+    return this.translation.translate(this.translation.messages.event.default, {
       when: event.when ? event.when.render(this.timeRenderer, options.time) : '',
       where: event.where ? event.where.render(this.placeRenderer) : '',
       type: event.type

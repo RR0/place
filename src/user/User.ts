@@ -1,5 +1,5 @@
 import {Gender, People} from "..";
-import {UserPreferences} from "./UserPreferences";
+import {UserPreferences} from "@rr0/common";
 
 export class User extends People {
 

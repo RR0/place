@@ -1,6 +1,6 @@
 import {People, PeopleRenderer} from "../People"
-import {Translator} from "../../lang/Translator"
 import {HTML, HTMLRenderer} from "../../HTMLRenderer"
+import {Translation} from "@rr0/lang";
 
 
 export enum NameCase {
@@ -95,14 +95,14 @@ export interface PeopleRenderOptions {
 
 export class HTMLPeopleRenderer extends HTMLRenderer implements PeopleRenderer<HTML> {
 
-  constructor(translator: Translator<any>) {
-    super(translator)
+  constructor(translation: Translation<any>) {
+    super(translation)
   }
 
   render(people: People, options: PeopleRenderOptions): HTML {
     let rendered
     if (options.pronoun) {
-      rendered = this.translator.translate(this.translator.messages.people.pronoun[people.gender])
+      rendered = this.translation.translate(this.translation.messages.people.pronoun[people.gender])
     } else {
       const nameOptions = options.name
       const firstName = people.firstName ? NameCaseUtil.render(people.firstName, nameOptions.first) : ''

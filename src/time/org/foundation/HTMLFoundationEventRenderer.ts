@@ -1,4 +1,3 @@
-import {Translator} from "../../../lang/Translator";
 import {TimeRenderer} from "../../Time";
 import {People, PeopleRenderer} from "../../../people/People";
 import {Country} from "../../../place/country/Country";
@@ -8,26 +7,27 @@ import {FoundationEvent, FoundationEventRenderer, FoundationEventRenderOptions} 
 import {OccupationEvent, OccupationEventRenderer} from "../../people/occupation/OccupationEvent";
 import {Organization, OrganizationRenderer} from "../../../org/Organization";
 import {WithEventMessages} from "../../EventMessages";
+import {Translation} from "@rr0/lang";
 
 export class HTMLFoundationEventRenderer extends HTMLRenderer implements FoundationEventRenderer<HTML> {
 
   constructor(
-    translator: Translator<WithEventMessages>,
+    translation: Translation<WithEventMessages>,
     private peopleRenderer: PeopleRenderer<HTML>,
     private orgRenderer: OrganizationRenderer<HTML>,
     private timeRenderer: TimeRenderer<HTML>,
     private placeRenderer: PlaceRenderer<HTML>,
     private occupationRenderer: OccupationEventRenderer<HTML>,
   ) {
-    super(translator);
+    super(translation);
   }
 
   renderFoundation(foundation: FoundationEvent, options: FoundationEventRenderOptions): HTML {
     const foundationPlace = foundation.where
     const foundationTime = foundation.when
     const newOrg = foundation.org
-    const foundationMsg = this.translator.messages.event.org.foundation
-    const born = this.translator.translate(foundationMsg.label, {
+    const foundationMsg = this.translation.messages.event.org.foundation
+    const born = this.translation.translate(foundationMsg.label, {
       org: this.orgRenderer.render(newOrg, options.organization),
       when: foundationTime ? foundationTime.render(this.timeRenderer, options.time) : '',
       where: foundationPlace ? foundationPlace.render(this.placeRenderer) : '',
@@ -80,7 +80,7 @@ export class HTMLFoundationEventRenderer extends HTMLRenderer implements Foundat
         founderNationality += ` (${nationality})`
       }
     } else if (nationality) {
-      founderNationality += this.translator.translate(this.translator.messages.event.org.foundation.founder.anonymous.nationality, {nationality})
+      founderNationality += this.translation.translate(this.translation.messages.event.org.foundation.founder.anonymous.nationality, {nationality})
     }
     return founderNationality
   }
@@ -98,7 +98,7 @@ export class HTMLFoundationEventRenderer extends HTMLRenderer implements Foundat
     const founderFoundationCountry = org.firstCountry
     let nationality = ''
     if (foundationCountry !== founderFoundationCountry) {
-      const orgGender = this.translator.getGender(this.translator.messages.dict[org.type]);
+      const orgGender = this.translation.getGender(this.translation.messages.dict[org.type]);
       nationality += founderFoundationCountry?.renderNationality(this.placeRenderer, orgGender)
     }
     return nationality

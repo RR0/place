@@ -1,5 +1,4 @@
 import {BirthEvent, BirthEventRenderer, BirthEventRenderOptions} from "./BirthEvent";
-import {Translator} from "../../../lang/Translator";
 import {TimeRenderer} from "../../Time";
 import {Gender, People, PeopleRenderer} from "../../../people/People";
 import {OccupationEvent, OccupationEventRenderer} from "../occupation/OccupationEvent";
@@ -7,25 +6,26 @@ import {Country} from "../../../place/country/Country";
 import {HTML, HTMLRenderer} from "../../../HTMLRenderer";
 import {Place, PlaceRenderer} from "../../../place/Place";
 import {WithEventMessages} from "../../EventMessages";
+import {Translation} from "@rr0/lang";
 
 export class HTMLBirthEventRenderer extends HTMLRenderer implements BirthEventRenderer<HTML> {
 
   constructor(
-    translator: Translator<WithEventMessages>,
+    translation: Translation<WithEventMessages>,
     private peopleRenderer: PeopleRenderer<HTML>,
     private timeRenderer: TimeRenderer<HTML>,
     private placeRenderer: PlaceRenderer<HTML>,
     private occupationRenderer: OccupationEventRenderer<HTML>,
   ) {
-    super(translator);
+    super(translation);
   }
 
   renderBirth(birth: BirthEvent, options: BirthEventRenderOptions): HTML {
     const birthPlace = birth.where
     const birthTime = birth.when
     const baby = birth.who
-    const bornMsg = this.translator.messages.event.people.born
-    const born = this.translator.translate(bornMsg.label, {
+    const bornMsg = this.translation.messages.event.people.born
+    const born = this.translation.translate(bornMsg.label, {
       who: this.peopleRenderer.render(baby, options.people),
       when: birthTime ? birthTime.render(this.timeRenderer, options.time) : '',
       where: birthPlace ? birthPlace.render(this.placeRenderer) : '',
@@ -52,10 +52,10 @@ export class HTMLBirthEventRenderer extends HTMLRenderer implements BirthEventRe
         motherNationality = this.nationality(mother, birthCountry)
       }
     }
-    const bornMsg = this.translator.messages.event.people.born
+    const bornMsg = this.translation.messages.event.people.born
     let parents = ''
     if (fatherName || motherName) {
-      parents += this.translator.translate(bornMsg.child[baby.gender])
+      parents += this.translation.translate(bornMsg.child[baby.gender])
       parents += this.parentNationality(fatherName, fatherNationality, father?.gender)
       const occupations = father!.events.findOfType(OccupationEvent);
       if (occupations.length > 0) {
@@ -71,15 +71,15 @@ export class HTMLBirthEventRenderer extends HTMLRenderer implements BirthEventRe
         }
       }
       if (fatherName && motherName) {
-        parents += this.translator.translate(bornMsg.parents.and)
+        parents += this.translation.translate(bornMsg.parents.and)
       }
       parents += this.parentNationality(motherName, motherNationality, mother?.gender)
     } else {
       const anonParentsMsg = bornMsg.parents.anonymous
       if (fatherNationality === motherNationality) {
-        parents += this.translator.translate(anonParentsMsg.nationality, {nationality: fatherNationality})
+        parents += this.translation.translate(anonParentsMsg.nationality, {nationality: fatherNationality})
       } else {
-        parents += this.translator.translate(anonParentsMsg.nationalities, {fatherNationality, motherNationality})
+        parents += this.translation.translate(anonParentsMsg.nationalities, {fatherNationality, motherNationality})
       }
     }
     return parents;
@@ -93,7 +93,7 @@ export class HTMLBirthEventRenderer extends HTMLRenderer implements BirthEventRe
         parentNationality += ` (${nationality})`
       }
     } else if (nationality) {
-      parentNationality += this.translator.translate(this.translator.messages.event.born[gender === Gender.male ? 'father' : 'mother'].anonymous.nationality, {nationality})
+      parentNationality += this.translation.translate(this.translation.messages.event.born[gender === Gender.male ? 'father' : 'mother'].anonymous.nationality, {nationality})
     }
     return parentNationality
   }

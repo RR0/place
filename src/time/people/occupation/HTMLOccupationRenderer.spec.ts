@@ -1,4 +1,3 @@
-import {Translator} from "../../../lang/Translator";
 import {HTMLOrganizationRenderer, OrganizationDescriptionOptions} from "../../../org/render/HTMLOrganizationRenderer";
 import {Company} from "../../../org/Company";
 import {OccupationEvent, OccupationRenderOptions, OccupationRole} from "./OccupationEvent";
@@ -7,15 +6,16 @@ import {DateTime} from "../../DateTime";
 import {TimeRenderFormat} from "../../Time";
 import {HTMLOccupationRenderer} from "./HTMLOccupationRenderer";
 import {BeforeTime} from "../../BeforeTime";
-import {grammar_fr, messages_fr} from "../../../lang/Messages_fr";
+import {messages_fr} from "../../../lang/Messages_fr";
 import {HTMLPlaceRenderer} from "../../../place/render/HTMLPlaceRenderer";
 import {Countries} from "../../../place/country/Countries";
 import {HTMLPeopleRenderer, PeopleNameFormat} from "../../../people/render/HTMLPeopleRenderer";
+import {grammar_fr, Translation} from "@rr0/lang";
 
 
-const translator = new Translator('fr', messages_fr, grammar_fr);
-const peopleRenderer = new HTMLPeopleRenderer(translator);
-const organizationRenderer = new HTMLOrganizationRenderer(translator, new HTMLPlaceRenderer(translator));
+const translation = new Translation('fr', grammar_fr, messages_fr);
+const peopleRenderer = new HTMLPeopleRenderer(translation);
+const organizationRenderer = new HTMLOrganizationRenderer(translation, new HTMLPlaceRenderer(translation));
 
 const father = new People(Gender.male);
 const birthdate = new Date(1910, 4, 1);
@@ -39,7 +39,7 @@ test('renders an occupation for an anonymous company', () => {
 
   const occupationEvent = new OccupationEvent(father, OccupationRole.worker, cigarFactory, new BeforeTime(new DateTime(birthdate)), Countries.cs);
 
-  const renderer = new HTMLOccupationRenderer(translator, organizationRenderer, peopleRenderer);
+  const renderer = new HTMLOccupationRenderer(translation, organizationRenderer, peopleRenderer);
   const found = occupationEvent.render(renderer, renderOptions)
 
   expect(found).toBe('il travaille pour une société produisant des cigares')
@@ -64,7 +64,7 @@ test('renders an occupation role for an anonymous company', () => {
 
   const occupationEvent = new OccupationEvent(father, OccupationRole.worker, cigarFactory, new BeforeTime(new DateTime(birthdate)), Countries.cs);
 
-  const renderer = new HTMLOccupationRenderer(translator, organizationRenderer, peopleRenderer);
+  const renderer = new HTMLOccupationRenderer(translation, organizationRenderer, peopleRenderer);
   const found = occupationEvent.render(renderer, renderOptions)
 
   expect(found).toBe('il est ouvrier chez une société produisant des cigares')

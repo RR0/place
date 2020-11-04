@@ -1,17 +1,17 @@
-import {Translator} from "../../lang/Translator";
-import {grammar_fr, messages_fr} from "../../lang/Messages_fr";
+import {messages_fr} from "../../lang/Messages_fr";
 import {HTMLTimeRenderer} from "./HTMLTimeRenderer";
 import {DateTime} from "../DateTime";
 import {TimeRenderFormat, TimeRenderOptions} from "../Time";
 import {BeforeTime} from "../BeforeTime";
+import {grammar_fr, Translation} from "@rr0/lang";
 
 
-const translator = new Translator('fr', messages_fr, grammar_fr);
+const translation = new Translation('fr', grammar_fr, messages_fr);
 
 
 test('renders date', () => {
   const dateTime = new DateTime(new Date(1910, 4, 1))
-  const renderer = new HTMLTimeRenderer(translator)
+  const renderer = new HTMLTimeRenderer(translation)
   const options: TimeRenderOptions = TimeRenderFormat.fullDate
   const renderedTime = dateTime.render(renderer, options)
 
@@ -21,7 +21,7 @@ test('renders date', () => {
 
 test('renders none', () => {
   const dateTime = new DateTime(new Date(1910, 4, 1))
-  const renderer = new HTMLTimeRenderer(translator)
+  const renderer = new HTMLTimeRenderer(translation)
   const options: TimeRenderOptions = TimeRenderFormat.none
   const renderedTime = dateTime.render(renderer, options)
 
@@ -31,7 +31,7 @@ test('renders none', () => {
 
 test('renders before date', () => {
   const beforeTime = new BeforeTime(new DateTime(new Date(1910, 4, 1)))
-  const renderer = new HTMLTimeRenderer(translator)
+  const renderer = new HTMLTimeRenderer(translation)
   const options: TimeRenderOptions = TimeRenderFormat.fullDate
   const renderedTime = beforeTime.render(renderer, options)
 

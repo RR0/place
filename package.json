@@ -17,7 +17,10 @@
     "prepublishOnly": "npm test",
     "test": "jest"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@rr0/common": "^0.1.4",
+    "@rr0/lang": "^0.1.4"
+  },
   "devDependencies": {
     "parcel": "2.0.0-beta.1",
     "@types/jest": "^26.0.14",

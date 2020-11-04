@@ -4,24 +4,8 @@ import {PlaceMessages} from "../place/PlaceMessages";
 import {TimeMessages} from "../time/TimeMessages";
 import {EventMessages} from "../time/EventMessages";
 import {OrgMessages} from "../org/OrgMessages";
-import {DictionaryMessages, Grammar} from "./Translator";
-import {Gender} from "../people/People";
 import {PeopleMessages} from "../people/PeopleMessages";
-
-
-class FrenchGrammar implements Grammar {
-
-  plural(s: string) {
-    return s.endsWith('al') ? s.substring(0, s.length - 2) + 'aux' : s + 's'
-  }
-
-  at(s: string, gender: Gender): string {
-    return 'aàâäéeêèiïîoôuùûy'.includes(s.charAt(0)) ? `à l'` : gender === Gender.male ? 'au ' : gender === Gender.female ? 'à la ' : 'à l'
-  }
-}
-
-export const grammar_fr = new FrenchGrammar()
-
+import {KeyValue} from "@rr0/common";
 
 class FrenchMessages implements Messages {
   people: PeopleMessages = {
@@ -161,7 +145,7 @@ class FrenchMessages implements Messages {
   time: TimeMessages = {
     before: 'avant le ${date}'
   }
-  dict: DictionaryMessages = {
+  dict: KeyValue = {
     cigar: {
       male: 'cigare',
     },

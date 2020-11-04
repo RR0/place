@@ -1,6 +1,4 @@
 export * from "./user/User"
-export * from "./lang/Language"
-export * from "./lang/Translator"
 export * from "./lang/Messages_fr"
 export * from "./lang/Messages_en"
 export * from "./people/People"

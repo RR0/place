@@ -1,14 +1,9 @@
 import {PeopleNameFormat} from "./people/render/HTMLPeopleRenderer";
-import {Translator} from "./lang/Translator";
 import {Gender, People} from "./people/People";
 import {OrganizationDescriptionOptions} from "./org/render/HTMLOrganizationRenderer";
 import {HTMLDocRenderer, HTMLDocRenderOptions} from "./HTMLDocRenderer";
-import {KeyValue} from "./util/ObjectUtils";
 import {User} from "./user/User";
 import {TimeRenderFormat} from "./time/Time";
-import {Language} from "./lang/Language";
-import {grammar_en, messages_en} from "./lang/Messages_en";
-import {grammar_fr, messages_fr} from "./lang/Messages_fr";
 import {States} from "./place/state/States";
 import {Company} from "./org/Company";
 import {School, SchoolType} from "./org/School";
@@ -19,6 +14,10 @@ import {City} from "./place/City";
 import {OccupationEvent, OccupationRole} from "./time/people/occupation/OccupationEvent";
 import {DateTime} from "./time/DateTime";
 import {BirthEvent} from "./time/people/birth/BirthEvent";
+import {KeyValue} from "@rr0/common";
+import {grammar_en, grammar_fr, Language, Translation} from "@rr0/lang";
+import {messages_fr} from "./lang/Messages_fr";
+import {messages_en} from "./lang/Messages_en";
 
 
 const languages: KeyValue<Language> = {
@@ -117,7 +116,7 @@ test('Renders a people bio in english', () => {
   const user = new User(preferences, Gender.neutral, 'Jérôme', 'Beau');
   const userLocale = user.preferences.locale;
   const language = languages[userLocale];
-  const lang = new Translator(userLocale, language.messages, language.grammar);
+  const lang = new Translation(userLocale, language.grammar, language.messages);
 
   lang.add('craneTech', 'Lycée technique Crane');
 
@@ -135,7 +134,7 @@ test('Renders a people bio in french', () => {
   const user = new User(preferences, Gender.neutral, 'Jérôme', 'Beau');
   const userLocale = user.preferences.locale;
   const language = languages[userLocale];
-  const lang = new Translator(userLocale, language.messages, language.grammar);
+  const lang = new Translation(userLocale, language.grammar, language.messages);
 
   lang.add('craneTech', 'Lycée technique Crane');
 

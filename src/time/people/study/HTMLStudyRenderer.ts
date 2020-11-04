@@ -1,16 +1,16 @@
 import {HTML, HTMLRenderer} from "../../../HTMLRenderer";
 import {StudyEvent, StudyEventRenderer, StudyRenderOptions} from "./StudyEvent";
-import {Translator} from "../../../lang/Translator";
 import {OrganizationRenderer} from "../../../org/Organization";
 import {WithEventMessages} from "../../EventMessages";
-import {StringUtils} from "../../../util/StringUtils";
 import {HTMLPeopleRenderer} from "../../../people/render/HTMLPeopleRenderer";
+import {Translation} from "@rr0/lang";
+import {StringUtils} from "@rr0/common";
 
 
 export class HTMLStudyRenderer extends HTMLRenderer implements StudyEventRenderer<HTML> {
 
-  constructor(translator: Translator<WithEventMessages>, private orgRenderer: OrganizationRenderer<HTML>, private peopleRenderer: HTMLPeopleRenderer) {
-    super(translator)
+  constructor(translation: Translation<WithEventMessages>, private orgRenderer: OrganizationRenderer<HTML>, private peopleRenderer: HTMLPeopleRenderer) {
+    super(translation)
   }
 
   renderStudy(study: StudyEvent, options: StudyRenderOptions): HTML {
@@ -20,7 +20,7 @@ export class HTMLStudyRenderer extends HTMLRenderer implements StudyEventRendere
     if (school) {
       values.school = school.render(this.orgRenderer, options.org)
     }
-    const translator = this.translator;
+    const translator = this.translation;
     const schoolStr = values.school;
     if (schoolStr) {
       const schoolType = school.schoolType

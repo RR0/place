@@ -1,15 +1,15 @@
 import {HTML, HTMLRenderer} from "../../../HTMLRenderer";
 import {OccupationEvent, OccupationEventRenderer, OccupationRenderOptions} from "./OccupationEvent";
-import {Translator} from "../../../lang/Translator";
 import {OrganizationRenderer} from "../../../org/Organization";
 import {WithEventMessages} from "../../EventMessages";
 import {HTMLPeopleRenderer} from "../../../people/render/HTMLPeopleRenderer";
+import {Translation} from "@rr0/lang";
 
 
 export class HTMLOccupationRenderer extends HTMLRenderer implements OccupationEventRenderer<HTML> {
 
-  constructor(translator: Translator<WithEventMessages>, private orgRenderer: OrganizationRenderer<HTML>, private peopleRenderer: HTMLPeopleRenderer) {
-    super(translator)
+  constructor(translation: Translation<WithEventMessages>, private orgRenderer: OrganizationRenderer<HTML>, private peopleRenderer: HTMLPeopleRenderer) {
+    super(translation)
   }
 
   renderOccupation(occupation: OccupationEvent, options: OccupationRenderOptions): HTML {
@@ -18,7 +18,7 @@ export class HTMLOccupationRenderer extends HTMLRenderer implements OccupationEv
     if (options.role) {
       const role = occupation.role;
       if (role) {
-        values.role = this.translator.translate(this.translator.messages.dict[role][occupation.who.gender])
+        values.role = this.translation.translate(this.translation.messages.dict[role][occupation.who.gender])
       }
     }
     if (options.org) {
@@ -27,7 +27,7 @@ export class HTMLOccupationRenderer extends HTMLRenderer implements OccupationEv
         values.org = org.render(this.orgRenderer, options.org)
       }
     }
-    const key = this.translator.compoundKey(Object.keys(values).concat(options.verb ? 'verb' : []))
-    return this.translator.translateKey(this.translator.messages.event.people.occupation, key, values)
+    const key = this.translation.compoundKey(Object.keys(values).concat(options.verb ? 'verb' : []))
+    return this.translation.translateKey(this.translation.messages.event.people.occupation, key, values)
   }
 }

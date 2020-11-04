@@ -2,12 +2,11 @@ import {Gender, People} from "../../people/People";
 import {City} from "../../place/City";
 import {DateTime} from "../DateTime";
 import {HTMLEventRenderer} from "./HTMLEventRenderer";
-import {Translator} from "../../lang/Translator";
 import {HTMLPeopleRenderer, PeopleNameFormat} from "../../people/render/HTMLPeopleRenderer";
 import {HTMLTimeRenderer} from "./HTMLTimeRenderer";
 import {HTMLPlaceRenderer} from "../../place/render/HTMLPlaceRenderer";
 import {HTMLOrganizationRenderer} from "../../org/render/HTMLOrganizationRenderer";
-import {grammar_fr, messages_fr} from "../../lang/Messages_fr";
+import {messages_fr} from "../../lang/Messages_fr";
 import {TimeRenderFormat} from "../Time";
 import {HTMLOccupationRenderer} from "../people/occupation/HTMLOccupationRenderer";
 import {BirthEvent, BirthEventRenderOptions, OccupationFormat} from "../people/birth/BirthEvent";
@@ -16,21 +15,22 @@ import {HTMLFoundationEventRenderer} from "../org/foundation/HTMLFoundationEvent
 import {HTMLStudyRenderer} from "../people/study/HTMLStudyRenderer";
 import {Countries} from "../../place/country/Countries";
 import {States} from "../../place/state/States";
+import {grammar_fr, Translation} from "@rr0/lang";
 
 
 const hynek = new People(Gender.male, 'Josef', 'Hynek', `Allen`)
 const chicago = new City('Chicago', States.illinois)
 
-const translator = new Translator('fr', messages_fr, grammar_fr);
-const peopleRenderer = new HTMLPeopleRenderer(translator);
-const placeRenderer = new HTMLPlaceRenderer(translator);
-const timeRenderer = new HTMLTimeRenderer(translator);
-const orgRenderer = new HTMLOrganizationRenderer(translator, placeRenderer);
-const occupationRenderer = new HTMLOccupationRenderer(translator, orgRenderer, peopleRenderer);
-const birthEventRenderer = new HTMLBirthEventRenderer(translator, peopleRenderer, timeRenderer, placeRenderer, occupationRenderer);
-const foundationRenderer = new HTMLFoundationEventRenderer(translator, peopleRenderer, orgRenderer, timeRenderer, placeRenderer, occupationRenderer);
-const studyRenderer = new HTMLStudyRenderer(translator, orgRenderer, peopleRenderer);
-const renderer = new HTMLEventRenderer(translator, placeRenderer, timeRenderer, occupationRenderer, birthEventRenderer, foundationRenderer, studyRenderer);
+const translation = new Translation('fr', grammar_fr, messages_fr);
+const peopleRenderer = new HTMLPeopleRenderer(translation);
+const placeRenderer = new HTMLPlaceRenderer(translation);
+const timeRenderer = new HTMLTimeRenderer(translation);
+const orgRenderer = new HTMLOrganizationRenderer(translation, placeRenderer);
+const occupationRenderer = new HTMLOccupationRenderer(translation, orgRenderer, peopleRenderer);
+const birthEventRenderer = new HTMLBirthEventRenderer(translation, peopleRenderer, timeRenderer, placeRenderer, occupationRenderer);
+const foundationRenderer = new HTMLFoundationEventRenderer(translation, peopleRenderer, orgRenderer, timeRenderer, placeRenderer, occupationRenderer);
+const studyRenderer = new HTMLStudyRenderer(translation, orgRenderer, peopleRenderer);
+const renderer = new HTMLEventRenderer(translation, placeRenderer, timeRenderer, occupationRenderer, birthEventRenderer, foundationRenderer, studyRenderer);
 
 
 test('renders anonymous parents of same nationality', () => {
