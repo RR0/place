@@ -1,11 +1,11 @@
-import {CountryCode} from "../place/country/CountryCode";
-import {Messages} from "./Messages";
-import {PlaceMessages} from "../place/PlaceMessages";
-import {TimeMessages} from "../time/TimeMessages";
-import {EventMessages} from "../time/EventMessages";
-import {OrgMessages} from "../org/OrgMessages";
-import {PeopleMessages} from "../people/PeopleMessages";
-import {KeyValue} from "@rr0/common";
+import {CountryCode} from "place/country/CountryCode"
+import {Messages} from "./Messages"
+import {PlaceMessages} from "place/PlaceMessages"
+import {TimeMessages} from "time/TimeMessages"
+import {EventMessages} from "time/EventMessages"
+import {OrgMessages} from "org/OrgMessages"
+import {PeopleMessages} from "people/PeopleMessages"
+import {KeyValue} from "@rr0/common"
 
 
 class EnglishMessages implements Messages {

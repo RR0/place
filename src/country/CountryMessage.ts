@@ -1,4 +1,4 @@
-import {StatesMessages} from "./StateMessage";
+import {StatesMessages} from "./StateMessage"
 
 
 export interface CountryMessage {

@@ -1,4 +1,4 @@
-import {CountriesMessage} from "./country/CountriesMessage";
+import {CountriesMessage} from "./country/CountriesMessage"
 
 
 export interface PlaceMessages {

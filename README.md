@@ -1,20 +1,20 @@
-# facts
+# place
 
-[![RR0](https://circleci.com/gh/RR0/facts.svg?style=svg)](https://app.circleci.com/pipelines/github/RR0/facts)
+[![RR0](https://circleci.com/gh/RR0/place.svg?style=svg)](https://app.circleci.com/pipelines/github/RR0/place)
 
 Facts representation and rendering API
 
 ## Installation
 
 ```
-npm install @rr0/facts --save
+npm install @rr0/place --save
 ```
 
 ## Design
-Once facts are represented using assembled business objects 
-(`Time`, `Place`, `People`, `Organization`, and several `Event` subtypes),
-they can be provided as parameters to some `Renderer`, which will use a `Translator` to convert them to text (or HTML
- markup, etc.). 
+
+Once place are represented using assembled business objects
+(`Time`, `Place`, `People`, `Organization`, and several `Event` subtypes), they can be provided as parameters to
+some `Renderer`, which will use a `Translator` to convert them to text (or HTML markup, etc.).
 
 ## Example
 Say we want to render the timeline of some people:
@@ -27,7 +27,7 @@ import {
   PeopleNameFormat,
   TimeRenderFormat,
   User,
-} from '@rr0/facts';
+} from '@rr0/place';
 
 // The timeline
 const hynek = new People(Gender.male, 'Josef', 'Hynek', 'Allen')

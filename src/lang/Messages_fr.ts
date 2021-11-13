@@ -1,38 +1,16 @@
-import {CountryCode} from "../place/country/CountryCode";
-import {Messages} from "./Messages";
-import {PlaceMessages} from "../place/PlaceMessages";
-import {TimeMessages} from "../time/TimeMessages";
-import {EventMessages} from "../time/EventMessages";
-import {OrgMessages} from "../org/OrgMessages";
-import {PeopleMessages} from "../people/PeopleMessages";
-import {KeyValue} from "@rr0/common";
+import {Messages} from "./Messages"
+import {KeyValue} from "@rr0/common"
+import {PlaceMessages, WithPlaceMessages} from "PlaceMessages"
+import {CountryCode} from "country/CountryCode"
 
-class FrenchMessages implements Messages {
-  people: PeopleMessages = {
-    pronoun: {
-      male: 'il',
-      female: 'elle',
-      neutral: 'ça'
-    }
-  }
-  org: OrgMessages = {
-    short: '${short}',
-    long: '${long}',
-    short_long: '<abbr title="${long}">${short}</abbr>',
-    company_products: 'une société produisant des ${products:plural}',
-    company_nationality: 'une société ${nationality}',
-    company_nationality_products: 'une société ${nationality} produisant des ${products:plural}',
-    long_school: '${long}',
-    school: 'école',
-    army: 'armée',
-  }
+class FrenchMessages implements WithPlaceMessages, Messages {
   place: PlaceMessages = {
     country: {
       [CountryCode.cz]: {
         name: 'Tchéquie',
         nationality: {
           male: 'tchèque',
-          female: 'tchèque',
+          female: 'tchèque'
         },
         state: {}
       },
@@ -66,7 +44,7 @@ class FrenchMessages implements Messages {
         name: 'États-Unis',
         nationality: {
           male: 'américain',
-          female: 'américaine',
+          female: 'américaine'
         },
         state: {
           il: {short: 'IL', long: 'Illinois'}
@@ -74,99 +52,8 @@ class FrenchMessages implements Messages {
       },
     }
   }
-  event: EventMessages = {
-    default: '${when} à ${where} ${type}',
-    people: {
-      born: {
-        label: '${who} naît le ${when} à ${where}',
-        child: {
-          male: ", fils de ",
-          female: ", fille de "
-        },
-        father: {
-          anonymous: {
-            nationality: " d'un père ${nationality}"
-          }
-        },
-        mother: {
-          anonymous: {
-            nationality: " d'une mère ${nationality}"
-          }
-        },
-        parents: {
-          and: " et ",
-          anonymous: {
-            nationality: " de parents ${nationality}s",
-            nationalities: " d'un père ${fatherNationality} et d'une mère ${motherNationality}"
-          }
-        }
-      },
-      occupation: {
-        org_role_verb: "${who} travaille comme ${role} pour ${org}",
-        org_verb: "$travaille pour ${org}",
-        org_verb_who: "${who} travaille pour ${org}",
-        org_role: "${role} pour ${org}",
-        org_role_who: "${who} est ${role} chez ${org}",
-      },
-      study: {
-        at_school_verb: "étudie ${at}${school}",
-        at_school_verb_who: "${who} étudie ${at}${school}",
-      }
-    },
-    org: {
-      foundation: {
-        label: '${org} est fondée le ${when} à ${where}',
-        org: {
-          short: '${short}',
-          long: '${long}',
-          short_long: '<abbr title="${long}">${short}</abbr>',
-          company_products: '(une société vendant des ${products:plural})',
-          company_nationality: '(une société ${nationality})',
-          company_nationality_products: '(une société ${nationality} vendant des ${products:plural})',
-          school: '(une école)',
-          long_school: '($long)',
-          army: 'armée',
-        },
-        founder: {
-          anonymous: {
-            nationality: ' par un ${nationality}'
-          }
-        },
-        founders: {
-          and: " et ",
-          anonymous: {
-            nationality: " par des fondateurs ${nationality}",
-            nationalities: " par un fondateur ${nationality}"
-          }
-        }
-      }
-    }
-  }
-  time: TimeMessages = {
-    before: 'avant le ${date}'
-  }
-  dict: KeyValue = {
-    cigar: {
-      male: 'cigare',
-    },
-    company: {
-      female: 'société',
-    },
-    general: {
-      male: 'général',
-      female: 'générale'
-    },
-    highSchool: {
-      male: 'lycée'
-    },
-    primarySchool: {
-      female: 'école'
-    },
-    worker: {
-      male: 'ouvrier',
-      female: 'ouvrière'
-    }
-  }
+
+  dict: KeyValue = {}
 }
 
 export const messages_fr = new FrenchMessages()
