@@ -1,4 +1,4 @@
-import {CountryMessage} from "./CountryMessage"
+import {CountryMessage} from "country/CountryMessage"
 
 export interface CountriesMessage {
   [countryCode: string]: CountryMessage

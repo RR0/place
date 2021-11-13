@@ -1,4 +1,4 @@
-import {Messages} from "./Messages"
+import {Messages} from "lang/Messages"
 import {KeyValue} from "@rr0/common"
 import {PlaceMessages, WithPlaceMessages} from "PlaceMessages"
 import {CountryCode} from "country/CountryCode"

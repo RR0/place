@@ -1,5 +1,5 @@
-import {Place} from "../Place"
-import {CountryCode} from "./CountryCode"
+import {Place} from "Place"
+import {CountryCode} from "country/CountryCode"
 import {Gender} from "@rr0/common"
 
 
