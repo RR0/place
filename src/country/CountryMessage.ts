@@ -1,4 +1,4 @@
-import {StatesMessages} from "country/StateMessage"
+import {StatesMessages} from "./StateMessage.js"
 
 
 export interface CountryMessage {

@@ -1,6 +1,6 @@
-import {CityRenderer} from "City"
-import {Country, CountryRenderer} from "country/Country"
-import {StateRenderer} from "state/State"
+import {CityRenderer} from "./City.js"
+import {Country, CountryRenderer} from "./country/index.js"
+import {StateRenderer} from "./state/index.js"
 
 
 export interface PlaceRenderer<R> extends CityRenderer<R>, StateRenderer<R>, CountryRenderer<R> {
@@ -21,4 +21,3 @@ export class Place {
     return renderer.render(this)
   }
 }
-

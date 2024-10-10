@@ -1,6 +1,5 @@
 import {Translation} from "@rr0/lang"
 
-
 export abstract class Renderer<M = any> {
 
   protected constructor(protected readonly translation: Translation<M>) {

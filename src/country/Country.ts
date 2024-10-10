@@ -1,6 +1,6 @@
-import {Place} from "Place"
-import {CountryCode} from "country/CountryCode"
 import {Gender} from "@rr0/common"
+import {Place} from "../Place.js"
+import {CountryCode} from "./CountryCode.js"
 
 
 export interface CountryRenderer<R> {

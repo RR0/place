@@ -1,11 +1,9 @@
-import {Place} from "Place"
-import {State} from "state/State"
-
+import { Place } from "./Place.js"
+import { State } from "./state/State.js"
 
 export interface CityRenderer<R> {
   renderCity(city: City): R
 }
-
 
 export class City extends Place {
 

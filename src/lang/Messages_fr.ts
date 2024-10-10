@@ -1,7 +1,8 @@
-import {Messages} from "lang/Messages"
 import {KeyValue} from "@rr0/common"
-import {PlaceMessages, WithPlaceMessages} from "PlaceMessages"
-import {CountryCode} from "country/CountryCode"
+
+import {Messages} from "./Messages.js"
+import {PlaceMessages, WithPlaceMessages} from "../PlaceMessages.js"
+import {CountryCode} from "../country/CountryCode.js"
 
 export class FrenchPlaceMessages implements WithPlaceMessages, Messages {
   place: PlaceMessages = {

@@ -1,5 +1,5 @@
-import {Place} from "Place"
-import {Country} from "country/Country"
+import {Place} from "../Place.js"
+import {Country} from "../country/Country.js"
 
 
 export interface StateRenderer<R> {

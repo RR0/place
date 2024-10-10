@@ -1,5 +1,5 @@
-import {CountryCode} from "country/CountryCode"
-import {Country} from "country/Country"
+import {CountryCode} from "./CountryCode.js"
+import {Country} from "./Country.js"
 
 export class Countries {
   /**

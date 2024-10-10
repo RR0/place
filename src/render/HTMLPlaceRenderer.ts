@@ -1,11 +1,12 @@
-import {City, CityRenderer} from "City"
-import {Place, PlaceRenderer} from "Place"
-import {Country} from "country/Country"
-import {State} from "state/State"
-import {WithPlaceMessages} from "PlaceMessages"
-import {Translation} from "@rr0/lang"
 import {Gender} from "@rr0/common"
-import {HTML, HTMLRenderer} from "HTMLRenderer"
+import {Translation} from "@rr0/lang"
+
+import {City, CityRenderer} from "../City.js"
+import {Place, PlaceRenderer} from "../Place.js"
+import {Country} from "../country/Country.js"
+import {State} from "../state/State.js"
+import {WithPlaceMessages} from "../PlaceMessages.js"
+import {HTML, HTMLRenderer} from "./HTMLRenderer.js"
 
 
 export class HTMLPlaceRenderer extends HTMLRenderer implements PlaceRenderer<HTML>, CityRenderer<HTML> {
