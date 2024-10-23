@@ -5,8 +5,8 @@ import {City, CityRenderer} from "../City.js"
 import {Place, PlaceRenderer} from "../Place.js"
 import {Country} from "../country/Country.js"
 import {State} from "../state/State.js"
-import {WithPlaceMessages} from "../PlaceMessages.js"
 import {HTML, HTMLRenderer} from "./HTMLRenderer.js"
+import { WithPlaceMessages } from "../PlaceMessages"
 
 
 export class HTMLPlaceRenderer extends HTMLRenderer implements PlaceRenderer<HTML>, CityRenderer<HTML> {

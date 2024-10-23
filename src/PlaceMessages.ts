@@ -1,6 +1,12 @@
-import {CountriesMessage} from "./country/index.js"
+import { CountriesMessage } from "./country"
 
+/**
+ * @deprecated
+ */
 export interface PlaceMessages {
+  /**
+   * @deprecated Use org package for that
+   */
   country: CountriesMessage
 }
 
