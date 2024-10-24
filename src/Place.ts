@@ -1,23 +1,37 @@
-import {CityRenderer} from "./City.js"
-import {Country, CountryRenderer} from "./country/index.js"
-import {StateRenderer} from "./state/index.js"
+import { PlaceLocation } from "./location"
+import { RR0Data, RR0Event } from "@rr0/data"
 
-
-export interface PlaceRenderer<R> extends CityRenderer<R>, StateRenderer<R>, CountryRenderer<R> {
-  render(place: Place): R
+export type Elevation = {
+  elevation: number,
+  data?: any
 }
 
+export class Place implements RR0Data {
+  readonly id: string
+  readonly events: RR0Event[] = []
 
-export class Place {
-
-  constructor(readonly name: string) {
+  constructor(
+    readonly locations: PlaceLocation[], readonly elevation?: Elevation, readonly dirName?: string,
+    /**
+     * Remote geo IP service specific data.
+     */
+    data?: any
+  ) {
+    this.id = dirName
   }
 
-  get country(): Country | undefined {
-    return undefined
+  /**
+   *
+   * @param {float} lat Latitude in decimal degrees. North is positive.
+   * @param {float} lng Longitude in decimal degrees. East is positive.
+   */
+  static fromLocation(lat: number, lng: number): Place {
+    return new Place([new PlaceLocation(lat, lng)])
   }
 
-  render<R>(renderer: PlaceRenderer<R>): R {
-    return renderer.render(this)
+  static fromDMS(latLng: string): Place {
+    return new Place([PlaceLocation.fromDMS(latLng)])
   }
 }
+
+export const placeDirName = "place/systeme/solaire/planete/terre/"

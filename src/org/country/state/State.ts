@@ -1,13 +1,17 @@
-import {Place} from "../Place.js"
-import {Country} from "../country/Country.js"
+import {Org} from "../../Org.js"
+import {Country} from "../Country.js"
 
-
+/**
+ * @deprecated Use @rr0/org instead
+ */
 export interface StateRenderer<R> {
   renderState(State: State): R
 }
 
-
-export class State extends Place {
+/**
+ * @deprecated Use @rr0/org instead
+ */
+export class State extends Org {
 
   constructor(name: string, readonly _country: Country) {
     super(name)

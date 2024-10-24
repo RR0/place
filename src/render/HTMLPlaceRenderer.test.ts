@@ -1,11 +1,11 @@
 import {grammar_en, grammar_fr, Translation} from "@rr0/lang"
 import { describe, expect, test } from "@javarome/testscript"
 
-import {City} from "../City.js"
-import {States} from "../state/States.js"
-import {messages_fr} from "../lang/Messages_fr.js"
+import {City} from "../org/country/state/City.js"
+import {States} from "../org/country/state/States.js"
+import {messages_fr} from "../org/Messages_fr.js"
 import {HTMLPlaceRenderer} from "./HTMLPlaceRenderer.js"
-import {messages_en} from "../lang/Messages_en.js"
+import {messages_en} from "../org/Messages_en.js"
 
 describe('render city', () => {
 

@@ -1,6 +1,9 @@
 import {CountryCode} from "./CountryCode.js"
 import {Country} from "./Country.js"
 
+/**
+ * @deprecated Use @rr0/org instead
+ */
 export class Countries {
   /**
    * United States of America (USA).

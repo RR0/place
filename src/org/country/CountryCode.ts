@@ -1,3 +1,6 @@
+/**
+ * @deprecated Use @rr0/org instead
+ */
 export enum CountryCode {
   /**
    * France

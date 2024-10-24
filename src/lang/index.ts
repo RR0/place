@@ -1,3 +1,3 @@
 export * from "./Messages.js"
-export * from "./Messages_fr.js"
-export * from "./Messages_en.js"
+export * from "../org/Messages_fr.js"
+export * from "../org/Messages_en.js"

@@ -1,6 +1,8 @@
 import {StatesMessages} from "./StateMessage.js"
 
-
+/**
+ * @deprecated Use @rr0/org instead
+ */
 export interface CountryMessage {
   name: string
   nationality: {

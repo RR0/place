@@ -1,8 +1,11 @@
 import {Gender} from "@rr0/common"
-import {Place} from "../Place.js"
+import {Org} from "../Org.js"
 import {CountryCode} from "./CountryCode.js"
 
 
+/**
+ * @deprecated Use @rr0/org instead
+ */
 export interface CountryRenderer<R> {
   /**
    * Render a country.
@@ -15,8 +18,10 @@ export interface CountryRenderer<R> {
   renderNationality(country: Country, gender: Gender): R;
 }
 
-
-export class Country extends Place {
+/**
+ * @deprecated Use @rr0/org instead
+ */
+export class Country extends Org {
 
   constructor(name: CountryCode) {
     super(name)

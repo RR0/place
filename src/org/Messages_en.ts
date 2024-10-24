@@ -1,11 +1,14 @@
 import {KeyValue} from "@rr0/common"
 
-import {Messages} from "./Messages.js"
-import {CountryCode} from "../country/CountryCode.js"
-import { PlaceMessages, WithPlaceMessages } from "../PlaceMessages"
+import {Messages} from "../lang/Messages.js"
+import {CountryCode} from "./country/CountryCode.js"
+import { OrgMessages, WithOrgMessages } from "./OrgMessages"
 
-export class EnglishPlaceMessages implements WithPlaceMessages, Messages {
-  place: PlaceMessages = {
+/**
+ * @deprecated Use @rr0/org instead
+ */
+export class EnglishPlaceMessages implements WithOrgMessages, Messages {
+  place: OrgMessages = {
     country: {
       [CountryCode.cz]: {
         name: 'Czechia',
