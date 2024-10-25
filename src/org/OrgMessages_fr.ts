@@ -1,6 +1,6 @@
 import { KeyValue } from "@rr0/common"
 
-import { Messages } from "../lang/Messages.js"
+import { Messages } from "./Messages.js"
 import { OrgMessages, WithOrgMessages } from "./OrgMessages.js"
 import { CountryCode } from "./country/CountryCode.js"
 
@@ -60,4 +60,4 @@ export class FrenchPlaceMessages implements WithOrgMessages, Messages {
   dict: KeyValue = {}
 }
 
-export const messages_fr = new FrenchPlaceMessages()
+export const orgMessages_fr = new FrenchPlaceMessages()
