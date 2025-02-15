@@ -4,6 +4,10 @@ import { rr0TestUtil } from "../test/index.js"
 
 describe("PlaceLocation", () => {
 
+  test("without seconds", () => {
+    expect(PlaceLocation.fromDMS("35°52′N,106°19′O")).toBeDefined()
+  })
+
   test("from degrees minutes seconds", () => {
     const location = new PlaceLocation(35.87555555555556, -106.32416666666666)
     expect(PlaceLocation.fromDMS("35° 52′ 32″ N, 106° 19′ 27″ O")).toEqual(location)
