@@ -1,6 +1,7 @@
 export * from "./lang/index.js"
 export * from "./location/index.js"
 export * from "./Place.js"
+export * from "./NamedPlace.js"
 export * from "./PlaceContext.js"
 export * from "./PlaceService.js"
 export * from "./GooglePlaceService.js"
