@@ -32,6 +32,10 @@ export class Place implements RR0Data {
   static fromDMS(latLng: string): Place {
     return new Place([PlaceLocation.fromDMS(latLng)])
   }
+
+  toString() {
+    return this.id ?? this.locations.map(location => location.toString()).join("$")
+  }
 }
 
 export const placeDirName = "place/systeme/solaire/planete/terre/"

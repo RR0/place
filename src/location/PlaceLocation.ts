@@ -58,4 +58,8 @@ export class PlaceLocation {
     return placeMsg.dmsLat(PlaceLocation.fromDouble(this.lat)) + ","
       + placeMsg.dmsLng(PlaceLocation.fromDouble(this.lng))
   }
+
+  toString() {
+    return `${this.lat},${this.lng}`
+  }
 }

@@ -21,4 +21,11 @@ describe("PlaceLocation", () => {
     const context = rr0TestUtil.newContext()
     expect(location.toDMS(context)).toBe("35°52′32″N,106°19′27″O")
   })
+
+  test("toString", () => {
+    let lat = 35.87555555555556
+    let lng = -106.32416666666666
+    const location = new PlaceLocation(lat, lng)
+    expect(location.toString()).toBe(`${lat},${lng}`)
+  })
 })
